@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lyt_mtd_sale"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/lyt_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/ten" >
+
+        <LinearLayout
+            android:id="@+id/lyt_tgtvsach"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <LinearLayout
+                android:id="@+id/lyt_one"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight=".33" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padtext"
+                    android:text="Sale: "
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_mtd_sale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="323"
+                    android:textSize="15sp"
+                    android:textStyle="bold|italic" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="fill_parent"
+                android:background="@color/CornflowerBlue"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/lyt_two"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight=".33" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padtext"
+                    android:text="Target: "
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_mtd_tgt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="140"
+                    android:textSize="15sp"
+                    android:textStyle="bold|italic" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="fill_parent"
+                android:background="@color/CornflowerBlue"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/lyt_three"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".33" >
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padtext"
+                    android:text="Ach: "
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_mtd_ach"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="80"
+                    android:textSize="15sp"
+                    android:textStyle="bold|italic" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_gap"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/lyt_tgtvsach"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/CornflowerBlue"
+            android:visibility="visible" />
+
+        
+        
+           <LinearLayout
+            android:id="@+id/lytcat_and_sale"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+           
+            android:layout_below="@+id/view_gap">
+            
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Category"
+                 android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_weight="1">
+                
+            </TextView>
+            
+             <TextView
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:text="Sale"
+                 android:textSize="17sp"
+                android:textStyle="bold" >
+                
+                
+            </TextView>
+            
+        </LinearLayout>
+        
+           
+         <View
+            android:id="@+id/view_gapp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/lytcat_and_sale"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/CornflowerBlue"
+            android:visibility="visible" />
+
+          
+        
+        <ListView
+            android:id="@+id/lv_sale_mtd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_below="@id/view_gapp" >
+        </ListView>
+
+        <TextView
+            android:id="@+id/txt_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lv_sale_mtd"
+            android:text="No mtd sale found!"
+            android:textColor="@color/Green"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_purple"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <TextView
+            android:id="@+id/txt_footer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="Sponsored by V5 Global Services."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

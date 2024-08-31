@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "844574256846",
+    "firebase_url": "https://harman-mobile.firebaseio.com",
+    "project_id": "harman-mobile",
+    "storage_bucket": "harman-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844574256846:android:b56f89d19a30cbf2436a9f",
+        "android_client_info": {
+          "package_name": "com.fieldforce.harmonkardonff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "844574256846-97pg1f3krs3gs6bkrstqujpeoqq9l2s5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0oJJRg4-7srUCVLgoSaXaA0dB1q1N584"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "844574256846-97pg1f3krs3gs6bkrstqujpeoqq9l2s5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

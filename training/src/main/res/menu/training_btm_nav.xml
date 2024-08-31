@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/action_history"
+        android:icon="@drawable/ic_history_black_24dp"
+        android:title="@string/history" />
+    <item
+        android:id="@+id/quiz_plan"
+        android:icon="@drawable/ic_quiz_plan_black_24dp"
+        android:title="@string/quiz_plan" />
+
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/ic_share_black_24dp"
+        android:title="@string/share" />
+
+</menu>

@@ -1,0 +1,77 @@
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape_row"
+        android:padding="5dp"
+        android:text="Date"
+        android:gravity="center"
+        android:textColor="#000" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/attendance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape_row"
+        android:padding="5dp"
+        android:gravity="center"
+        android:text="Attendance"
+        android:textColor="#000" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/checkin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape_row"
+        android:padding="5dp"
+        android:gravity="center"
+        android:text="Checkin"
+        android:textColor="#000" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/checkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape_row"
+        android:padding="5dp"
+        android:gravity="center"
+        android:text="Checkout"
+        android:textColor="#000" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/working_hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape_row"
+        android:padding="5dp"
+        android:gravity="center"
+        android:text="Working Hours"
+        android:textColor="#000" >
+
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cell_shape_row"
+        android:padding="5dp"
+        android:gravity="center"
+        android:text="Update"
+        android:textColor="#000" >
+
+
+    </TextView>
+
+</TableRow>

@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+     <item
+        android:id="@+id/action_fullgrid"
+        android:orderInCategory="100"
+        android:title="View in Grid 3">
+    </item>
+     <item
+        android:id="@+id/action_grd2"
+        android:orderInCategory="100"
+        android:title="View in Grid 2">
+    </item>
+     <item
+        android:id="@+id/action_grd1"
+        android:orderInCategory="100"
+        android:title="View in list">
+    </item>
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        android:title="Logout">
+    </item>
+     
+
+</menu>

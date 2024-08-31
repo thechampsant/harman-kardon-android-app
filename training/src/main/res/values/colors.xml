@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="light_gray">#ACACAC</color>
+
+    <color name="training_item_one">#2B56AF</color>
+    <color name="training_item_two">#5843BE</color>
+    <color name="training_item_three">#E85D2A</color>
+    <color name="training_item_four">#396813</color>
+    <color name="training_blue">#1A55AF</color>
+    <color name="accent">#ADADAD</color>
+    <color name="labels_rv_training_desc">#565656</color>
+</resources>

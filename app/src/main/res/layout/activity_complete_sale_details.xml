@@ -1,0 +1,131 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </RelativeLayout>
+
+    <!--  <TextView
+            android:id="@+id/tvAchievementPresentation"
+            android:layout_width="wrap_content"
+            
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Target Achievement Presentation" /> -->
+        
+   <RelativeLayout
+        android:id="@+id/RelativeLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/btn_purple"
+        android:gravity="left"
+        android:paddingLeft="@dimen/activity_horizontal_margin" >
+
+        <LinearLayout
+            android:id="@+id/sd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           
+            >
+
+            <Button
+                android:id="@+id/btn_go_home"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:visibility="gone"
+                android:background="@drawable/go_back_icon"
+                android:width="10dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/itemdatfordate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/sd"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Product Sale Details"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+    </RelativeLayout>
+    
+   <TextView 
+        android:id="@+id/weekdates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RelativeLayoutTop"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="Sales details from 29th july to 4th august"/>
+    
+   
+    <LinearLayout
+        android:id="@+id/table_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/weekdates"
+        android:gravity="center">
+        
+        
+         <TextView
+            android:id="@+id/sale_category"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textStyle="bold|italic"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:text="Date" />
+        
+
+        <TextView
+            
+            android:layout_width="0dp"
+            android:layout_weight="1"
+          
+             android:textStyle="bold|italic"
+            android:layout_height="wrap_content"
+            android:text="SKU" />
+
+        <TextView
+            android:id="@+id/sale"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+             android:textStyle="bold|italic"
+            android:layout_height="wrap_content"
+            android:text="Sale" />
+        
+        
+    </LinearLayout>
+
+     <TextView
+            android:id="@+id/textView4"
+            android:layout_below="@+id/table_header"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/Black" />
+
+     <ListView
+         android:id="@+id/sale_list"
+         android:layout_width="match_parent"
+         android:layout_height="330dp"
+         android:layout_alignParentLeft="true"
+         android:layout_below="@+id/textView4" >
+     </ListView>
+
+
+     
+
+</RelativeLayout>

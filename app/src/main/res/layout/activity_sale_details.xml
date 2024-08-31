@@ -1,0 +1,133 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </RelativeLayout>
+
+    <!--  <TextView
+            android:id="@+id/tvAchievementPresentation"
+            android:layout_width="wrap_content"
+            
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Target Achievement Presentation" /> -->
+        
+   <RelativeLayout
+        android:id="@+id/RelativeLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/btn_purple"
+        android:gravity="left"
+        android:paddingLeft="@dimen/activity_horizontal_margin" >
+
+        <LinearLayout
+            android:id="@+id/sd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" >
+
+            <Button
+                android:id="@+id/btn_go_home"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@drawable/home_icon"
+                android:width="10dp"
+                android:onClick="homebutton" 
+                android:clickable="true"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/itemdatfordate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/sd"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Sale Details"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+    </RelativeLayout>
+    
+   
+   <TextView 
+        android:id="@+id/weekdates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RelativeLayoutTop"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text=" 29th "/>
+    
+   
+    <LinearLayout
+        android:id="@+id/table_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/weekdates"
+        android:gravity="center">
+        
+        
+         
+
+        <TextView
+            android:id="@+id/sale_category"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:text="Category" />
+
+        <TextView
+            android:id="@+id/sale"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:text="Sale"/>
+        
+        
+    </LinearLayout>
+
+     <TextView
+            android:id="@+id/textView4"
+            android:layout_below="@+id/table_header"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/Black" />
+     
+        <LinearLayout android:layout_height="match_parent"
+         android:layout_width="match_parent"
+         android:orientation="vertical"
+         android:layout_below="@+id/textView4"
+         android:id="@+id/lytlistheader">
+
+     <ListView
+         android:id="@+id/sale_list"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+      >
+
+     </ListView>
+
+</LinearLayout>
+
+       
+
+</RelativeLayout>

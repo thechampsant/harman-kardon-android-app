@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/question"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="@dimen/size_10"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="5dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size_10">
+
+        <com.fieldforce.training_module.utility.widgets.RobotoBoldTextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/notifications_popup"
+            android:textColor="#147F84"
+            android:textSize="@dimen/font_20" />
+
+        <com.ariston.training_module.utility.widgets.RobotoTextView
+            android:id="@+id/tv_notification_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_marginTop="@dimen/size_16"
+            android:textColor="#000"
+            android:textSize="@dimen/font_14" />
+
+        <com.fieldforce.training_module.utility.widgets.RobotoBoldTextView
+            android:id="@+id/btn_i_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_notification_text"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/size_16"
+            android:background="#36A891"
+            android:padding="@dimen/size_9"
+            android:text="@string/i_read"
+            android:textColor="@android:color/white" />
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
+

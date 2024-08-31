@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff">
+
+    <com.ariston.training_module.utility.widgets.RobotoBoldTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Filter"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:id="@+id/rbtv_filterTitleInDialog"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#bdbdbd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rbtv_filterTitleInDialog"
+        android:layout_marginTop="2dp"
+        />
+
+    <com.ariston.training_module.utility.widgets.RobotoTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ascending Order"
+        android:textSize="16sp"
+        android:textColor="#bdbdbd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rbtv_filterTitleInDialog"
+        android:layout_margin="20dp"
+        android:id="@+id/rtv_ascending"
+        />
+
+    <com.ariston.training_module.utility.widgets.RobotoTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descending Order"
+        android:textSize="16sp"
+        android:textColor="#bdbdbd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rtv_ascending"
+        android:layout_margin="20dp"
+        android:id="@+id/rtv_descending"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:textSize="14sp"
+        android:textColor="#E91E63"
+        app:layout_constraintTop_toBottomOf="@+id/rtv_descending"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"
+        android:id="@+id/tv_okInDialog"
+        />
+
+
+
+</androidx.constraintlayout.ConstraintLayout>

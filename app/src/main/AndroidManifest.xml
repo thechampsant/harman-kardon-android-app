@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.fieldforce.harmonkardonff"
+    android:installLocation="preferExternal">
+
+    <permission
+        android:name="com.fieldforce.harmonkardonff.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.fieldforce.v5hpff.permission.MAPS_RECEIVE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        tools:remove="android:maxSdkVersion" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:remove="android:maxSdkVersion" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RAISED_THREAD_PRIORITY" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_*" />
+
+    <permission
+        android:name="com.fieldforce.harmonkardonff.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.fieldforce.v5hpff.permission.C2D_MESSAGE" />
+    <uses-permission android:name="mob.field.gcm.permission.C2D_MESSAGE" />
+
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+
+    <application
+        android:name="app.core.base.ApplicationBase"
+        android:allowBackup="true"
+
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/ApplicationStyle"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".Model_Display"
+            android:exported="false" />
+
+        <activity
+            android:name=".View_Module_List"
+            android:exported="false" />
+        <activity
+            android:name=".ViewDownStock"
+            android:exported="false" />
+        <activity android:name=".NewTrainingDetailsActivity" />
+        <activity android:name=".NewTrainingActivity" />
+        <activity android:name=".SalesPitch" />
+        <activity android:name=".CoronaActivity" />
+        <activity android:name=".HelpLine" />
+        <activity android:name=".SimpleCameraActivityOld" />
+        <activity android:name=".SimpleCameraActivity" />
+        <activity
+            android:name="com.suveyform.ui.fragments.SurveyFormTabsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyB93a2zaN8XyRb6nQRoBr4JbJ55ZRV-pWY" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="72aa739f93cec6dde5bb02cd04af424bf3b58276" /> <!-- Splash screen -->
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- <activity -->
+        <!-- android:name="mob.app.eureka.MainActivity" -->
+        <!-- android:configChanges="keyboardHidden|orientation" -->
+        <!-- android:label="@string/app_name" -->
+        <!-- android:screenOrientation="portrait" > -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <activity android:name="mob.field.gcm.NotificationView" />
+        <activity android:name=".Module_Display" />
+        <activity android:name=".SubmitDownStock" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CameraActivity"
+            android:configChanges="screenLayout|keyboardHidden"
+            android:hardwareAccelerated="true"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge" />
+        <activity
+            android:name=".AadharActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.suveyform.SurveytypeActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".NeftActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="mob.field.harmonkardonff.quiz.QuizDisplayActivity"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TrainningModule"
+            android:label="@string/Training"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Helpdesk"
+            android:label="@string/Helpdesk"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PresentationActivity"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PresentationView"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="mob.field.harmonkardonff.quiz.QuizActivity"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="mob.field.harmonkardonff.survey.SurveyDisplayActivity"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="mob.field.harmonkardonff.survey.SurveyActivity"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ComplainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_complain"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FeedbackActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_feedback"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MOPFormManagerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_mop"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TargetScreenManagerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_target"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SaleScreenManagerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_sales"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SaleDetailsScreenManagerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_sale_detail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".MyInfoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_my_info"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_setting" />
+        <activity android:name=".AttandanceRegularize" />
+        <activity
+            android:name="app.core.image.slider.FullScreenImageActivity"
+            android:label="Capture Image"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
+        <activity
+            android:name=".ImageCaptureActivity"
+            android:label="Capture Image"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
+        <activity
+            android:name="com.fieldforce.floorhygiene.upload_handler.FloorHygieneCapture"
+            android:label="Capture Display Compliance Data"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
+        <activity
+            android:name=".ImageGridActivity"
+            android:label="Capture Image"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
+        <activity
+            android:name="app.core.camera.CameraActivity"
+            android:label="Capture Image"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" /> <!-- tabs activity -->
+        <activity android:name="mob.field.harmonkardonff.tabs.SaleTabs" />
+        <activity android:name="mob.field.harmonkardonff.tabs.ModuleTab" />
+        <activity android:name="mob.field.harmonkardonff.tabs.DownStock" />
+        <activity
+            android:name="mob.field.harmonkardonff.tabs.DatTab"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Attendance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="mob.field.harmonkardonff.tabs.DisplayTab"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Display"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="mob.field.harmonkardonff.tabs.CTNTabs"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MarkAttendanceActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Attendance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="mob.field.harmonkardonff.tabs.StockTabs"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Attendance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ViewStockActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="View Stock"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="mob.field.harmonkardonff.tabs.FootfallTab"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Footfall"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CheckoutActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Checkout"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".TurnGpsOnActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="TurnGpsOn"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".NetworkNotAvailableActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="NetworkNotavailable"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.fieldforce.barcodereader.BarcodeReader"
+            android:label="Barcode"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="ForgotPassword"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".BrandingActivity"
+            android:label="Branding"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.APIService.SubmitEmpDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name="com.APIService.SliderInterestedActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <!--
+            <activity
+            android:name="com.google.zxing.client.android.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.zxing.client.android.SCAN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        -->
+        <receiver
+            android:name="mob.field.gcm.GcmBroadcastReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <action android:name="com.google.android.c2dm.intent.GCM_RECEIVED_ACTION" />
+
+                <category android:name="mob.app.gcm" />
+            </intent-filter>
+        </receiver>
+        <!--
+        <service
+            android:name="com.fieldforce.gpscoord.SchedulerEventService"
+            android:enabled="true" >
+        </service>
+
+        <receiver android:name="com.fieldforce.gpscoord.SchedulerSetupReceiver" >
+        </receiver>
+        <receiver android:name="com.fieldforce.gpscoord.SchedulerEvent" >
+            <intent-filter>
+                <action
+                    android:name="startgpsbroadcast"
+                    android:enabled="true" />
+            </intent-filter>
+        </receiver>
+        -->
+        <!--
+        <receiver android:name="mob.app.usha.services.ReceiverOnReboot" >
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.BOOT_COMPLETED"
+                    android:enabled="true" />
+            </intent-filter>
+        </receiver>
+        -->
+        <service
+            android:name="mob.field.harmonkardonff.services.WHPL_MainService"
+            android:enabled="true" />
+        <service
+            android:name="mob.field.gcm.GcmMessageHandler"
+            android:enabled="true" />
+        <!--
+ <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        -->
+        <activity
+            android:name=".BarcodeScannerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="mob.field.harmonkardonff.tabs.CoronaSurvey_Tabs"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".corona_survey_module.ui.CoronaSurveyTabsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".demo_tracking_module.ui.activities.DemoTrackingFragmentsContainer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.fieldforce.floorhygiene.HygieneUploadStoreImagesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.fieldforce.floorhygiene.HygieneStoreListActivity"
+            android:screenOrientation="portrait" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+</manifest>

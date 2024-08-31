@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".demo_tracking_module.ui.fragments.ViewDemoFragment">
+
+
+
+    <RelativeLayout
+        android:id="@+id/ll_dateContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="@dimen/size_10"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@+id/rl_view">
+
+        <!-- <LinearLayout
+             android:id="@+id/rllheadersalespage"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:orientation="vertical"
+             android:padding="5dp"
+             android:visibility="visible" >
+
+             <TextView
+                 android:id="@+id/from_date"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="From Date:"
+                 android:textAppearance="?android:attr/textAppearanceMedium"
+                 android:textColor="@color/Black" />
+
+             <LinearLayout
+                 android:id="@+id/lyt_start_date"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:weightSum="350" >
+
+                 <TextView
+                     android:id="@+id/txt_for_dates"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+                     android:layout_weight="300"
+                     android:text="NA"
+                     android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                 <ImageView
+                     android:id="@+id/btn_for_dates"
+                     android:layout_width="35dp"
+                     android:layout_height="35dp"
+                     android:paddingLeft="@dimen/padtext"
+                     android:src="@drawable/calendar_icon" />
+             </LinearLayout>
+         </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/rllsalespage"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:gravity="center_horizontal"
+             android:orientation="vertical"
+             android:padding="5dp" >
+
+             <TextView
+                 android:id="@+id/todate_text"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="To Date:"
+                 android:textAppearance="?android:attr/textAppearanceMedium"
+                 android:textColor="@color/Black" />
+
+             <LinearLayout
+                 android:id="@+id/lyt_end_date"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/todate_text"
+                 android:gravity="center_horizontal"
+                 android:orientation="horizontal"
+                 android:weightSum="350" >
+
+                 <TextView
+                     android:id="@+id/txt_to_dates"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+                     android:layout_weight="300"
+                     android:gravity="right|center_vertical"
+                     android:paddingRight="3dp"
+                     android:text="NA"
+                     android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                 <ImageView
+                     android:id="@+id/btn_to_dates"
+                     android:layout_width="35dp"
+                     android:layout_height="35dp"
+                     android:paddingLeft="@dimen/padtext"
+                     android:src="@drawable/calendar_icon" />
+             </LinearLayout>
+         </LinearLayout>-->
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="@dimen/size_150"
+            android:layout_height="@dimen/size_50"
+
+            android:layout_margin="@dimen/size_5"
+            app:cardBackgroundColor="@color/app_btn_color1"
+            app:cardCornerRadius="@dimen/size_10">
+
+
+            <RelativeLayout
+
+                android:id="@+id/lyt_start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_marginEnd="@dimen/size_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_for_dates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:text="Start Date"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:id="@+id/btn_for_dates"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+
+                    android:paddingLeft="@dimen/padtext"
+                    android:src="@drawable/ic_calendar_plan"
+                    app:tint="@color/white" />
+            </RelativeLayout>
+            <!--     </LinearLayout>-->
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="@dimen/size_150"
+            android:layout_height="@dimen/size_50"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/size_5"
+            app:cardBackgroundColor="@color/app_btn_color1"
+            app:cardCornerRadius="@dimen/size_5">
+
+            <!--     <LinearLayout
+                     android:id="@+id/rllsalespage"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+
+                     android:gravity="center_horizontal"
+                     android:orientation="vertical"
+                     android:padding="5dp">-->
+
+            <!-- <TextView
+                 android:id="@+id/todate_text"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="To Date:"
+                 android:textAppearance="?android:attr/textAppearanceMedium"
+                 android:textColor="@color/Black" />-->
+
+            <RelativeLayout
+                android:id="@+id/lyt_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/size_10"
+                android:layout_marginEnd="@dimen/size_10"
+
+                >
+
+                <TextView
+                    android:id="@+id/txt_to_dates"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:gravity="end|center_vertical"
+                    android:paddingRight="3dp"
+                    android:text="End Date"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:id="@+id/btn_to_dates"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="@dimen/padtext"
+                    android:src="@drawable/ic_calendar_plan"
+                    app:tint="@color/white" />
+            </RelativeLayout>
+            <!-- </LinearLayout>-->
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_viewDemo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_dateContainer" />
+
+
+</LinearLayout>

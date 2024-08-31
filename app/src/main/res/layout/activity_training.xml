@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/app_header"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:background="@drawable/btn_purple"
+    android:paddingLeft="@dimen/activity_horizontal_margin" >
+
+    <TextView
+        android:id="@+id/text_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:text="Training Module"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <!--
+        <Button
+        android:id="@+id/tvmsg"
+        android:layout_width="35dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/text_header"
+        android:background="@drawable/message"
+        android:visibility="visible"
+        android:onClick="message"
+        android:clickable="true"  />
+    -->
+
+</RelativeLayout>

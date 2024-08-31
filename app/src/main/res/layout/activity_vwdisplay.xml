@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/lnr_hide_unhide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:weightSum="800" >
+
+                <TextView
+                    android:id="@+id/txt_category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="300"
+                    android:text="Category :" />
+
+                <TextView
+                    android:id="@+id/txt_categoryvlue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="500"
+                    android:text="Category :" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:weightSum="800" >
+
+                <TextView
+                    android:id="@+id/txt_sbcategory"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="300"
+                    android:text="SubCategory :" />
+
+                <TextView
+                    android:id="@+id/txt_sbcategoryvlue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="500"
+                    android:text="SubCategory :" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:weightSum="800" >
+
+                <TextView
+                    android:id="@+id/txt_model"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="300"
+                    android:text="Model :" />
+
+                <TextView
+                    android:id="@+id/txt_modelvlue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="500"
+                    android:text="modelvalue :" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:weightSum="800" >
+
+            <TextView
+                android:id="@+id/txt_Sku"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="300"
+                android:text="SKU :" />
+
+            <TextView
+                android:id="@+id/txt_Skuvlue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="450"
+                android:text="SKU :" />
+
+            <ImageView
+                android:id="@+id/imgvw"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="50"
+                android:background="@drawable/arrow_upward" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="800" >
+
+            <TextView
+                android:id="@+id/txt_Qty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="380"
+                android:text="Quantity :" />
+
+            <ImageView
+                android:id="@+id/imgvw_incqty"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_weight="60"
+                android:background="@drawable/plus"
+                android:clickable="true" />
+
+            <EditText
+                android:id="@+id/edtext_qty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="300"
+                android:gravity="center"
+                android:inputType="none"
+                android:textIsSelectable="true"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/imgvw_lssqty"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="60"
+                android:background="@drawable/minus" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    					xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/lyt_sale3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#eafeea">
+		      <LinearLayout
+		                android:id="@+id/lyt_sale12"
+		                android:layout_width="match_parent"
+		                android:layout_height="wrap_content"
+		                android:orientation="horizontal">
+		                
+		          				<TextView
+						            android:id="@+id/linss"
+						            style="?android:attr/listSeparatorTextViewStyle"
+						            android:layout_width="1dp"
+						            android:layout_height="match_parent"
+						            android:layout_marginRight="5dp"
+						            android:background="#000"
+						            android:gravity="center_horizontal" />
+					            <TextView
+						            android:id="@+id/model210"
+						            android:layout_width="90dp"
+						            android:layout_height="match_parent"
+						            android:gravity="center"
+						            android:textColor="@color/black" />
+					
+					            <TextView
+								    android:id="@+id/line1"
+								    style="?android:attr/listSeparatorTextViewStyle"
+								    android:paddingTop="5dip"
+								    android:gravity="center_horizontal"
+								    android:layout_width="1dp"
+								    android:layout_marginLeft="5dp"
+								    android:layout_height="match_parent"
+								    android:background="#000" />
+			
+					            <TextView
+						            android:id="@+id/model11"
+						            android:layout_width="130dp"
+						            android:layout_height="match_parent"
+						            android:layout_marginLeft="5dp"
+						            android:gravity="center"
+						            android:textColor="@color/black" />
+					
+					            <TextView
+								    android:id="@+id/line21"
+								    style="?android:attr/listSeparatorTextViewStyle"
+								    android:paddingTop="5dip"
+								    android:gravity="center_horizontal"
+								    android:layout_width="1dp"
+								    android:layout_marginLeft="5dp"
+								    android:layout_height="match_parent"
+								    android:background="#000" />
+					            
+					            <!-- <TextView
+					                android:id="@+id/TextView0211"
+					                android:layout_width="90dp"
+					                android:layout_height="match_parent"
+					                android:layout_marginLeft="5dp"
+					                android:text="Edit"
+					                android:textStyle="bold"
+					                android:gravity="center"
+					                android:textColor="@color/black"
+					                android:clickable="true"/>
+					            <TextView
+								    android:id="@+id/line43"
+								    style="?android:attr/listSeparatorTextViewStyle"
+								    android:paddingTop="5dip"
+								    android:gravity="center_horizontal"
+								    android:layout_width="1dp"
+								    android:layout_marginLeft="5dp"
+								    android:layout_height="match_parent"
+								    android:background="#000"/> -->
+					            <TextView
+					                android:id="@+id/TextView031"
+					                android:layout_width="90dp"
+					                android:layout_height="match_parent"
+					                android:layout_marginLeft="5dp"
+					                android:text="Delete"
+					                android:gravity="center"
+					                android:textColor="@color/black"
+					                android:textStyle="bold"
+					                android:clickable="false"/>
+					            <TextView
+						            android:id="@+id/line44"
+						            style="?android:attr/listSeparatorTextViewStyle"
+						            android:layout_width="1dp"
+						            android:layout_height="match_parent"
+						            android:layout_marginLeft="5dp"
+						            android:background="#000"
+						            android:gravity="center_horizontal" />
+		            </LinearLayout> 
+		            <LinearLayout
+		                android:id="@+id/lytt"
+		                android:layout_width="match_parent"
+		                android:layout_height="wrap_content"
+		                android:orientation="vertical">
+		
+					            <TextView
+								    android:id="@+id/lined"
+								    style="?android:attr/listSeparatorTextViewStyle"
+								    android:paddingTop="5dip"
+								    android:gravity="center_horizontal"
+								    android:layout_width="match_parent"
+								    android:layout_height="1dp"
+								    android:background="#000" />
+		            </LinearLayout>
+		            
+</LinearLayout>
+		            
+		

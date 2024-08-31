@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="optionarray">
+        <item>Select</item>
+        <item>Present</item>
+        <item>Training</item>
+        <item>Weekly Off</item>
+        <item>Half Day</item>
+        <item>Leave</item>
+        <item>Comp Off</item>
+        <item>National Holiday</item>
+    </string-array>
+    <string-array name="Communication_option_array">
+        <item>GPRS</item>
+        <item>SMS</item>
+        <item>BOTH</item>
+    </string-array>
+    <string-array name="categoryarray">
+        <item>Select</item>
+        <item>Direct Cool </item>
+        <item>Frost Free</item>
+        <item>FLT</item>
+        <item>FATL</item>
+        <item>SATT</item>
+        <item>Microwave Oven</item>
+        <item>Air Conditioner</item>
+        <item>RO</item>
+        <item>Built In</item>
+    </string-array>
+</resources>

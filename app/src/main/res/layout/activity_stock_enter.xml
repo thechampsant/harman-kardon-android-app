@@ -1,0 +1,520 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFE">
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/btn_purple"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:visibility="gone">
+
+        <TextView
+
+            android:id="@+id/text_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:text="New Sale"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrv_cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/RelativeLayoutTop"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_10">
+
+            <!-- <LinearLayout
+                 android:id="@+id/lyt_body"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical">
+
+
+
+
+
+                 &lt;!&ndash;<View
+                     android:layout_width="wrap_content"
+                     android:layout_height="1dp"
+                     android:background="@color/OrangeRed" />&ndash;&gt;
+
+                 <TextView
+                     android:id="@+id/txt_msg"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="10dp"
+                     android:text="Customer Name*"
+                     android:textAppearance="?android:attr/textAppearanceMedium"
+                     android:textStyle="bold"
+                     android:visibility="gone" />
+
+                 <EditText
+                     android:id="@+id/edt_CustomerName"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:ems="10"
+                     android:visibility="gone">
+
+                     <requestFocus />
+                 </EditText>
+
+                 <TextView
+                     android:id="@+id/txt_mtd_sale"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="10dp"
+                     android:text="City*"
+                     android:textAppearance="?android:attr/textAppearanceMedium"
+                     android:textStyle="bold"
+                     android:visibility="gone" />
+
+                 <EditText
+                     android:id="@+id/edt_city"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:visibility="gone" />
+
+                 <TextView
+                     android:id="@+id/textView3"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="10dp"
+                     android:text="Location*"
+                     android:textAppearance="?android:attr/textAppearanceMedium"
+                     android:textStyle="bold"
+                     android:visibility="gone" />
+
+                 <EditText
+                     android:id="@+id/edt_location"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:visibility="gone" />
+
+                 <TextView
+                     android:id="@+id/txt_mtd_tgt"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="10dp"
+                     android:text="Mobile No*"
+                     android:textAppearance="?android:attr/textAppearanceMedium"
+                     android:textStyle="bold"
+                     android:visibility="gone" />
+
+                 <EditText
+                     android:id="@+id/edt_mobile"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:ems="10"
+                     android:inputType="number"
+                     android:visibility="gone" />
+
+                 <TextView
+                     android:id="@+id/textView5"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="10dp"
+                     android:text="Email"
+                     android:textAppearance="?android:attr/textAppearanceMedium"
+                     android:textStyle="bold"
+                     android:visibility="gone" />
+
+                 <EditText
+                     android:id="@+id/edt_email"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:ems="10"
+                     android:visibility="gone" />
+             </LinearLayout>-->
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_5"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/size_5"
+
+                >
+
+                <TextView
+
+                    android:id="@+id/txt_outletname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="OutLet missing"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/app_btn_color" />
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/lyt_sale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardTop"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_nostock"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/custom_button"
+                    android:gravity="center"
+                    android:shadowColor="#000000"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="No Stock"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/lyt_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lyt_one"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date:"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/lyt_date1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/btn_for_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_calender"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txt_for_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="NA"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/model2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Category"
+                    android:layout_marginStart="@dimen/size_5"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black"
+                    android:textStyle="normal"
+                    android:visibility="gone" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_5"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/size_5"
+                    app:cardElevation="@dimen/size_5">
+
+                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                        android:id="@+id/searchableSpinner_spmastcat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:visibility="gone"
+                        android:padding="5dp" />
+                    <Spinner
+                        android:id="@+id/spmastcat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:minHeight="@dimen/size_45"
+
+                        android:padding="@dimen/size_10"
+                        android:visibility="gone" />
+
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/model1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/size_2"
+                    android:text="Category"
+                    android:textColor="@color/black2"
+                    android:textSize="@dimen/size_12"
+                    android:textStyle="normal" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_5"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/size_5">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size_2">
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/searchableSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:visibility="visible"
+                            android:padding="5dp" />
+                        <Spinner
+
+                            android:id="@+id/spsubcat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:visibility="gone"
+                            android:minHeight="@dimen/size_40" />
+
+
+                        <ImageView
+                            android:layout_width="@dimen/size_20"
+                            android:layout_height="@dimen/size_20"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:visibility="gone"
+                            android:layout_marginEnd="@dimen/size_5"
+                            android:src="@drawable/ic_dropdown" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="@dimen/size_5"
+                    android:layout_marginBottom="@dimen/size_2"
+                    android:text="Sub Category"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_12"
+                    android:textStyle="normal" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_5"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/size_5">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size_2">
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/searchableSpinner_spmodels"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:visibility="visible"
+                            android:padding="5dp" />
+                        <Spinner
+                            android:background="@color/white"
+                            android:minHeight="@dimen/size_40"
+                            android:id="@+id/spmodels"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <ImageView
+                            android:layout_width="@dimen/size_20"
+                            android:layout_height="@dimen/size_20"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="@dimen/size_5"
+                            android:visibility="gone"
+                            android:src="@drawable/ic_dropdown" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <TextView
+                    android:layout_marginStart="@dimen/size_5"
+                    android:id="@+id/txt_mtd_ach"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12"
+                    android:layout_marginBottom="@dimen/size_2"
+                    android:text="Model"
+                    android:textSize="@dimen/size_12"
+                    android:textStyle="normal" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_5"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/size_5">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size_2">
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/searchableSpinner_spproducts"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:visibility="visible"
+                            android:padding="5dp" />
+
+                        <Spinner
+                            android:background="@color/white"
+                            android:minHeight="@dimen/size_40"
+                            android:id="@+id/spproducts"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                        <ImageView
+                            android:layout_width="@dimen/size_20"
+                            android:layout_height="@dimen/size_20"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:visibility="gone"
+                            android:layout_marginEnd="@dimen/size_5"
+                            android:src="@drawable/ic_dropdown" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <TextView
+                    android:layout_marginStart="@dimen/size_5"
+                    android:id="@+id/TextView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/size_2"
+                    android:text="@string/lblqty"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_12"
+                    android:textStyle="normal" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_5"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/size_5">
+
+                    <EditText
+                        android:id="@+id/txt_stockqty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size_10"
+                        android:background="@color/white"
+                        android:ems="10"
+                        android:hint="@string/hntenterqty"
+                        android:inputType="number|numberSigned"
+                        android:minHeight="@dimen/size_35" />
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="@dimen/size_50"
+                    android:layout_marginTop="@dimen/size_30"
+                    android:layout_marginBottom="@dimen/size_20"
+                    android:layout_marginEnd="@dimen/size_50"
+                    app:cardBackgroundColor="@color/app_btn_color"
+                    app:cardCornerRadius="22.5dp">
+
+                    <Button
+
+                        android:id="@+id/btn_newstock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Submit"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutBottom"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_purple"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/txt_footer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="Sponsored by V5 Global Services."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/size_10"
+    app:cardCornerRadius="@dimen/size_5"
+    app:cardBackgroundColor="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_customerNameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category : "
+            android:textColor="#AC000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_customerNameValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NA"
+            app:layout_constraintStart_toEndOf="@+id/tv_customerNameTitle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_customerNumberTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SubCategory : "
+            android:textColor="#AC000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_customerNameTitle" />
+
+        <TextView
+            android:id="@+id/tv_customerNumberValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NA"
+            app:layout_constraintStart_toEndOf="@+id/tv_customerNumberTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tv_customerNameValue" />
+
+        <TextView
+            android:id="@+id/tv_customerMailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SKU : "
+            android:textColor="#AC000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_customerNumberTitle" />
+
+        <TextView
+            android:id="@+id/tv_customerMailValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NA"
+            app:layout_constraintStart_toEndOf="@+id/tv_customerMailTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tv_customerNumberValue" />
+
+
+        <TextView
+            android:id="@+id/tv_customerbarcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Barcode Value : "
+            android:textColor="#AC000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_customerMailValue" />
+
+        <TextView
+            android:id="@+id/tv_customerBarValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NA"
+            app:layout_constraintStart_toEndOf="@+id/tv_customerbarcode"
+            app:layout_constraintTop_toBottomOf="@+id/tv_customerMailValue" />
+
+
+
+
+        <TextView
+            android:id="@+id/tv_submittedDateValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NA"
+            android:textColor="@color/orange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_customerBarValue" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,15 @@
+package app.core.camera;
+
+import com.example.com.test.image.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class NoCamera extends Activity {
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.no_camera);
+	}
+}

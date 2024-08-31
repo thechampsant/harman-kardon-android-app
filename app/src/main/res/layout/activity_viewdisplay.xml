@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lnr_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff" >
+
+
+    <ListView
+        android:id="@+id/list_vwdsply"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@+id/lnr_header" >
+    </ListView>
+
+    <RelativeLayout
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp" >
+
+        <LinearLayout
+            android:id="@+id/lnrly"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="800" >
+
+            <Button
+                android:id="@+id/Submit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="350"
+                android:text="Submit" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="100" />
+
+            <Button
+                android:id="@+id/add"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="350"
+                android:text="Add New" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

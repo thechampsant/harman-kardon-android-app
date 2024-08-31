@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:id="@+id/lyt_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/quiz_actionbarnew"
+        android:padding="@dimen/padtext" >
+
+        <ImageView
+            android:id="@+id/img_tip_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/survey_icon" />
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/img_tip_next"
+            android:paddingLeft="@dimen/padtext"
+            android:text="Survey"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ImageView
+            android:id="@+id/img_action_refresh"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/refresh_icon" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lyt_header"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:visibility="gone"
+        android:layout_below="@id/lyt_action_bar"
+        android:background="@color/quiz_header"
+        android:padding="@dimen/padtext" >
+
+        <TextView
+            android:id="@+id/txt_submittedon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_quizs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lyt_header" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/txt_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No Quiz found!"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/darkgreen"
+        android:visibility="gone" />
+
+</RelativeLayout>

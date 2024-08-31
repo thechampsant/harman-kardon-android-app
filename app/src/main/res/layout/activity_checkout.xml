@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2FFFFFF"
+    android:clipToPadding="false"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/checkout_current_user_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:textSize="15sp" />
+
+
+    <ImageView
+        android:id="@+id/iv_bg_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_150"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_top_home" />
+
+    <com.ariston.training_module.utility.widgets.RobotoTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="@dimen/size_8"
+
+
+        android:layout_marginStart="@dimen/size_10"
+        android:layout_marginBottom="@dimen/size_50"
+        android:layout_toEndOf="@id/iv_back"
+        android:gravity="center|start"
+        android:text="@string/mark_out"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_30" />
+
+    <ImageButton
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/size_40"
+        android:layout_height="@dimen/size_40"
+        android:layout_margin="@dimen/size_8"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_chevron_left_white_24dp" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_remarks"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_70"
+        android:layout_below="@+id/iv_bg_top"
+        android:layout_marginStart="@dimen/size_16"
+        android:layout_marginTop="-30dp"
+        android:background="@color/white"
+        android:layout_marginEnd="@dimen/size_16"
+        app:cardCornerRadius="@dimen/size_8">
+
+
+        <com.ariston.training_module.utility.widgets.RobotoEditText
+            android:id="@+id/edt_remarks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:calendarViewShown="false"
+            android:gravity="center"
+            android:hint="@string/enter_remarks"
+            android:padding="8dp"
+            android:scrollbarSize="20dp"
+            android:textColor="@color/gray"
+            android:textColorHint="@color/gray" />
+
+
+    </androidx.cardview.widget.CardView>
+
+    <com.ariston.training_module.utility.widgets.RobotoTextView
+        android:id="@+id/itemsalefordate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:text="Mark Out"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_purple"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/itemsaleqty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="Sponsored by V5 Global Services."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rrrl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/relativeLayout3"
+        android:layout_below="@id/cv_remarks"
+        android:layout_marginTop="@dimen/size_16"
+
+        android:padding="15dp">
+
+
+        <TextView
+            android:id="@+id/already_checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Checkout not required."
+            android:textColor="@color/Gray"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <ScrollView
+            android:id="@+id/checkout_form"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/lll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/size_20"
+                    android:paddingBottom="10dp">
+
+                    <com.ariston.training_module.utility.widgets.RobotoTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/your_current_location"
+                        android:textColor="@color/gray" />
+
+                    <ProgressBar
+                        android:id="@+id/check_out_progress_bar"
+                        style="?android:attr/progressBarStyleSmall"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_weight="1"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:visibility="invisible" />
+
+                    <com.ariston.training_module.utility.widgets.RobotoTextView
+                        android:id="@+id/checkout_refresh_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/bg_capsule_shape"
+
+
+                        android:gravity="center"
+                        android:paddingStart="@dimen/size_10"
+                        android:paddingEnd="@dimen/size_10"
+                        android:paddingTop="@dimen/size_3"
+                        android:paddingBottom="@dimen/size_3"
+                        android:text="@string/rfrsh"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_marginStart="@dimen/size_2"
+                    android:layout_marginEnd="@dimen/size_2"
+                    android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="@color/white"
+
+                    app:cardCornerRadius="@dimen/size_8">
+
+                    <com.google.android.gms.maps.MapView
+                        android:id="@+id/checkout_map_fragment"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/attach_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/size_2"
+                    android:layout_marginTop="@dimen/size_8"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginEnd="@dimen/size_2"
+                    app:cardCornerRadius="@dimen/size_5">
+
+                    <com.fieldforce.utility.widgets.RobotoTextView
+                        android:id="@+id/bt_attach_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:background="@color/white"
+                        android:drawablePadding="@dimen/size_8"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/size_15"
+                        android:paddingBottom="@dimen/size_15"
+                        android:text="@string/capture_image"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/font_16" />
+                </androidx.cardview.widget.CardView>
+
+
+                <com.fieldforce.utility.widgets.RobotoTextView
+                    android:id="@+id/text_submt"
+                    android:layout_width="@dimen/size_200"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:minHeight="@dimen/size_45"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0.22"
+                    android:background="@drawable/bg_capsule_shape"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/size_50"
+                    android:paddingTop="@dimen/size_8"
+                    android:paddingEnd="@dimen/size_50"
+                    android:paddingBottom="@dimen/size_8"
+                    android:text="@string/save"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_16" />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</RelativeLayout>

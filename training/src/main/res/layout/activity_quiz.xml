@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:background="#fff"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_bg_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_150"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_top_home" />
+
+    <ImageButton
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/size_40"
+        android:layout_height="@dimen/size_40"
+        android:layout_margin="@dimen/size_8"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_chevron_left_white_24dp" />
+
+    <com.ariston.training_module.utility.widgets.RobotoTextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_40"
+        android:layout_toRightOf="@+id/iv_back"
+        android:layout_margin="@dimen/size_8"
+        android:gravity="center_vertical"
+        android:text="@string/back"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_24" />
+
+    <com.ariston.training_module.utility.widgets.RobotoTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_back"
+        android:layout_marginStart="-12dp"
+        android:layout_marginBottom="@dimen/size_35"
+        android:layout_toEndOf="@id/iv_back"
+        android:gravity="center|start"
+        android:text="@string/quize"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_30" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/takeexamview"
+        android:visibility="visible"
+        android:layout_below="@+id/iv_bg_top">
+        <com.ariston.training_module.utility.widgets.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginRight="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_15"
+            android:gravity="center|start"
+            android:text="Question 10/10"
+            android:textStyle="bold"
+            android:id="@+id/question_number"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_24" />
+        <com.ariston.training_module.utility.widgets.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/question_number"
+            android:layout_marginRight="@dimen/size_15"
+            android:layout_marginLeft="@dimen/size_15"
+
+            android:gravity="center|start"
+            android:lines="1"
+            android:id="@+id/view"
+            android:text="---------------------------------------------"
+            android:textStyle="bold"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/font_24" />
+        <com.ariston.training_module.utility.widgets.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:layout_marginRight="@dimen/size_15"
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_15"
+            android:gravity="center|start"
+            android:id="@+id/question"
+            android:text="Lorem ipsum dolor sit amet, Comsectetuer adipscing elit?"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_16" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/question"
+            android:layout_marginRight="@dimen/size_15"
+            android:layout_marginLeft="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_15"
+            android:id="@+id/rv_quetionanslist"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/rv_quetionanslist"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:cardBackgroundColor="@color/light_gray"
+                app:cardCornerRadius="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/cv_previous"
+                >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    >
+                    <com.ariston.training_module.utility.widgets.RobotoTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/previous"
+                        android:textColor="#000"
+                        android:textSize="@dimen/font_12"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:id="@+id/tv_previous"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:cardBackgroundColor="#D30C2F"
+                app:cardCornerRadius="20dp"
+
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/cv_next"
+                >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    >
+                    <com.ariston.training_module.utility.widgets.RobotoTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/next"
+                        android:textColor="#fff"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:id="@+id/tv_next"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:cardBackgroundColor="#D30C2F"
+                app:cardCornerRadius="20dp"
+
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/cv_submit"
+                >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    >
+                    <com.ariston.training_module.utility.widgets.RobotoTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Submit"
+                        android:textColor="#fff"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:id="@+id/tv_submit"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/resultView"
+            android:visibility="gone"
+            android:layout_below="@+id/iv_bg_top">
+            <com.ariston.training_module.utility.widgets.RobotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_15"
+                android:layout_marginRight="@dimen/size_15"
+                android:layout_marginTop="@dimen/size_15"
+                android:gravity="center|start"
+                android:text="Result"
+                android:textStyle="bold"
+                android:id="@+id/result"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_24" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:cardBackgroundColor="#000"
+                app:cardCornerRadius="15dp"
+                android:layout_below="@+id/result"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/cv_resultView"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    >
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+
+
+</RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

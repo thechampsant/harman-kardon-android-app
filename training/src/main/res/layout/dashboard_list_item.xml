@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff"
+    android:id="@+id/ll_traineeListContainer"
+    tools:context=".modules.dashboard.ui.fragments.DashboardListFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+        <com.ariston.training_module.utility.widgets.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Name"
+            android:textSize="10sp"
+            android:textColor="@color/training_blue"
+            android:gravity="center_vertical"
+            android:paddingStart="4dp"
+            android:id="@+id/rtv_traineeNameInDashboardItem"
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            />
+        <com.ariston.training_module.utility.widgets.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_weight="0.8"
+            android:layout_height="match_parent"
+            android:text="V5ID"
+            android:textSize="10sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/training_blue"
+            android:id="@+id/v5Id"
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            />
+        <com.ariston.training_module.utility.widgets.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_weight="1.1"
+            android:layout_height="match_parent"
+            android:text="Quiz\nAssigned"
+            android:textSize="10sp"
+            android:textColor="@color/training_blue"
+            android:gravity="center"
+            android:id="@+id/rtv_quizAttempted"
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            />
+        <com.ariston.training_module.utility.widgets.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_weight="1.1"
+            android:layout_height="match_parent"
+            android:text="Material\nViewed"
+            android:textSize="10sp"
+            android:textColor="@color/training_blue"
+            android:gravity="center"
+            android:id="@+id/rtv_material"
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            />
+        <com.ariston.training_module.utility.widgets.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Status"
+            android:textSize="10sp"
+            android:textColor="@color/training_blue"
+            android:gravity="center"
+            android:id="@+id/rtv_status"
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            />
+        <com.ariston.training_module.utility.widgets.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_weight="0.6"
+            android:layout_height="match_parent"
+            android:text="% Of Marks"
+            android:textSize="10sp"
+            android:textColor="@color/training_blue"
+            android:gravity="end|center_vertical"
+            android:paddingEnd="5dp"
+            android:id="@+id/rtv_percentage"
+            />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

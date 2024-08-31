@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white" >
+
+    <RelativeLayout
+        android:id="@+id/lyt_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/quiz_actionbar" >
+
+        <ImageView
+            android:id="@+id/img_tip_next"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/padtext"
+            android:scaleType="fitCenter"
+            android:src="@drawable/quiz" />
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/img_tip_next"
+            android:paddingLeft="@dimen/padtext"
+            android:text="loading..."
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <LinearLayout
+            android:id="@+id/lyt_save_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/action_save"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <View
+                android:id="@+id/view_gap"
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/light_gray"
+                android:paddingLeft="@dimen/ten" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padtext"
+                android:scaleType="fitCenter"
+                android:src="@drawable/save" />
+
+            <TextView
+                android:id="@+id/txt_action_save_quiz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padtext"
+                android:paddingRight="@dimen/padtext"
+                android:text="Save"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/lyt_save_quiz"
+            android:paddingLeft="@dimen/padtext"
+            android:paddingRight="@dimen/padtext"
+            android:text="loading..."
+           
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lyt_quiz_status_header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/lyt_action_bar"
+        android:background="@color/quiz_header"
+        android:padding="@dimen/padtext" >
+
+        <TextView
+            android:id="@+id/txt_total_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="Total: -"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/txt_answered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Answered: -"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/txt_pending_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="Pending: -"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/quiz_pending" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lyt_quiz_serial"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/lyt_quiz_status_header"
+        android:background="@color/quiz_footer"
+        android:paddingLeft="@dimen/padtext"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/txt_question_serial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="Question No: 1"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/txt_qid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="@dimen/padtext"
+            android:text="QID: 1223"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+    <!-- <RelativeLayout -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:layout_below="@id/lyt_quiz_serial" > -->
+
+
+    <!-- <android.support.v4.view.ViewPager -->
+    <!-- xmlns:android="http://schemas.android.com/apk/res/android" -->
+    <!-- android:id="@+id/pager" -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="match_parent"/> -->
+    <!-- </RelativeLayout> -->
+
+    <LinearLayout
+        android:id="@+id/lyt_quiz_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lyt_quiz_serial"
+        android:background="@color/quiz_background_question"
+        android:orientation="horizontal"
+        android:padding="@dimen/padtext"
+        android:paddingLeft="@dimen/padtext"
+        android:paddingTop="@dimen/padtext"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:id="@+id/lyt_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/quiz_pending"
+            android:paddingLeft="@dimen/padtext"
+            android:paddingRight="@dimen/padtext" >
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/warning_small" />
+
+            <TextView
+                android:id="@+id/txt_status1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/padtext"
+                android:text="Pending"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/lyt_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lyt_quiz_status"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/txt_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/quiz_background_question"
+            android:padding="@dimen/padtext"
+            android:text="Amol  is an AMSO who has recently received a revised set of outlets (urban only) and their CTR data. He now knows which outlets have how many M2+ customers and which category of BOT are they mapped to. What should Amol do to manage his retailers and build more CTR 20+ outlets? "
+            android:textSize="15sp" />
+
+        <ScrollView
+            android:id="@+id/scrl_choice_multiple"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_question" >
+
+            <LinearLayout
+                android:id="@+id/lyt_choice_multiple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+            </LinearLayout>
+        </ScrollView>
+
+        <ScrollView
+            android:id="@+id/scrl_choice_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/scrl_choice_multiple"
+            android:paddingBottom="@dimen/fifty" >
+
+            <LinearLayout
+                android:id="@+id/lyt_choice_single"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <RadioGroup
+                    android:id="@+id/rg_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </RadioGroup>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/lyt_reset_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/scrl_choice_single"
+            android:background="@drawable/action_quiz_reset"
+            android:orientation="vertical"
+            android:padding="@dimen/padtext" 
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txt_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reset"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/quiz_reset"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyt_quiz_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lyt_reset_answer"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remarks"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/edt_remarks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:ems="10" >
+
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lyt_sumarry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lyt_question"
+        android:paddingTop="@dimen/padtext" >
+
+        <RelativeLayout
+            android:id="@+id/lyt_warning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@color/quiz_pending"
+            android:padding="@dimen/padtext"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/img_warning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/warning" />
+
+            <TextView
+                android:id="@+id/txt_warning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/img_warning"
+                android:paddingLeft="@dimen/padtext"
+                android:text="3 Questions are pending\n Are you sure to submit  your quiz"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lyt_quiz_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lyt_warning"
+            android:paddingTop="@dimen/padtext"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/quiz_header_question"
+                android:paddingBottom="@dimen/padtext"
+                android:paddingLeft="@dimen/ten"
+                android:paddingTop="@dimen/padtext"
+                android:text="Status :"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ListView
+                android:id="@+id/lv_quiz_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView7"
+                android:layout_marginBottom="30dp" >
+            </ListView>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/quiz_footer" >
+
+        <RelativeLayout
+            android:id="@+id/lyt_back"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/action_layout"
+            android:paddingLeft="@dimen/padtext"
+            android:paddingRight="@dimen/padtext" >
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/previous" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/img_back"
+                android:paddingLeft="@dimen/padtext"
+                android:text="Previous"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lyt_next"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/action_layout"
+            android:paddingLeft="@dimen/padtext"
+            android:paddingRight="@dimen/padtext" >
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/padtext"
+                android:paddingRight="@dimen/padtext"
+                android:text="Next"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/img_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView6"
+                android:src="@drawable/next" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lyt_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/action_layout"
+            android:paddingLeft="@dimen/padtext"
+            android:paddingRight="@dimen/padtext"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/img_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/submit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/img_submit"
+                android:paddingLeft="@dimen/padtext"
+                android:text="Submit"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

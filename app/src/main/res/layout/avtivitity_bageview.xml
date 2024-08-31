@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    
+    
+    <RelativeLayout
+        android:id="@+id/Rel"
+        android:layout_height="wrap_content"
+        
+        android:layout_width="match_parent">
+
+     <TextView
+         android:id="@+id/textView1"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+        
+         android:layout_centerVertical="true"
+         android:layout_marginTop="3dp"
+         android:gravity="center_horizontal"
+         android:text="Message"
+         android:textSize="25dp"
+         android:textStyle="bold" />
+
+     <ImageView
+         android:id="@+id/refrresh"
+         android:layout_width="30dp"
+         android:layout_height="30dp"
+         android:layout_alignParentRight="true"
+         android:layout_centerVertical="true"
+         android:layout_marginRight="18dp"
+         android:src="@drawable/refreesh" />
+
+     <ImageView
+         android:id="@+id/ivbackbtn"
+         android:layout_width="32dp"
+         android:layout_height="32dp"
+         android:layout_alignParentLeft="true"
+         android:layout_centerVertical="true"
+         android:layout_marginLeft="9dp"
+         android:src="@drawable/go_back_icon" />
+    
+      </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Rel"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="4dp"
+        >
+    </ListView>
+
+   
+</RelativeLayout>

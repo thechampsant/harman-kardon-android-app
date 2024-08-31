@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_log_out"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Logout"/>
+<!--     <item -->
+<!--         android:id="@+id/action_register_device" -->
+<!--         android:orderInCategory="100" -->
+<!--         android:showAsAction="never" -->
+<!--         android:title="Register Device"/> -->
+    <item
+        android:id="@+id/action_updateretailer"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Update Stores">
+    </item> 
+<!--      <item -->
+<!--         android:id="@+id/action_clearpendingpic" -->
+<!--         android:orderInCategory="100" -->
+<!--         android:showAsAction="never" -->
+<!--         android:title="@string/pendingpic"> -->
+<!--     </item>      -->
+
+</menu>

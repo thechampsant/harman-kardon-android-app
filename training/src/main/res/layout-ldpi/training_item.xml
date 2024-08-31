@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#fff"
+    app:cardElevation="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_parentInTrainingItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#800000"
+        android:paddingStart="5dp"
+        android:paddingBottom="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_training"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ball"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.ariston.training_module.utility.widgets.RobotoBoldTextView
+            android:id="@+id/rbtv_trainingTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="@dimen/size_10"
+            android:layout_marginEnd="10dp"
+            android:text="Training Title"
+            android:textColor="#000"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/ib_rightArrowInTrainingItem"
+            app:layout_constraintStart_toEndOf="@+id/civ_training"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.ariston.training_module.utility.widgets.RobotoTextView
+            android:id="@+id/rtv_trainerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:text="Trainer Name"
+            android:textColor="#000"
+            android:textSize="9sp"
+            app:layout_constraintEnd_toStartOf="@+id/ib_rightArrowInTrainingItem"
+            app:layout_constraintStart_toEndOf="@+id/civ_training"
+            app:layout_constraintTop_toBottomOf="@+id/rbtv_trainingTitle" />
+
+        <ImageView
+            android:id="@+id/iv_watchIconInTraining"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/watch_grey_24dp"
+            app:layout_constraintStart_toEndOf="@+id/civ_training"
+            app:layout_constraintTop_toBottomOf="@+id/rtv_trainerName" />
+
+        <com.ariston.training_module.utility.widgets.RobotoBoldTextView
+            android:id="@+id/rtv_dateValueInTrainingItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="16/10/1993"
+            android:textColor="#000"
+            android:textSize="6sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_watchIconInTraining"
+            app:layout_constraintStart_toEndOf="@+id/iv_watchIconInTraining"
+            app:layout_constraintTop_toTopOf="@+id/iv_watchIconInTraining" />
+
+
+        <ImageView
+            android:id="@+id/iv_time"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/watch_grey_24dp"
+            app:layout_constraintStart_toEndOf="@+id/civ_training"
+            app:layout_constraintTop_toBottomOf="@+id/iv_watchIconInTraining" />
+
+        <com.ariston.training_module.utility.widgets.RobotoBoldTextView
+            android:id="@+id/rbtv_timeInTrainingItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="12:00 PM"
+            android:textColor="#000"
+            android:textSize="6sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_time"
+            app:layout_constraintStart_toEndOf="@+id/iv_time"
+            app:layout_constraintTop_toTopOf="@+id/iv_time" />
+
+        <ImageButton
+            android:id="@+id/ib_rightArrowInTrainingItem"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="#fff"
+            android:scaleType="centerCrop"
+            android:src="@drawable/chevron_right_grey_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.ariston.training_module.utility.widgets.RobotoBoldTextView
+            android:id="@+id/rbtv_trainingTypeInTrainingItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Training Type"
+            android:textColor="#000"
+            android:textSize="6sp"
+            app:layout_constraintStart_toStartOf="@id/rbtv_timeInTrainingItem"
+            app:layout_constraintTop_toBottomOf="@+id/iv_time" />
+
+        <ImageView
+            android:id="@+id/iv_check"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_margin="@dimen/size_5"
+            android:src="@drawable/ic_baseline_check_green_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

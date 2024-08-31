@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_header_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_bg_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:paddingBottom="50dp"
+        android:scaleType="centerCrop" />
+
+    <com.fieldforce.utility.widgets.RobotoTextView
+        android:id="@+id/text_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_name"
+        android:layout_marginStart="@dimen/size_8"
+        android:layout_toStartOf="@+id/iv_profile_pic"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:paddingStart="@dimen/size_20"
+        android:singleLine="true"
+        android:text="@string/welcome"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <com.fieldforce.utility.widgets.RobotoBoldTextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_V5ID"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/size_8"
+        android:layout_marginBottom="@dimen/size_8"
+        android:layout_toStartOf="@+id/iv_profile_pic"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:paddingStart="@dimen/size_20"
+
+        android:singleLine="true"
+
+        android:text="Ankhir Sardar"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.fieldforce.utility.widgets.RobotoBoldTextView
+        android:id="@+id/tv_V5ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_user_ID"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/size_8"
+        android:layout_marginBottom="@dimen/size_8"
+        android:layout_toStartOf="@+id/iv_profile_pic"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:paddingStart="@dimen/size_20"
+
+        android:singleLine="true"
+
+        android:text="Ankhir Sardar"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.fieldforce.utility.widgets.RobotoBoldTextView
+        android:id="@+id/tv_user_ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fl_grid_top"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/size_8"
+        android:layout_marginBottom="@dimen/size_8"
+        android:layout_toStartOf="@+id/iv_profile_pic"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:paddingStart="@dimen/size_20"
+
+        android:singleLine="true"
+
+        android:text="Ankhir Sardar"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+
+    <ImageView
+        android:id="@+id/iv_profile_pic"
+        android:layout_width="@dimen/size_100"
+        android:layout_height="@dimen/size_100"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/size_60"
+        android:layout_marginEnd="@dimen/size_30"
+        android:layout_marginBottom="@dimen/size_10"
+        android:src="@drawable/profile_home" />
+
+    <FrameLayout
+        android:id="@+id/fl_grid_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_profile_pic"
+        android:background="@drawable/bg_home"
+        android:padding="@dimen/size_8">
+
+
+        <com.fieldforce.utility.widgets.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20"
+            android:background="@drawable/bg_our_module"
+            android:padding="@dimen/size_5"
+            android:text="Our Modules"
+            android:textColor="#fff" />
+    </FrameLayout>
+
+
+</RelativeLayout>

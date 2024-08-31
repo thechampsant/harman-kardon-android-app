@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_150"
+        android:background="@color/green">
+
+        <ImageView
+            android:id="@+id/iv_bg_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_150"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_top_home" />
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_marginTop="@dimen/size_20"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_back_btn"
+                android:layout_width="@dimen/size_24"
+                android:layout_height="@dimen/size_24"
+                android:rotation="270"
+                app:srcCompat="@drawable/arrow_upward"
+                app:tint="@color/white" />
+
+
+            <com.fieldforce.utility.widgets.RobotoTextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10"
+                android:text="@string/back"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <com.fieldforce.utility.widgets.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_marginBottom="10dp"
+            android:text="Display Compliance"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_30" />
+
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvStoreList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_header"
+        android:layout_margin="@dimen/size_10" />
+
+
+    <Button
+        android:id="@+id/fabAddNew"
+        android:layout_width="@dimen/size_100"
+        android:layout_height="@dimen/size_40"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+
+        android:text="Add" />
+
+    <ProgressBar
+        android:id="@+id/pb_floor_hygiene"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+      android:layout_centerInParent="true" />
+
+
+</RelativeLayout>

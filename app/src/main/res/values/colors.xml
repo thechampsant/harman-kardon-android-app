@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="btm_nav_text">#CCCCCC</color>
+    <color name="bg_btn">#1C5E8D</color>
+    <color name="app_btn_color">#00958f</color>
+    <color name="app_btn_color1">#ffffff</color>
+</resources>

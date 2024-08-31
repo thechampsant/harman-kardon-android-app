@@ -1,0 +1,128 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity" >
+
+     <RelativeLayout
+        android:id="@+id/RelativeLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+         android:visibility="gone"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/btn_purple"
+        android:paddingLeft="@dimen/activity_horizontal_margin" >
+
+         <Button
+            android:id="@+id/btnhomee"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/home_icon"
+            android:onClick="homebutton"
+            android:clickable="true"/>
+         
+        <TextView
+            android:id="@+id/itemsalefordate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:text="Settings"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/rl_view"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_bg_top"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_top_home" />
+
+        <RelativeLayout
+            android:id="@+id/iv_backView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/size_40"
+                android:layout_height="@dimen/size_40"
+                android:layout_margin="@dimen/size_8"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_chevron_left_white_24dp" />
+
+            <com.ariston.training_module.utility.widgets.RobotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_40"
+                android:layout_margin="@dimen/size_8"
+                android:layout_toRightOf="@+id/iv_back"
+                android:gravity="center_vertical"
+                android:text="@string/back"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_24" />
+
+            <com.ariston.training_module.utility.widgets.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_back"
+                android:layout_marginStart="-3dp"
+                android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/size_20"
+                android:layout_toEndOf="@id/iv_back"
+                android:gravity="center|start"
+                android:text="Setting"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_30" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <ListView
+         android:id="@+id/lv_setting"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@id/rl_view"
+         android:padding="@dimen/ten" >
+
+     </ListView>
+     
+     <RelativeLayout
+        android:id="@+id/RelativeLayoutBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_purple"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <TextView
+            android:id="@+id/itemsaleqty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/lblpowerby"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+    
+    
+    
+</RelativeLayout>

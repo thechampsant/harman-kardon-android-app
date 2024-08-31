@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <app.core.image.capture.TouchImageView
+        android:id="@+id/imgDisplay"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/not_available" />
+    
+    <RelativeLayout
+        android:id="@+id/lyt_imgdetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/button_background"
+        android:padding="@dimen/padtext" >
+
+        <LinearLayout
+            android:id="@+id/hold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="242dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/txt_doctype"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Image Type: Feedback"
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:id="@+id/txt_capturedon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Capture on:2014-03-03"
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:id="@+id/txt_remarks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Remarks:DC is very fine"
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:id="@+id/txt_src"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyt_imgstatusicon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/img_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:src="@drawable/pending" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lyt_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_background" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="fill_parent"
+                android:visibility="gone"
+                android:layout_height="2dip"
+                android:background="#ffffff" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/lyt_action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/btnupload"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/ic_action_av_upload"
+                android:text=""
+                android:visibility="gone"
+                android:textColor="@color/black" />
+            <Button
+                android:id="@+id/btn_info"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/btnupload"
+                android:background="@drawable/ic_action_collections_go_to_today" />
+  			 <Button
+                android:id="@+id/btn_share"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/btn_info"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/ic_action_social_share" />
+
+  			 <Button
+  			     android:id="@+id/btn_takephotos"
+  			     style="?android:attr/buttonStyleSmall"
+  			     android:layout_width="wrap_content"
+  			     android:layout_height="wrap_content"
+  			     android:layout_alignParentTop="true"
+  			     android:layout_marginLeft="5dp"
+  			     android:layout_toRightOf="@+id/btn_share"
+  			     android:background="@drawable/ic_takephotos" />
+
+            <Button
+                android:id="@+id/btnClose"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/btn_options"
+                android:background="@drawable/ic_action_content_remove"
+                android:textColor="#ffffff" />
+
+             <Button
+                 android:id="@+id/btn_options"
+                 style="?android:attr/buttonStyleSmall"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentRight="true"
+                 android:background="@drawable/ic_options"
+                 android:text="" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:text="Sorry no image found to display !"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/darkgreen" />
+
+</RelativeLayout>

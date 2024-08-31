@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="250dp" >
+
+    <ImageView
+        android:id="@+id/sublayout_proof_image_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/very_light_gray"
+        android:clickable="true"
+        android:scaleType="fitXY" />
+
+    <View
+        android:id="@+id/dummy_layout"
+        android:layout_width="2dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:background="@color/gray" />
+
+    <ImageButton
+        android:id="@+id/image_sublayout_open_gallery_button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/dummy_layout"
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="openGallery"
+        android:src="@drawable/ic_gallery" />
+
+    <TextView
+        android:id="@+id/image_sublayout_gallery_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_sublayout_open_gallery_button"
+        android:layout_marginRight="30dp"
+        android:layout_toLeftOf="@id/dummy_layout"
+        android:text="Gallery" />
+
+    <ImageButton
+        android:id="@+id/image_sublayout_open_camera_button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_toRightOf="@+id/dummy_layout"
+        android:layout_centerVertical="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="openCamera"
+        android:src="@drawable/ic_camera_48dp" />
+
+    <TextView
+        android:id="@+id/image_sublayout_camera_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_sublayout_open_camera_button"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@id/dummy_layout"
+        android:text="Camera" />
+
+</RelativeLayout>

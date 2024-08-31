@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NA"
+        android:textSize="16sp"
+        android:id="@+id/tv_questionValueInEditTextViewType"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp"
+        android:id="@+id/et_answerValueInsideEditTextViewType"
+        android:scrollbars="vertical"
+        android:maxHeight="80dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:background="@drawable/border"
+        android:maxLength="5"
+
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:layout_margin="@dimen/size_10"
+        android:layout_height="wrap_content"
+        android:text="Upload Image"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:id="@+id/btn_click"
+        />
+
+
+</LinearLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_floor_hygiene"
+        android:layout_width="@dimen/size_150"
+        android:layout_height="@dimen/size_150"
+        android:adjustViewBounds="true"
+        android:src="@drawable/harman_logo"
+        android:scaleType="fitCenter" />
+
+    <com.fieldforce.utility.widgets.RobotoTextView
+        android:id="@+id/tv_label_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center" />
+
+</LinearLayout>

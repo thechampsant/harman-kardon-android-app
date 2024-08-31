@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <!--tools:context="com.APIService.SliderInterestedActivity"-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorEnabled="true"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="#00000000"
+                app:sliderIndicatorUnselectedColor="#00000000"
+                app:sliderScrollTimeInSec="1" />
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/size_10"
+                android:layout_height="wrap_content"
+                android:text="Be Greater with FM Learn"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_24"
+                android:layout_gravity="center"
+                android:gravity="left"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="@dimen/size_10"
+                android:src="@drawable/imgtwo"
+                android:scaleType="fitCenter"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:text="Learn new skills, improve your performance, become a more valuable employee and grow faster."
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_18"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="@dimen/size_10"
+                android:src="@drawable/imgone"
+                android:scaleType="fitCenter"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:text="Unlock your true potential and upgrade your lifestyle – Learn new skills, apply for great job opportunities with us and earn higher pay and incentives."
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_18"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="How Upskilling with FM Learn Will Help You Grow Faster &amp; Future Ready"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_24"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:text="•	Become familiar with new technologies that are changing your job."
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_18"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:text="•	Learn advanced soft skills and attributes that today's jobs are demanding."
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_18"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:text="•	Boost your productivity, confidence and competence."
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_18"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:text="•	Understand the market better and become future-proof."
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_18"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical"/>
+            <Button
+                android:id="@+id/interested_btn"
+                android:layout_width="match_parent"
+                android:height="40dp"
+                android:layout_margin="@dimen/font_10"
+                android:background="@drawable/rect_login_button"
+                android:text="Yes I'm Interested"
+                android:textColor="@color/White"
+                android:textStyle="bold"
+                android:layout_height="@dimen/size_40" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+
+</LinearLayout>

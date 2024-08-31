@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_update_all"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Update Pending All"/>
+     <item
+        android:id="@+id/action_clear_saved"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Clear Updated All"/>
+      <item
+        android:id="@+id/action_clear_all_pending"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Clear Pending All"/>
+      <item
+        android:id="@+id/action_clear_all"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Clear All"/>
+
+</menu>

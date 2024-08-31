@@ -1,0 +1,39 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_Upload"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/ic_action_av_upload"
+        android:title="Upload"/>
+       <item
+        android:id="@+id/action_info"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/ic_action_collections_go_to_today"
+        android:title="Image Info"/>
+      <item
+        android:id="@+id/action_share"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/ic_action_social_share"
+        android:title="Share"/>
+      <item
+        android:id="@+id/action_close"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/ic_action_content_remove"
+        android:title="Close"/>
+     <item
+        android:id="@+id/action_delete"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/ic_action_content_discard"
+        android:title="Delete"/>
+      <item
+        android:id="@+id/action_UploadAll"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Upload All"/>
+
+</menu>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="orange">#ff5500
+</color>
+    <color name="white">#ffffff
+</color>
+    <color name="transparent">#00000000
+</color>
+    <color name="date_color">#999999
+</color>
+    <color name="black">#000000
+</color>
+    <color name="red">#ff0000
+</color>
+    <color name="gray">#999999
+</color>
+    <color name="blue">#0066cc
+</color>
+    <color name="light_gray">#CBCBCB
+</color>
+    <color name="light_gray2">#DDD
+</color>
+    <color name="gold">#e6b121
+</color>
+    <color name="blueback">#99FFFF
+</color>
+    <color name="articlecolor">#3399FF
+</color>
+    <color name="article_title">#3399FF</color>
+    <color name="cachecolor">#8ad0e8</color>
+    <color name="yellow">#FFFF66</color>
+    <color name="midyellow">#ffff00</color>
+    <color name="golden">#FF8000</color>
+    <color name="darkblue">#0033ff</color>
+    <color name="green">#00CC00</color>
+    <color name="green_parrot">#00FF00</color>
+    <color name="orange2">#FFA500</color>
+    <color name="gray2">#808080</color>
+    <color name="brown">#FFFFE0</color>
+    <color name="midblue">#0066FF</color>
+    <color name="purple">#A319A3</color>
+    <color name="pink2">#FF1975</color>
+    <color name="black2">#000000</color>
+    <color name="darkgreen">#328032</color>
+    <color name="skyblue">#3BB9FF</color>
+    <color name="darkred">#9A3334</color>
+    <color name="darkyellow">#FFCC00</color>
+
+    <color name="alert">#ef4e3a</color>
+    
+    
+    <color name="quiz_actionbar">#f6f3f3</color>
+    <color name="quiz_header">#586666</color>
+    <color name="quiz_warning">#FFCC00</color>
+    <color name="quiz_pending">#f58c1a</color>
+    <color name="quiz_closed">#f72424</color>
+    <color name="quiz_footer">#58aecf</color>
+    <color name="quiz_score">#209ad3</color>
+    <color name="quiz_date">#f0b568</color>
+    <color name="quiz_question">#f3f1f1</color>
+    <color name="quiz_reset">#2478c0</color>
+    <color name="quiz_pending_item">#fce4cb</color>
+    <color name="quiz_header_success">#017506</color>
+    <color name="quiz_header_question">#ebebeb</color>
+     <color name="quiz_background_question">#f3f1f1</color>
+     
+     <color name="tip_dialog_background">#b8820e</color>
+
+</resources>

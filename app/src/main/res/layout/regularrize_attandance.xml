@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f6f6f6"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/tv_checkOutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Attendance Regularize"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/white"
+        android:background="@drawable/app_header_bg"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/tv_checkOutTitle"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/llo11"
+                 android:orientation="vertical">
+                 <LinearLayout
+                     android:id="@+id/llo"
+                     android:gravity="center"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                    >
+
+                     <ImageView
+                         android:layout_width="@dimen/size_20"
+                         android:id="@+id/cal_imag"
+                         android:layout_gravity="center_vertical"
+                         android:layout_height="@dimen/size_20"
+                         android:src="@drawable/calendar_icon"/>
+
+                     <TextView
+                         android:id="@+id/qty"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginRight="@dimen/size_5"
+                         android:layout_marginLeft="@dimen/size_10"
+                         android:gravity="center"
+                         android:layout_below="@+id/btnhomedat"
+                         android:text="@string/lbldate"
+                         android:textSize="16sp"
+                         android:textStyle="bold"
+                         android:textColor="@color/black" />
+
+                     <TextView
+                         android:id="@+id/date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/qty"
+                         android:layout_marginLeft="5dp"
+
+                         android:text="Current Date"
+                         android:textSize="16sp"
+                         android:textColor="@color/black" />
+
+
+                 </LinearLayout>
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_marginTop="@dimen/size_10"
+                     android:layout_height="wrap_content"
+                     android:weightSum="2"
+                     android:orientation="horizontal">
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_weight="1"
+
+                         android:layout_height="wrap_content"
+                         >
+
+                         <ImageView
+                             android:layout_width="@dimen/size_20"
+                             android:id="@+id/cal_imag1"
+                             android:layout_gravity="center_vertical"
+                             android:layout_height="@dimen/size_20"
+                             android:src="@drawable/ic_action_name"/>
+
+                         <TextView
+                             android:id="@+id/checkin"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_marginRight="@dimen/size_5"
+                             android:layout_marginLeft="@dimen/size_10"
+                             android:layout_alignParentLeft="true"
+                             android:layout_below="@+id/btnhomedat"
+                             android:gravity="center"
+                             android:layout_gravity="center"
+                             android:text="Check-in Time"
+                             android:textSize="14sp"
+                             android:textStyle="bold"
+                             android:textColor="@color/black" />
+
+
+
+
+                     </LinearLayout>
+                     <LinearLayout
+                         android:layout_below="@+id/llo"
+                         android:layout_width="0dp"
+
+                         android:layout_weight="1"
+                         android:layout_height="wrap_content"
+                         >
+
+                         <ImageView
+                             android:layout_width="@dimen/size_20"
+                             android:layout_gravity="center_vertical"
+                             android:layout_height="@dimen/size_20"
+                             android:src="@drawable/ic_action_name"/>
+
+                         <TextView
+
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_marginRight="@dimen/size_5"
+                             android:layout_marginLeft="@dimen/size_10"
+                             android:layout_alignParentLeft="true"
+                             android:layout_below="@+id/btnhomedat"
+
+                             android:gravity="center"
+                             android:layout_gravity="center"
+                             android:text="Check-out Time"
+                             android:textSize="14sp"
+                             android:textStyle="bold"
+                             android:textColor="@color/black" />
+
+
+
+
+                     </LinearLayout>
+                 </LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:weightSum="2"
+                     android:layout_marginTop="5dp"
+                     android:orientation="horizontal">
+                     <LinearLayout
+                         android:id="@+id/llocheckintime"
+                         android:layout_below="@+id/llo"
+                         android:layout_width="0dp"
+                         android:layout_weight="1"
+                         android:layout_height="wrap_content"
+                         >
+                         <androidx.cardview.widget.CardView
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content">
+                             <TextView
+                                 android:id="@+id/checkintime"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="40dp"
+                                 android:layout_alignParentLeft="true"
+                                 android:layout_below="@+id/qty"
+                                 android:gravity="center"
+                                 android:layout_marginLeft="5dp"
+                                 android:text="00:00:00"
+                                 android:textSize="16sp"
+                                 android:textColor="@color/black" />
+                         </androidx.cardview.widget.CardView>
+
+
+
+                     </LinearLayout>
+                     <LinearLayout
+                         android:id="@+id/llo1"
+                         android:layout_width="0dp"
+                         android:layout_marginLeft="@dimen/size_5"
+                         android:layout_weight="1"
+                         android:layout_height="wrap_content"
+                         >
+                         <androidx.cardview.widget.CardView
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content">
+                             <TextView
+                                 android:id="@+id/checkouttime"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="40dp"
+                                 android:gravity="center"
+                                 android:layout_marginLeft="5dp"
+                                 android:text="00:00:00"
+                                 android:textSize="16sp"
+                                 android:textColor="@color/black" />
+
+
+                         </androidx.cardview.widget.CardView>
+
+
+                     </LinearLayout>
+                 </LinearLayout>
+
+             </LinearLayout>
+
+            <DatePicker
+                android:id="@+id/dpdatfor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/llo11"
+                android:layout_marginTop="05dp"
+                android:visibility="gone" />
+
+
+
+
+
+            <TextView
+                android:id="@+id/salesfor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/llo11"
+                android:layout_marginTop="10dp"
+                android:text="@string/lbloption"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <Spinner
+                android:id="@+id/spdat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/salesfor"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="05dp"
+                android:ems="10"
+                android:entries="@array/optionarray"
+                android:minHeight="48dp" />
+
+            <LinearLayout
+                android:id="@+id/datell"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spdat"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:visibility="visible" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/brown"
+                    android:padding="5dp"
+                    android:visibility="gone" >
+
+                    <TextView
+                        android:id="@+id/txt_remarks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Select Leave Period"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_lastupdateinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:text="Till Date :"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <DatePicker
+                    android:id="@+id/dpedate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:calendarViewShown="false"
+                    android:visibility="gone"
+                    android:scrollbarSize="20dp" />
+            </LinearLayout>
+
+            <fragment
+                class="com.google.android.gms.maps.MapFragment"
+                android:id="@+id/mapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/spdat"
+                />
+
+            <Button
+                android:id="@+id/btn_take_pic"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/mapFragment"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/custom_button"
+                android:gravity="center"
+                android:shadowColor="#000000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="Capture Photo"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/btnSubmitDAT"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/btn_take_pic"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/custom_button"
+                android:gravity="center"
+                android:shadowColor="#000000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="@string/btnsubmitdat"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/btnSubmitDAT"
+                />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/txt_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scrollView1"
+        android:paddingLeft="@dimen/ten"
+        android:text="Your Attendance already marked!"
+        android:textColor="@color/Green"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/app_header_bg"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <TextView
+            android:id="@+id/itemsaleqty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/lblpowerby"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

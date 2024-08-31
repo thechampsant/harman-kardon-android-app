@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+  <item
+        android:id="@+id/action_geo"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Where I am?"/>
+      <item
+        android:id="@+id/action_startupdates"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Start Updates"/>
+      <item
+        android:id="@+id/action_stopupdates"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Stop Updates"/>
+      
+</menu>

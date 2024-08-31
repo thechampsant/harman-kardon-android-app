@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">training_module</string>
+    <string name="home">home</string>
+    <string name="profile">profile</string>
+    <string name="quiz_plan">quiz plan</string>
+    <string name="history">history</string>
+    <string name="share">share</string>
+    <string name="trainings">Trainings</string>
+    <string name="search_your_trainings">Search Your Trainings</string>
+    <string name="back">Back</string>
+    <string name="description">Description</string>
+    <string name="read_more">Read More</string>
+    <string name="read_less">Read Less</string>
+    <string name="trainer">Trainer</string>
+    <string name="quize">Quiz</string>
+    <string name="training_material">Training Material</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="No_Internet">No Internet</string>
+    <string name="intenet">Internet Active Connection Require.</string>
+    <string name="settings">Settings</string>
+    <string name="OK">OK</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+</resources>

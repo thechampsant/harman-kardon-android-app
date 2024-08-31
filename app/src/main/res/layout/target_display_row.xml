@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </RelativeLayout>
+
+    
+   <LinearLayout
+        android:id="@+id/lytheder"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:padding="2dp"
+        android:orientation="horizontal"
+        android:weightSum="3" >
+
+     
+
+        <TextView
+            android:id="@+id/target_lv_template_target"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="19sp"
+        android:textColor="@color/black"
+            android:background="@drawable/round_rect_blue"
+            android:text="2"/>
+
+        <TextView
+            android:id="@+id/target_lv_template_achvied"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+             android:textSize="19sp"
+             android:gravity="center"
+             android:background="@drawable/round_rect_blue"
+            android:textColor="@color/black"
+            android:text="1"/>
+        
+        
+        <TextView
+            android:id="@+id/tvAchviement"
+            android:layout_width="0dp"
+           android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="19sp"
+            android:textColor="@color/black"
+            android:background="@drawable/round_rect_blue"
+             android:gravity="center"
+            android:text="1"/>
+        
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/lytheder"
+        android:background="#fff" />
+
+</RelativeLayout>
