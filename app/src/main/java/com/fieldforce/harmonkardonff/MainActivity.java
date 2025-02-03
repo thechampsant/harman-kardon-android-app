@@ -44,6 +44,7 @@ import com.fieldforce.customAdapter.corona_adapters.VerticalItemDecorator;
 import com.fieldforce.entities.MainActivityPopupResponse;
 import com.fieldforce.floorhygiene.HygieneStoreListActivity;
 import com.fieldforce.harmonhelper.GPSTracker;
+import com.fieldforce.harmonkardonff.Comptition.CompetitionTab;
 import com.fieldforce.harmonkardonff.custom_adapters.NotificationAdpter;
 import com.fieldforce.harmonkardonff.demo_tracking_module.ui.activities.DemoTrackingFragmentsContainer;
 import com.fieldforce.model.NotificationResonseMode;
@@ -115,11 +116,8 @@ import mob.field.harmonkardonff.tabs.StockTabs;
 @SuppressLint("NewApi")
 public class MainActivity extends GridActivity implements View.OnClickListener, NotificationAdpter.NotificationAdapterCallbacks {
 
-    /**
-     * Intent Key used with {@link #checkForPendingAttendance}
-     */
-    public final static String IS_SOURCE_DIALOG = "SOURCE_DIALOG";
 
+    public final static String IS_SOURCE_DIALOG = "SOURCE_DIALOG";
     public static MainActivity Current;
     // For Database Operations
     public static Database Database = null;
@@ -150,11 +148,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
     NotificationAdpter notificationAdpter;
     public static FeedbackUrlConfigModel feedbackURLConfig = null;
     public static ProfileURLModel profileUrlModel = null;
-
-
     //------------------------------------ from Abhijai----------------------
-
-
     public static ArrayList<String> GetMOPSubCategories(String Cat1) {
         ArrayList<String> list = new ArrayList<String>();
         for (CompProductModel p : MyPLForMOP) {
@@ -164,12 +158,9 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
                 list.add(p.Cat2);
             }
         }
-
         return list;
     }
-
-    public static ArrayList<CompProductModel> GetMOPProducts(String Cat1,
-                                                             String Cat2) {
+    public static ArrayList<CompProductModel> GetMOPProducts(String Cat1, String Cat2) {
         ArrayList<CompProductModel> list = new ArrayList<CompProductModel>();
         for (CompProductModel p : MyPLForMOP) {
             if (p.Cat1.equalsIgnoreCase(Cat1) && p.Cat2.equalsIgnoreCase(Cat2)) {
@@ -180,7 +171,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         }
         return list;
     }
-
     public static ArrayList<String> GetMOPMasterCategories() {
         ArrayList<String> list = new ArrayList<String>();
         for (CompProductModel p : MyPLForMOP) {
@@ -190,71 +180,56 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         }
         return list;
     }
-
     public static ArrayList<String> GetMasterCategories() {
         return MyProductList.Select("Cat1").Distinct().ToString();
     }
-
     public static ArrayList<String> GetSelectMasterCategories() {
         ArrayList<String> list = new ArrayList<String>();
         list.add("Select");
         list.addAll(MyProductList.Select("Cat1").Distinct().ToString());
         return list;
     }
-
     public static ArrayList<String> GetSubCategories(String Cat1) {
         return MyProductList.where("Cat1", Cat1).Select("Cat2").Distinct()
                 .ToString();
     }
-
     public static ArrayList<String> GetSelectSubCategories(String Cat1) {
         ArrayList<String> list = new ArrayList<String>();
         list.add("Select");
-        list.addAll(MyProductList.where("Cat1", Cat1).Select("Cat2").Distinct()
-                .ToString());
+        list.addAll(MyProductList.where("Cat1", Cat1).Select("Cat2").Distinct().ToString());
         return list;
     }
-
     public static ArrayList<String> GetModels(String mastCat, String subCat) {
 
         return MyProductList.where("Cat1", mastCat).where("Cat2", subCat)
                 .Select("Cat3").Distinct().ToString();
     }
-
-    public static ArrayList<String> GetSelectModels(String mastCat,
-                                                    String subCat) {
+    public static ArrayList<String> GetSelectModels(String mastCat, String subCat) {
         ArrayList<String> list = new ArrayList<String>();
         list.add("Select");
         list.addAll(MyProductList.where("Cat1", mastCat).where("Cat2", subCat)
                 .Select("Cat3").Distinct().ToString());
         return list;
     }
-
-    public static ArrayList<ProductModel> GetProducts(String Cat1, String Cat2,
-                                                      String Cat3) {
+    public static ArrayList<ProductModel> GetProducts(String Cat1, String Cat2, String Cat3) {
         return MyProductList.where("Cat1", Cat1).where("Cat2", Cat2)
                 .where("Cat3", Cat3).Distinct();
     }
-
     public static ArrayList<ProductModel> GetProducts(String Cat1, String Cat2) {
 
         return MyProductList.where("Cat1", Cat1).where("Cat2", Cat2).Distinct();
     }
-
     public static ArrayList<String> GetDemostratorRequired() {
         ArrayList<String> modellist = new ArrayList<String>();
         modellist.add("Yes");
         modellist.add("No");
         return modellist;
     }
-
     public static ArrayList<ProductModel> GetProducts(String Cat1) {
 
         return MyProductList.where("Cat1", Cat1).Distinct();
     }
-
-    public static ArrayList<ProductModel> GetSelectProducts(String Cat1,
-                                                            String Cat2, String Cat3) {
+    public static ArrayList<ProductModel> GetSelectProducts(String Cat1, String Cat2, String Cat3) {
         ArrayList<ProductModel> list = new ArrayList<ProductModel>();
         ProductModel PM = new ProductModel();
         PM.Name = "Select";
@@ -264,14 +239,13 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
                 .where("Cat3", Cat3).Distinct());
         return list;
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Current = this;
         super.onCreate(savedInstanceState);
         SetPolicy();
         gpsTracker = new GPSTracker(MainActivity.this);
-        this.EnableLocalDatabase("MyyDbb0052", 52);
+        this.EnableLocalDatabase("MyyDbb0055", 55);
         Database = new Database(this);
         startService(new Intent(this, WHPL_MainService.class));
         // new GCMResponseManager();
@@ -296,7 +270,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
 
 
     }
-
     @Override
     public void TrysetGridHeader() {
         super.TrysetGridHeader();
@@ -313,7 +286,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
 
 
     }
-
     public void initializeNotificationsRecycler() {
         notificationAdpter = new NotificationAdpter();
         notificationAdpter.setCallbacks(this);
@@ -331,13 +303,10 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         notificationlist.setLayoutParams(layoutParams);
 
     }
-
-
     private ProgressBar progressBar;
     AlertDialog popBuilder;
     RecyclerView recyclerView;
     RecyclerViewMainActivityPopupAdapter mAdapter;
-
     private void preparePopupTask() {
         mAdapter = new RecyclerViewMainActivityPopupAdapter(new OnPopupReadButtonClickListener() {
             @Override
@@ -355,7 +324,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         popBuilder.setView(view);
 
     }
-
     private void getDataForMultipleImageFromServer() {
         BackgroundProcess bp = new BackgroundProcess(this).showProgress(false);
         bp.setProgressMessage("Please wait...");
@@ -389,7 +357,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
 
         bp.execute();
     }
-
     private void submitPopupResponseToServer(final String schemeId, final String status) {
         BackgroundProcess bp = new BackgroundProcess(this).showProgress(true);
         bp.setbackgroundProcess(new IProcess() {
@@ -414,8 +381,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
 
         bp.execute();
     }
-
-
     private void checkForPendingAttendance() {
         MainActivity.Database.LoadAttendancesFromDb();
 
@@ -443,7 +408,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         }
 
     }
-
     private void saveVersionUpdationFromServerToLocal() {
         if (isNetworkAvailable()) {
             checkForAppVersionOnServer();
@@ -528,7 +492,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
 
     }
     AlertDialog.Builder alertDialogBuilder = null;
-
     private void showConfirmationDialog(String number) {
         alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("New version is available!");
@@ -558,7 +521,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-
     private void checkForAppVersionOnServer() {
         BackgroundProcess bp = new BackgroundProcess(this).showProgress(false);
         bp.setbackgroundProcess(new IProcess() {
@@ -573,10 +535,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
 
             @Override
             public Object underProcess() throws Exception {
-                // TODO Auto-generated method stub
-                // IsCatSelected();
-                // GetDropDown();
-                Log.e("datafdvdfv", "dvdjfnv");
+
                 return web.checkLatestAppVersionOnPlaystore(getCurrentVersion());
             }
         });
@@ -584,7 +543,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         bp.execute();
 
     }
-
     protected void processMinAppVersionResponse(Response response) {
 
             // TODO Auto-generated method stub
@@ -600,7 +558,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         }
 
     }
-
     private void goToPlayStoreToDownloadApp() {
 
         try {
@@ -612,7 +569,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
                             + getPackageName())));
         }
     }
-
     public String GetDocIDs(String GUID) {
         String AllDocIDs = "";
         ArrayList<String> DocIDs = PendingImages.where("ID", GUID).Select(
@@ -622,7 +578,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         }
         return AllDocIDs;
     }
-
     private void checkForProducts() {
         if (MyProductList.Count() < 1)
             new ProductUpdater(this).UpdateProducts();
@@ -928,9 +883,12 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
     public void TrysetGridFooter() {
         super.TrysetGridFooter();
 
-        PushDownAnim.setPushDownAnimTo(footerview.findViewById(R.id.iv_notification), footerview.findViewById(R.id.iv_survey),
+        /*PushDownAnim.setPushDownAnimTo(footerview.findViewById(R.id.iv_notification), footerview.findViewById(R.id.iv_survey),
                 footerview.findViewById(R.id.iv_hr_helpline), footerview.findViewById(R.id.iv_settings), footerview.findViewById(R.id.iv_fl_log_out)
-                , footerview.findViewById(R.id.bt_corona_bot)).setOnClickListener(this);
+                , footerview.findViewById(R.id.bt_corona_bot)).setOnClickListener(this);*/
+        PushDownAnim.setPushDownAnimTo(footerview.findViewById(R.id.iv_notification),
+                footerview.findViewById(R.id.iv_hr_helpline), footerview.findViewById(R.id.iv_settings), footerview.findViewById(R.id.iv_fl_log_out)
+                ).setOnClickListener(this);
     }
 
 
@@ -957,42 +915,30 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         ArrayList<GridItem> data = new ArrayList<GridItem>();
 
         data.add(new GridItem().setItem("Mark IN", MarkAttendanceActivity.class, R.drawable.ic_mark_in));
-
-        data.add(new GridItem().setItem("Mark Out", CheckoutActivity.class,
-                R.drawable.ic_mark_out));
-
-        data.add(new GridItem().setItem("View Attendance", DatTab.class,
-                R.drawable.ic_view_attendance));
-        data.add(new GridItem().setItem("Enter Sale", SaleTabs.class,
-                R.drawable.ic_enter_sale));
+        data.add(new GridItem().setItem("Mark Out", CheckoutActivity.class, R.drawable.ic_mark_out));
+        data.add(new GridItem().setItem("View Attendance", DatTab.class, R.drawable.ic_view_attendance));
+        data.add(new GridItem().setItem("Enter Sale", SaleTabs.class, R.drawable.ic_enter_sale));
         data.add(new GridItem().setItem("Model Display", ModuleTab.class, R.drawable.ic_enter_sale));
-
-        data.add(new GridItem().setItem("Down Stock", DownStock.class,
-                R.drawable.ic_enter_sale));
-
-        data.add(new GridItem().setItem("Stock", StockTabs.class,
-                R.drawable.ic_enter_stock));
-//        data.add(new GridItem().setItem("Notification", NotificationView.class, R.drawable.inbox));
-
+        data.add(new GridItem().setItem("Down Stock", DownStock.class, R.drawable.ic_enter_sale));
+        data.add(new GridItem().setItem("Stock", StockTabs.class, R.drawable.ic_enter_stock));
+        //data.add(new GridItem().setItem("Notification", NotificationView.class, R.drawable.inbox));
         data.add(new GridItem().setItem("Training", com.ariston.training_module.modules.training_module.ui.activities.MainActivity.class, R.drawable.ic_training, dataForTraining));
         //data.add(new GridItem().setItem("Dashboard", com.fieldforce.training_module.modules.dashboard.ui.activities.DashboardActivity.class, R.drawable.target_grid_item, dataForTraining));
        data.add(new GridItem().setItem("Incentive", NewTrainingActivity.class, R.drawable.ic_incentive));
-        data.add(new GridItem().setItem("Sales Pitch", SalesPitch.class, R.drawable.ic_sales_pitch));
+       data.add(new GridItem().setItem("Sales Pitch", SalesPitch.class, R.drawable.ic_sales_pitch));
+       data.add(new GridItem().setItem("Target vs Achievements", TargetScreenManagerActivity.class, R.drawable.ic_target_vs_achievement));
+       data.add(new GridItem().setItem("Display Compliance", HygieneStoreListActivity.class, R.drawable.ic_floor_hygiene));
+       data.add(new GridItem().setItem("Survey Form", SurveytypeActivity.class, R.drawable.ic_floor_hygiene));
+       data.add(new GridItem().setItem("Counter share\n(MTD)", CompetitionTab.class, R.drawable.ic_floor_hygiene));
 
-/*        data.add(new GridItem().setItem("Branding", BrandingActivity.class,
+ /* data.add(new GridItem().setItem("Branding", BrandingActivity.class,
                 R.drawable.ic_branding));*/
-        // data.add(new GridItem().setItem("Feedback", FeedbackActivity.class,
+ // data.add(new GridItem().setItem("Feedback", FeedbackActivity.class,
         // R.drawable.feedback_new));
-       /* data.add(new GridItem().setItem("Last 7 days Sale",
+ /* data.add(new GridItem().setItem("Last 7 days Sale",
                 SaleScreenManagerActivity.class, R.drawable.seven_days_sale));*/
-        data.add(new GridItem().setItem("Target vs Achievements",
-                TargetScreenManagerActivity.class, R.drawable.ic_target_vs_achievement));
-
         data.add(new GridItem().setItem("Demo Tracking", DemoTrackingFragmentsContainer.class, R.drawable.ic_demo_tracking));
 
-        data.add(new GridItem().setItem("Display Compliance", HygieneStoreListActivity.class, R.drawable.ic_floor_hygiene));
-
-        data.add(new GridItem().setItem("Survey Form", SurveytypeActivity.class, R.drawable.ic_floor_hygiene));
 
 //        data.add(new GridItem().setItem("HR Helpline", HelpLine.class, R.drawable.help));
 
@@ -1041,7 +987,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         /*data.add(new GridItem().setItem("Helpdesk", Helpdesk.class,
                 R.drawable.feedback_new));*/
 
-//        data.add(new GridItem().setItem("Settings", SettingActivity.class,
+/*//        data.add(new GridItem().setItem("Settings", SettingActivity.class,
 //                R.drawable.settings_new));
 
 //        data.add(new GridItem().setItem("Logout", null, R.drawable.logout_new)
@@ -1051,7 +997,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
 //                        logout();
 //                        return null;
 //                    }
-//                }));
+//                }));*/
         isFeedbackUrlConfigModelLoaded();
         isProfileUrlModelLoaded();
         return data;

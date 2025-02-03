@@ -6,8 +6,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.CalendarView;
+import android.widget.Toast;
 
 import com.fieldforce.entities.MainActivityPopupResponse;
+import com.fieldforce.harmonkardonff.Comptition.CompitionModel;
 import com.fieldforce.harmonkardonff.MainActivity;
 import com.fieldforce.harmonkardonff.ViewModuleModel;
 import com.fieldforce.harmonkardonff.demo_tracking_module.models.EnterDemoRequestModel;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 import app.core.model.Response;
 import app.core.server.Encode;
 import app.core.server.Server;
+import app.core.utils.Dialog;
 import mob.field.harmonkardonff.entitiymodels.AadharModel;
 import mob.field.harmonkardonff.entitiymodels.AllPendingPushNotificationMsg;
 import mob.field.harmonkardonff.entitiymodels.AllSalesDetailModel;
@@ -77,7 +80,7 @@ public class WebService {
     static String MarkAttendanceAction = "MarkAttendance2?";
     static String MarkAttendanceAction1 = "MarkAttendance?";
     static String NewSaleAction = "UpdateSale2?";
-    static String SubmitDisplayModel = "SubmitDisplayModel2?";
+    public static String SubmitDisplayModel = "SubmitDisplayModel2?";
     static String SubmitDownStock = "SubmitDownStock2?";
     static String MTDSalesAction = "GetMTDSales?";
     static String LMTDSalesAction = "GetLMTDSales?";
@@ -94,6 +97,7 @@ public class WebService {
 
     static String NewComplainAction = "CreateComplain?";
     static String UpdateProductAction = "getSaleProducts?";
+    static String GetDemoProducts = "GetDemoProducts?";
     static String ChangePasswordAction = "ChangePassword?";
     static String UdateOtherInfoAction = "UpdateOtherInfo?";
     static String UpdateDisplayWithOtherBrand = "UpdateDisplayWithOtherBrand?";
@@ -371,8 +375,22 @@ public class WebService {
         apiUrl += SubmitDisplayModel + "Username=" + UserName + "&AppVersion="
                 + MainActivity.Current.getCurrentVersion()
                 + Encode.ToObject(model);
+
         Log.i("TryUpdateSale", apiUrl);
         return server.getResponse(apiUrl);
+    }
+    public Response GetCompetitionQuestion() {
+        String apiUrl = ApiUrl;
+        apiUrl += "GetCompetitionQuestion";
+        return server.getResponse(apiUrl, new CompitionModel());
+    }
+    public Response ViewCompetitionData(String startDate, String endDate) {
+        String apiUrl = ApiUrl;
+        apiUrl += "ViewCompetitionData"+
+                 "?UserName=" + MainActivity.MyInfo.EmployeeCode
+                + "&SDate=" + startDate
+                + "&EDate=" + endDate;;
+        return server.getResponse(apiUrl, new CompitionModel());
     }
     public Response SubmitDownStock(NewSaleModel model) {
         String apiUrl = ApiUrl;
@@ -611,6 +629,12 @@ public class WebService {
         String apiUrl = ApiUrl;
         apiUrl += UpdateProductAction + "UserName="
                 + MainActivity.MyInfo.EmployeeCode;
+        return server.getResponse(apiUrl, new ProductModel());
+    }
+
+    public Response TryUpdateDemoProducts() {
+        String apiUrl = ApiUrl;
+        apiUrl += GetDemoProducts;
         return server.getResponse(apiUrl, new ProductModel());
     }
 
@@ -891,16 +915,24 @@ public class WebService {
         return server.getResponse(apiUrl);
     }
 
+    public Response SubmitDemoToServerNew(EnterDemoRequestModel model) {
+        String apiUrl = ApiUrl;
+        apiUrl += "SubmitDemoProductData?"
+                + Encode.ToObject(model);
+        Log.i("SubmitDemoToServer", apiUrl);
+        return server.getResponse(apiUrl);
+    }
+
 
     //http://harman.infield.co.in/ispmobile/GetISPDemoTracking?Username=50&StartDate=2020-06-19&EndDate=2020-06-22
     //http://harman.infield.co.in/ispmobile/GetISPDemoTrackingAppVersion=2.8&Username=50&StartDate=2020-06-22&EndDate=2020-06-22
     public Response getDemoDataFromServer(String startdate, String enddate) {
         String apiUrl = ApiUrl;
-        apiUrl += "GetISPDemoTracking?" + "AppVersion="
-                + MainActivity.Current.getCurrentVersion() + "&Username="
+        apiUrl += "ViewDemoProductData?" + "AppVersion="
+                + MainActivity.Current.getCurrentVersion() + "&UserName="
                 + UserName;
-        apiUrl += "&StartDate=" + startdate;
-        apiUrl += "&EndDate=" + enddate;
+        apiUrl += "&SDate=" + startdate;
+        apiUrl += "&EDate=" + enddate;
         Log.i("getDemoDataFromServer", apiUrl);
         return server.getResponse(apiUrl, new ViewDemoResponseModel());
 

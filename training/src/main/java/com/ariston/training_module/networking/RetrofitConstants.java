@@ -2,7 +2,7 @@ package com.ariston.training_module.networking;
 
 public class RetrofitConstants {
 
-    static final String BASE_URL = "https://aristonfieldforce.infield.co.in/ispmobile/";
+    static final String BASE_URL = "http://harman.infield.co.in/ispmobile/";
     //https://aristonfieldforce.infield.co.in/
     public static final String IMAGE_PREFIX = "https://aristonfieldforce.infield.co.in/ispmobile";
 

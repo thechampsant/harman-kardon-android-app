@@ -1,5 +1,7 @@
 package linq;
 
+import android.util.Log;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.TypeVariable;
 import java.sql.Array;
@@ -205,6 +207,21 @@ public class ArrayList<E> extends java.util.ArrayList<E> {
 		for (E item : this) {
 			map.put(item.toString(), item);
 		}
+		for (Entry<String, E> e : map.entrySet()) {
+			data.add(e.getValue());
+		}
+		return data;
+	}
+
+	public ArrayList<E> Distinct1() {
+		ArrayList<E> data = new ArrayList<E>();
+		Map<String, E> map = new HashMap<String, E>();
+		Log.e("SizeeRR", String.valueOf(this.size())+"NUll");
+		for (E item : this) {
+			Log.e("SizeeRRM", item.toString()+" NUll "+item);
+			map.put(item.toString(), item);
+		}
+		Log.e("Sizeeeeeeeeeeee", String.valueOf(map.size())+"NUll");
 		for (Entry<String, E> e : map.entrySet()) {
 			data.add(e.getValue());
 		}

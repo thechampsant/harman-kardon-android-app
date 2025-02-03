@@ -18,7 +18,7 @@ public class Response<T, E> {
 
 	public PageModel PageInfo;
 	public ArrayList<T> data;
-	public ArrayList<E> EData;
+	//public ArrayList<E> EData;
 
 	public File file;
 	public String FileName;
@@ -51,22 +51,22 @@ public class Response<T, E> {
 			return true;
 	}
 
-	public boolean isEDataFound() {
+	/*public boolean isEDataFound() {
 		if (this.EData == null || this.EData.Count() < 1)
 			return false;
 		else
 			return true;
-	}
+	}*/
 
 	public boolean isDataExists() {
-		return this.isDataFound() && this.isEDataFound();
+		return this.isDataFound() /*&& this.isEDataFound()*/;
 	}
 
 	public String getMessage() {
 		if (!this.isDataFound() && TextUtils.isEmpty(this.errormsg))
 			return "No Data found !";
-		else if (!this.isEDataFound() && TextUtils.isEmpty(this.errormsg))
-			return "No Data found !";
+		/*else if (!this.isEDataFound() && TextUtils.isEmpty(this.errormsg))
+			return "No Data found !";*/
 		else
 			return this.errormsg;
 	}

@@ -51,6 +51,7 @@
             android:id="@+id/tv_customerMailTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="Customer Mail : "
             android:textColor="#AC000000"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +60,7 @@
         <TextView
             android:id="@+id/tv_customerMailValue"
             android:layout_width="wrap_content"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:text="NA"
             app:layout_constraintStart_toEndOf="@+id/tv_customerMailTitle"
@@ -68,18 +70,20 @@
             android:id="@+id/tv_customerAgeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Customer Age : "
+            android:text="No Demo: "
+
             android:textColor="#AC000000"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_customerMailTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_productTitle" />
 
         <TextView
             android:id="@+id/tv_customerAgeValue"
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
             android:text="NA"
             app:layout_constraintStart_toEndOf="@+id/tv_customerAgeTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tv_customerMailValue" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_productTitle" />
 
         <TextView
             android:id="@+id/tv_productTitle"
@@ -88,7 +92,7 @@
             android:text="Product : "
             android:textColor="#AC000000"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_customerAgeTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_customerNumberValue" />
 
         <TextView
             android:id="@+id/tv_productValue"
@@ -96,7 +100,7 @@
             android:layout_height="wrap_content"
             android:text="NA"
             app:layout_constraintStart_toEndOf="@+id/tv_productTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tv_customerAgeValue" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_customerNumberValue" />
 
         <TextView
             android:id="@+id/tv_submittedDateValue"

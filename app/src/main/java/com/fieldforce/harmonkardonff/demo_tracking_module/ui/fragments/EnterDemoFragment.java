@@ -1,5 +1,7 @@
 package com.fieldforce.harmonkardonff.demo_tracking_module.ui.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import app.core.async.IProcess;
 import app.core.base.IFragment;
 import app.core.model.Response;
 import app.core.utils.Dialog;
+import linq.ArrayList;
 import mob.field.harmonkardonff.entitiymodels.ProductModel;
 import mob.field.harmonkardonff.services.WebService;
 
@@ -27,15 +31,13 @@ import mob.field.harmonkardonff.services.WebService;
  */
 public class EnterDemoFragment extends IFragment {
 
-    public EnterDemoFragment() {
-        // Required empty public constructor
-    }
 
     private Spinner spinnerCat;
     private Spinner spinnerSubCat;
     private Spinner spinnerModel;
 
     private EditText editTextName;
+    private Button btn_no_sale;
     private EditText editTextNumber;
     private EditText editTextMail;
     private EditText editTextAge;
@@ -61,7 +63,7 @@ public class EnterDemoFragment extends IFragment {
 
     private void init(){
         findIds();
-        MastCat = MainActivity.GetMasterCategories().get(0);
+      //  MastCat = MainActivity.GetMasterCategories().get(0);
         textViewSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,20 +79,31 @@ public class EnterDemoFragment extends IFragment {
         spinnerCat = (Spinner) findViewById(R.id.spinner_categoryInDemo);
         spinnerSubCat = (Spinner) findViewById(R.id.spinner_subCategoryInDemo);
         spinnerModel = (Spinner) findViewById(R.id.spinner_modelInDemo);
+        btn_no_sale = (Button) findViewById(R.id.btn_no_sale);
 
         editTextName = (EditText) findViewById(R.id.et_custNameInDemo);
         editTextNumber = (EditText) findViewById(R.id.et_custPhoneInDemo);
         editTextMail = (EditText) findViewById(R.id.et_mailInDemo);
         editTextAge = (EditText) findViewById(R.id.et_ageInDemo);
         textViewSubmit = (TextView) findViewById(R.id.tv_submitDemo);
+        btn_no_sale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowDialog();
+
+            }
+        });
         initSpinnersTask();
     }
 
     private void initSpinnersTask(){
-        populateCategorySpinner();
+
+        getProductDemoList();
+        attachListenerToModelSpinner();
+      /*  populateCategorySpinner();
         AttachListenerToCatSpinner();
         attachListenerToSubCatSpinner();
-        attachListenerToModelSpinner();
+        attachListenerToModelSpinner();*/
     }
 
     private void populateCategorySpinner(){
@@ -106,12 +119,16 @@ public class EnterDemoFragment extends IFragment {
                 MainActivity.GetModels(MastCat, cat));
         spinnerSubCat.setAdapter(spinnerArrayAdapter);
     }
-
+    ArrayList<String> arrayList=new ArrayList<>();
     private void populateModelSpinner(String subCat){
-        ArrayAdapter<ProductModel> spinnerArrayAdapter = new ArrayAdapter<ProductModel>(
-                this.context, android.R.layout.simple_spinner_dropdown_item,
-                MainActivity.GetProducts(MastCat, Cat, subCat));
-        Log.d(TAG, "populateModelSpinner: MastCat : "+MastCat+" SubCat : "+Cat+" Model : "+subCat);
+
+        for(ProductModel e :resdata)
+        {
+            arrayList.add(e.ProductName);
+        }
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+                this.context, android.R.layout.simple_spinner_dropdown_item, arrayList);
+      //  Log.d(TAG, "populateModelSpinner: MastCat : "+MastCat+" SubCat : "+Cat+" Model : "+subCat);
         spinnerModel.setAdapter(spinnerArrayAdapter);
     }
 
@@ -150,7 +167,11 @@ public class EnterDemoFragment extends IFragment {
         spinnerModel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SelectedProduct = (ProductModel) parent.getSelectedItem();
+
+
+                SelectedProduct = resdata.get(parent.getSelectedItemPosition());
+
+                Log.e("SelectedProduct",SelectedProduct.ID+"nulll");
             }
 
             @Override
@@ -181,16 +202,83 @@ public class EnterDemoFragment extends IFragment {
         return true;
     }
 
+
+
+    private void ShowDialog() {
+        new AlertDialog.Builder(this.context)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("No demo")
+                .setMessage("Are you sure you want to submit “No demo” for the day? ")
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                model.UserName = WebService.UserName;
+                                model.CustomerName = "";
+                                model.CustomerMob = "";
+                                model.NoDemo = "true";
+
+                                model.DemoProdId ="0";
+                                makeApiCall(model);
+                            }
+                        }).setNegativeButton("No", null).show();
+
+    }
+
     private EnterDemoRequestModel model = new EnterDemoRequestModel();
     private void prepareModel(){
         model.UserName = WebService.UserName;
         model.CustomerName = editTextName.getText().toString();
-        model.CustomerPhone = editTextNumber.getText().toString();
+        model.CustomerMob = editTextNumber.getText().toString();
+        model.NoDemo = "false";
+       /* model.CustomerPhone = editTextNumber.getText().toString();
         model.CustomerEmail = editTextMail.getText().toString();
-        model.CustomerAge = editTextAge.getText().toString();
-        model.PID =SelectedProduct.PID;
+        model.CustomerAge = editTextAge.getText().toString();*/
+        model.DemoProdId =SelectedProduct.ID;
     }
 
+    private void getProductDemoList() {
+        BackgroundProcess bp = new BackgroundProcess(this).showProgress(false);
+        bp.setbackgroundProcess(new IProcess() {
+
+            @SuppressWarnings("rawtypes")
+            @Override
+            public void processResponse(Object arg0) throws Exception {
+                // TODO Auto-generated method stub
+                processMinAppVersionResponse((Response) arg0);
+
+            }
+
+            @Override
+            public Object underProcess() throws Exception {
+
+                return webService.TryUpdateDemoProducts();
+            }
+        });
+
+        bp.execute();
+
+    }
+
+
+    public ArrayList<ProductModel> resdata = new ArrayList<ProductModel>();
+    protected void processMinAppVersionResponse(Response response) {
+
+        // TODO Auto-generated method stub
+        Response res = (Response)response;
+
+        if (res.data != null && res.data.size() > 0) {
+            resdata =  res.data;
+            Log.e("Sizeeeee", String.valueOf(resdata.size()));
+
+            populateModelSpinner("");
+            hideProgress();
+        } else {
+            new Dialog(getActivity()).setTitle("Error").show(response.errormsg);
+        }
+
+    }
 
     private void makeApiCall(final EnterDemoRequestModel model){
         if (isNetworkAvailable()){
@@ -219,7 +307,7 @@ public class EnterDemoFragment extends IFragment {
                 @Override
                 public Object underProcess() throws Exception {
 
-                    return webService.SubmitDemoToServer(model);
+                    return webService.SubmitDemoToServerNew(model);
                 }
             });
 

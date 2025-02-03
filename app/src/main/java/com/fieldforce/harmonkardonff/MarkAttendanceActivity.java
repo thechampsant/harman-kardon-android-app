@@ -948,14 +948,17 @@ public class MarkAttendanceActivity extends InnosolsActivity implements OnMapRea
         googleMap.getUiSettings().setRotateGesturesEnabled(false);
         googleMap.getUiSettings().setScrollGesturesEnabled(true);
         googleMap.getUiSettings().setTiltGesturesEnabled(false);
-        LatLng sydney = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
-        googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15F));
-        // Zoom in, animating the camera.
-        googleMap.animateCamera(CameraUpdateFactory.zoomIn());
-        // Zoom out to zoom level 10, animating with a duration of 2 seconds.
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15F), 2000, null);
+        if(gpsTracker.getLatitude()!=0.0 &&gpsTracker.getLongitude()!=0.0) {
+            LatLng sydney = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15F));
+            // Zoom in, animating the camera.
+            googleMap.animateCamera(CameraUpdateFactory.zoomIn());
+            // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(15F), 2000, null);
+        }
+
     }
 
     @Override

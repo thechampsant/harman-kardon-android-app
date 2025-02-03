@@ -18,6 +18,34 @@
         android:focusableInTouchMode="true"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/size_10">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/size_150"
+                android:layout_height="@dimen/size_50"
+                android:layout_weight="1"
+                android:shape="ring"
+                app:cardBackgroundColor="#147f84"
+                app:cardCornerRadius="20dp">
+
+                <Button
+                    android:id="@+id/btn_no_sale"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent"
+                    android:text="No Demo"
+                    android:textSize="16sp"
+                    android:visibility="visible" />
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+
         <TextView
 
             android:id="@+id/tv_catTitle"
@@ -27,6 +55,7 @@
             android:layout_marginTop="10dp"
             android:text="Category"
             android:textColor="#000"
+            android:visibility="gone"
             android:textSize="16sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +66,7 @@
             android:id="@+id/cateCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_margin="@dimen/size_5"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/size_5"
@@ -75,6 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:visibility="gone"
             android:text="Sub-Category"
             android:textColor="#000"
             android:textSize="16sp"
@@ -89,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-
+            android:visibility="gone"
            android:layout_margin="@dimen/size_5"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/size_5"
@@ -123,7 +154,99 @@
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tv_nameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Customer Name"
+            android:textColor="#000"
+            android:layout_marginStart="@dimen/size_10"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modelCard" />
 
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cnameCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/size_5"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/size_5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nameTitle">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="@dimen/size_2">
+
+                <EditText
+                    android:id="@+id/et_custNameInDemo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="4dp"
+                    android:hint="Enter customer name"
+                    android:minHeight="@dimen/size_45" />
+
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/tv_phoneTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Customer Phone"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:layout_marginStart="@dimen/size_10"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cnameCard" />
+
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_5"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/size_5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nameTitle">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="@dimen/size_2">
+
+                <EditText
+                    android:id="@+id/et_custPhoneInDemo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:background="@color/white"
+                    android:hint="Enter contact number"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:minHeight="@dimen/size_45" />
+
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tv_modelTitle"
@@ -178,98 +301,7 @@
         </androidx.cardview.widget.CardView>
 
 
-        <TextView
-            android:id="@+id/tv_nameTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Customer Name"
-            android:textColor="#000"
-            android:layout_marginStart="@dimen/size_10"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/modelCard" />
 
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cnameCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-           android:layout_margin="@dimen/size_5"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/size_5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nameTitle">
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_margin="@dimen/size_2">
-
-                <EditText
-                    android:id="@+id/et_custNameInDemo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:hint="Enter customer name"
-                    android:minHeight="@dimen/size_45" />
-
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-
-
-        <TextView
-            android:id="@+id/tv_phoneTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Customer Phone"
-            android:textColor="#000"
-            android:textSize="16sp"
-            android:layout_marginStart="@dimen/size_10"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cnameCard" />
-
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-           android:layout_margin="@dimen/size_5"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/size_5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nameTitle">
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_margin="@dimen/size_2">
-
-                <EditText
-                    android:id="@+id/et_custPhoneInDemo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:background="@color/white"
-                    android:hint="Enter contact number"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:minHeight="@dimen/size_45" />
-
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
 
 
         <TextView
@@ -279,6 +311,7 @@
             android:layout_marginTop="10dp"
             android:text="Customer Email"
             android:textColor="#000"
+            android:visibility="gone"
             android:layout_marginStart="@dimen/size_10"
             android:textSize="16sp"
             android:textStyle="normal"
@@ -287,7 +320,7 @@
 
 
         <androidx.cardview.widget.CardView
-
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
            android:layout_margin="@dimen/size_5"
@@ -326,6 +359,7 @@
             android:layout_marginTop="10dp"
             android:text="Customer Age"
             android:textColor="#000"
+            android:visibility="gone"
             android:textSize="16sp"
             android:layout_marginStart="@dimen/size_10"
             android:textStyle="normal"
@@ -338,6 +372,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
            android:layout_margin="@dimen/size_5"
+            android:visibility="gone"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/size_5"
             app:layout_constraintStart_toStartOf="parent"

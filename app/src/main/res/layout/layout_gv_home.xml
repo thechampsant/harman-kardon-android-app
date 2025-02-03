@@ -1,51 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/size_2"
-   >
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:layout_gravity="center"
+    android:padding="@dimen/size_10"
+    android:background="@drawable/rectangle_2"
+    android:layout_centerHorizontal="true"
 
-    <androidx.cardview.widget.CardView
+    >
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_2"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="10dp"
-       >
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="@dimen/size_20"
+
+            android:background="@drawable/rectangle_7"
+
+            android:layout_centerInParent="true">
 
             <ImageView
                 android:id="@+id/iv_grid"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="@dimen/size_20"
+                android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter" />
 
-            <com.fieldforce.utility.widgets.RobotoTextView
-                android:id="@+id/tv_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_grid"
-                android:layout_marginStart="@dimen/size_5"
-                android:layout_marginTop="@dimen/size_8"
-                android:layout_marginEnd="@dimen/size_5"
-                android:layout_marginBottom="@dimen/size_5"
-                android:background="@drawable/bg_grid_label"
-                android:gravity="center"
-                android:padding="8dp"
-                android:singleLine="true"
-                android:textSize="@dimen/size_10"
-                android:textColor="#051032" />
+        </RelativeLayout>
 
-        </LinearLayout>
+        <!--   android:background="@drawable/bg_grid_label"-->
+        <com.fieldforce.utility.widgets.RobotoTextView
+            android:id="@+id/tv_label"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
 
-    </androidx.cardview.widget.CardView>
+            android:fontFamily="18sp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="#FF5722" />
+
+    </LinearLayout>
+
 </RelativeLayout>

@@ -16,6 +16,8 @@ public class ProductModel extends DataEntity<ProductModel>{
 
 	public int _ID;
 	public String PID;
+	public String ID;
+	public String ProductName;
 	public String Name;
 	public String Code;
 	public String ParentID = null;	
@@ -49,6 +51,8 @@ public class ProductModel extends DataEntity<ProductModel>{
 		// TODO Auto-generated method stub
 		this.RegisterMapping("_ID", DataTypes.INTEGER_PRIMARY_KEY);
 		this.RegisterMapping("PID", DataTypes.TEXT);
+		this.RegisterMapping("ID", DataTypes.TEXT);
+		this.RegisterMapping("ProductName", DataTypes.TEXT);
 		this.RegisterMapping("Name", DataTypes.TEXT);
 		this.RegisterMapping("Code", DataTypes.TEXT);
 		this.RegisterMapping("ParentID", DataTypes.TEXT);

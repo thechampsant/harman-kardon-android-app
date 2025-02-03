@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StatFs;
 import android.util.Log;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.suveyform.ui.fragments.questions_fragment.CoronaNewQuestionnaireFragm
 
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -212,9 +214,18 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
 
                     imageView.setImageBitmap(bm);
                     Gallery=true;
-                    galleryImage=saveBitMap(this,bm);
+                  /*  String URI=saveImageToPhone(bm);
+                    galleryImage=new File(URI);*/
+                    Bitmap resizedBitmap = resizeBitmap(bm, 300, 200);
 
-                    photoURI=Uri.fromFile((saveBitMap(this, bm)));
+                    galleryImage=saveBitMap(this,resizedBitmap);
+                    if (!galleryImage.isFile()) {
+                        Log.e("uploadFile", "Source File not exist :" + galleryImage);
+                        //imgUpResRec.setError("Source File not exist :" + sourceFileUri);
+                      //  return null;
+                    }
+
+                    photoURI=Uri.fromFile((galleryImage));
 
                     try {
                         hideView(buttonClick);
@@ -222,7 +233,7 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
                         showView(buttonUpload);
                         showView(buttonReAttach);
                         isImageReadyForUpload = true;
-                        compressImage(this, photoURI);
+                      //  compressImage(this, photoURI);
 
                     } catch (Exception ex) {
                         textViewError.setText("ERROR: " + ex.getMessage());
@@ -240,34 +251,97 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
     }
 
     FileUploader uploader = null;
-    private File saveBitMap(Context context, Bitmap Final_bitmap) {
-        File pictureFileDir = new File(Environment.getExternalStorageDirectory()
-                + "/Android/data/"
-                + getApplicationContext().getPackageName()
-                + "/"/*Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), ""*/);
+    private File saveBitMap(Context context, Bitmap finalBitmap) {
+        ShowToast("Saving image...");
+
+        // Downscale the bitmap if it's too large
+        Bitmap resizedBitmap = resizeBitmap(finalBitmap, 300, 200);  // Adjust max size as needed
+
+        File pictureFileDir = new File(
+                context.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                "SavedImages"
+        );
+
         if (!pictureFileDir.exists()) {
-            boolean isDirectoryCreated = pictureFileDir.mkdirs();
-            if (!isDirectoryCreated)
-                Log.i("SANJAY ", "Can't create directory to save the image");
+            if (!pictureFileDir.mkdirs()) {
+                Log.e("SANJAY", "Can't create directory to save the image");
+                return null;
+            }
+        }
+
+        // Check available space before writing
+        StatFs stat = new StatFs(pictureFileDir.getPath());
+        long bytesAvailable = (long) stat.getBlockSizeLong() * (long) stat.getAvailableBlocksLong();
+        if (bytesAvailable < 512 * 512) { // less than 1MB free
+            Log.e("SANJAY", "Not enough space to save image");
             return null;
         }
-        String filename = pictureFileDir.getPath() + File.separator + System.currentTimeMillis() + ".jpg";
-        File pictureFile = new File(filename);
-        try {
-            pictureFile.createNewFile();
-            FileOutputStream oStream = new FileOutputStream(pictureFile);
-            Final_bitmap.compress(Bitmap.CompressFormat.PNG, 18, oStream);
-            oStream.flush();
-            oStream.close();
-            Log.i("SANJAY ", "saveBitMap :: Save Image Successfully..");
 
+        String fileName = System.currentTimeMillis() + ".jpeg";
+        File pictureFile = new File(pictureFileDir, fileName);
+
+        try (FileOutputStream fos = new FileOutputStream(pictureFile);
+             BufferedOutputStream bos = new BufferedOutputStream(fos)) {
+
+            boolean success = resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 10, bos);
+            bos.flush();
+
+            if (!success) {
+                Log.e("SANJAY", "Bitmap compression failed");
+                return null;
+            }
+
+            Log.i("SANJAY", "Image saved successfully at: " + pictureFile.getAbsolutePath());
+            return pictureFile;
+
+        } catch (OutOfMemoryError e) {
+            Log.e("SANJAY", "Out of memory while saving image: " + e.getLocalizedMessage(), e);
+            return null;
         } catch (IOException e) {
-            e.printStackTrace();
-            Log.i("SANJAY", "There was an issue saving the image.");
-            Log.i("SANJAY", "Error :: " + e.getLocalizedMessage());
+            Log.e("SANJAY", "Error saving image: " + e.getLocalizedMessage(), e);
+            return null;
         }
-        return pictureFile;
     }
+
+    public Bitmap resizeBitmap(Bitmap original, int maxWidth, int maxHeight) {
+        int width = original.getWidth();
+        int height = original.getHeight();
+
+        float ratioBitmap = (float) width / (float) height;
+        float ratioMax = (float) maxWidth / (float) maxHeight;
+
+        int finalWidth = maxWidth;
+        int finalHeight = maxHeight;
+
+        if (ratioMax > ratioBitmap) {
+            finalWidth = (int) ((float)maxHeight * ratioBitmap);
+        } else {
+            finalHeight = (int) ((float)maxWidth / ratioBitmap);
+        }
+
+        return Bitmap.createScaledBitmap(original, finalWidth, finalHeight, true);
+    }
+
+    public String saveImageToPhone(Bitmap finalBitmap) {
+
+        String root = getFilesDir().getAbsolutePath();
+        File myDir = new File(root + "/saved_images");
+        myDir.mkdirs();
+        String fname = "Image-" + System.currentTimeMillis() + ".png";
+        File file = new File(myDir, fname);
+        if (file.exists())
+            file.delete();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            finalBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+
+        }
+        return root + "/saved_images/" + fname;
+    }
+
     private void prepareUploadTask() {
         if(DocType.equalsIgnoreCase("Hygiene"))
             uploader = new FileUploader().setFileUploadUrl("http://harman.infield.co.in/FileUploader/ISD/Harman_Kardon/FloorHygieneHandler.ashx?");
@@ -563,7 +637,7 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
                 break;
             }
             case R.id.btn_reAttach: {
-                if(docType.equalsIgnoreCase("SaleEnter"))
+                if(DocType.equalsIgnoreCase("SaleEnter"))
                     dispatchTakePictureIntent();
                 else
                 {
@@ -596,7 +670,7 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
         OutputStream os;
 
             try (FileOutputStream out = new FileOutputStream(createImageFile())) {
-                bm.compress(Bitmap.CompressFormat.PNG, 85, out); // bmp is your Bitmap instance
+                bm.compress(Bitmap.CompressFormat.JPEG, 20, out); // bmp is your Bitmap instance
                 // PNG is a lossless format, the compression factor (100) is ignored
             } catch (IOException e) {
                 e.printStackTrace();

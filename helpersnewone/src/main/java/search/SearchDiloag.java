@@ -86,10 +86,10 @@ public class SearchDiloag<T> {
 	@SuppressWarnings("unchecked")
 	private boolean processForDataType() {
 		if (adapter.data == null) {
-			showToast("Can not initate search!Because data item is null");
+			showToast("Can not initiate search!Because data item is null");
 			return false;
 		} else if (adapter.data.Count() < 1) {
-			showToast("Can not initate search!Because data item is empty");
+			showToast("Can not initiate search!Because data item is empty");
 			return false;
 		} else {
 

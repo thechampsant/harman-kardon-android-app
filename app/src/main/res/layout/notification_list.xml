@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/size_10">
 
-        <com.fieldforce.training_module.utility.widgets.RobotoBoldTextView
+        <com.fieldforce.utility.widgets.RobotoBoldTextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
             android:textColor="#000"
             android:textSize="@dimen/font_14" />
 
-        <com.fieldforce.training_module.utility.widgets.RobotoBoldTextView
+        <com.fieldforce.utility.widgets.RobotoBoldTextView
             android:id="@+id/btn_i_read"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

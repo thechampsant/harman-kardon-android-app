@@ -10,11 +10,13 @@ public class EnterDemoRequestModel extends DataEntity<EnterDemoRequestModel> {
     // &CustomerPhone=0202020202&CustomerAge=29
 
     public String UserName ="";
-    public String PID ="";
+    public String DemoProdId ="";
+
     public String CustomerName ="";
     public String CustomerEmail ="";
-    public String CustomerPhone ="";
+    public String CustomerMob ="";
     public String CustomerAge ="";
+    public String NoDemo ="";
 
     public EnterDemoRequestModel() {
         super(TableName);

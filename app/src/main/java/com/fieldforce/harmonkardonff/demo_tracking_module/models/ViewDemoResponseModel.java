@@ -14,7 +14,8 @@ public class ViewDemoResponseModel extends DataEntity<ViewDemoResponseModel> {
 
     public String ProductName="";
     public String CustomerName="";
-    public String CustomerPhone="";
+    public String CustomerMob="";
+    public String NoDemo="";
     public String CustomerEmail="";
     public String CustomerAge="";
     public String SubmittedOn="";

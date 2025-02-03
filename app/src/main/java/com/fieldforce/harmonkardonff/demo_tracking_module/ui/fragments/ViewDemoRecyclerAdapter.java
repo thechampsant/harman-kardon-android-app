@@ -60,11 +60,31 @@ public class ViewDemoRecyclerAdapter extends RecyclerView.Adapter<ViewDemoRecycl
         }
 
         public void bindValues(ViewDemoResponseModel obj){
-            textViewCustomerName.setText(obj.CustomerName);
-            textViewCustomerNumber.setText(obj.CustomerPhone);
-            textViewCustomerMail.setText(obj.CustomerEmail);
-            textViewCustomerAge.setText(obj.CustomerAge);
-            textViewProductName.setText(obj.ProductName);
+            if(!obj.CustomerName.equalsIgnoreCase(""))
+                textViewCustomerName.setText(obj.CustomerName);
+            else
+                textViewCustomerName.setText("NA");
+
+
+            if(!obj.CustomerMob.equalsIgnoreCase(""))
+                textViewCustomerNumber.setText(obj.CustomerMob);
+            else
+                textViewCustomerNumber.setText("NA");
+
+
+
+           // textViewCustomerMail.setText(obj.CustomerEmail);
+            if(obj.NoDemo.equalsIgnoreCase("true"))
+             textViewCustomerAge.setText("No Demo");
+            else
+                textViewCustomerAge.setText("NA");
+
+            if(!obj.ProductName.equalsIgnoreCase(""))
+                textViewProductName.setText(obj.ProductName);
+            else
+                textViewProductName.setText("NA");
+
+
             textViewSubmittedDate.setText(obj.SubmittedOn);
         }
     }

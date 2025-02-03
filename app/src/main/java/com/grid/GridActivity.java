@@ -319,10 +319,11 @@ public abstract class GridActivity extends InnosolsActivity {
             params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, mLayout.getId());
             footerview.setLayoutParams(params);
             footerview.setPadding(0, 10, 0, 10);
-            TrysetGridFooterSlider(footerview);
+           //TrysetGridFooterSlider(footerview);
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) grd.getLayoutParams();
-            layoutParams.setMargins(0, 10, 0, Helper.getViewHeight(footerview) + 10);
+            layoutParams.setMargins(0, 10, 0,  170);
             grd.setLayoutParams(layoutParams);
+            mLayout.addView(footerview);
 
         } else
             grd.setPadding(0, 0, 0, 0);

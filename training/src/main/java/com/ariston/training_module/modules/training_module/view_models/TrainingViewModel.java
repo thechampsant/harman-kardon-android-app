@@ -87,10 +87,8 @@ public class TrainingViewModel extends ViewModel {
                             .observeOn(Schedulers.newThread())
             );
         } else {
-
+            try{
             source = LiveDataReactiveStreams.fromPublisher(
-
-
                     ServiceGenerator.getTrainingModuleApi().getTraineeList(userName, sDate, eDate, searchQuery)
                             .subscribeOn(Schedulers.io())
                             .onErrorReturn(new Function<Throwable, TrainingParentModel>() {
@@ -130,6 +128,14 @@ public class TrainingViewModel extends ViewModel {
                             })
                             .observeOn(Schedulers.newThread())
             );
+
+
+            }
+            catch (Exception e)
+            {
+                e.getMessage();
+            }
+
 
         }
 

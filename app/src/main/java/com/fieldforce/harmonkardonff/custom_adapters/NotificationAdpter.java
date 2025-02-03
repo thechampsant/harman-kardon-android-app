@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.ariston.training_module.utility.widgets.RobotoTextView;
 import com.fieldforce.harmonkardonff.R;
 import com.fieldforce.model.NotificationResonseMode;
 import com.fieldforce.utility.widgets.RobotoBoldTextView;
-import com.fieldforce.utility.widgets.RobotoTextView;
 
 
 import java.util.List;

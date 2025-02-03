@@ -269,6 +269,7 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" /> <!-- tabs activity -->
         <activity android:name="mob.field.harmonkardonff.tabs.SaleTabs" />
+        <activity android:name=".Comptition.CompetitionTab" />
         <activity android:name="mob.field.harmonkardonff.tabs.ModuleTab" />
         <activity android:name="mob.field.harmonkardonff.tabs.DownStock" />
         <activity

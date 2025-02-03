@@ -30,5 +30,9 @@ interface Apiintefacec{
         @Body trim:String
     ): Call<String>
 
-
+    @Headers("Content-Type: application/json")
+    @POST("SubmitCompetitionData")
+    fun SubmitDisplayPic(
+        @Body trim:String
+    ): Call<String>
 }

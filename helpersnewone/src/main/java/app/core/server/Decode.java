@@ -129,13 +129,13 @@ public class Decode<T extends DataEntity<T>> {
 			array = Jobj.getJSONArray("EData");
 		} catch (Exception ex) {
 		}
-		R.EData = new ArrayList<T>();
+		/*R.EData = new ArrayList<T>();
 		for (int i = 0; i < array.length(); i++) {
 			T item = edata.GetNewObject();
 			
 			item = ConvertFrom(item, array.getJSONObject(i));
 			R.EData.add(item);
-		}
+		}*/
 		return R;
 	}
 

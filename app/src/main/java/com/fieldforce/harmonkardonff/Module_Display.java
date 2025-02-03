@@ -1,5 +1,9 @@
 package com.fieldforce.harmonkardonff;
 
+import static mob.field.harmonkardonff.services.WebService.ApiUrl;
+import static mob.field.harmonkardonff.services.WebService.SubmitDisplayModel;
+import static mob.field.harmonkardonff.services.WebService.UserName;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -26,6 +30,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.fieldforce.harmonhelper.GPSTracker;
 import com.fieldforce.utility.PermissionUtils;
+import com.google.gson.Gson;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.regex.Pattern;
@@ -36,6 +41,7 @@ import app.core.base.IFragment;
 import app.core.base.InnosolsActivity;
 import app.core.image.slider.AppConstant;
 import app.core.model.Response;
+import app.core.server.Encode;
 import app.core.utils.Dialog;
 import linq.ArrayList;
 import mob.field.harmonkardonff.entitiymodels.NewSaleModel;
@@ -88,7 +94,6 @@ import mob.field.harmonkardonff.services.WebService;
          GetButton(R.id.btn_submit_sale).setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 CurrentSalesModel.SKU=SelectedProduct.PID;
                  if(validateCustomer())
                  {
                      OnSubmitClick();
@@ -168,16 +173,22 @@ import mob.field.harmonkardonff.services.WebService;
           * } else return true;
           */
      }
+     String apiUrl;
      private void SubmitSaleOnServer() {
          if(localStrObj.getMessage("add").equalsIgnoreCase("AddMore"))
          {
              Log.e("IsManual",localStrObj.getMessage("IsManual"));
+
              ViewModuleModel viewModuleModel=new ViewModuleModel();
              viewModuleModel.SKUID=CurrentSalesModel.SKU;
              viewModuleModel.SKU=getSpinner(R.id.searchableSpinner_spproducts).getSelectedItem().toString();
              viewModuleModel.Category=getSpinner(R.id.searchableSpinner_spmodels).getSelectedItem().toString();;
              viewModuleModel.SubCategory=getSpinner(R.id.searchableSpinner_spsubcat).getSelectedItem().toString();;
              viewModuleModel.IsManual=localStrObj.getMessage("IsManual");
+             if(localStrObj.getMessage("IsManual").equalsIgnoreCase("0"))
+                 viewModuleModel.IsManual="false";
+             else
+                 viewModuleModel.IsManual="true";
              viewModuleModel.BarCodeValue=CurrentSalesModel.BarCodeValue;
              viewModuleModel.DisplayRaiseDate=GetCurrentDateInString();
              viewModuleModel.Longitude=CurrentSalesModel.Longitude;
@@ -188,7 +199,11 @@ import mob.field.harmonkardonff.services.WebService;
          }
          else{
              if (isNetworkAvailable()) {
-                 CurrentSalesModel.IsManual=localStrObj.getMessage("IsManual");
+                 if(localStrObj.getMessage("IsManual").equalsIgnoreCase("0"))
+                    CurrentSalesModel.IsManual="false";
+                 else
+                     CurrentSalesModel.IsManual="true";
+
                  BackgroundProcess bp = new BackgroundProcess(getActivity())
                          .setProgressMessage("sending to server..");
                  bp.setProgressDailogCancellable(false);
@@ -202,6 +217,25 @@ import mob.field.harmonkardonff.services.WebService;
 
                      @Override
                      public Object underProcess() throws Exception {
+                         Gson gson = new Gson();
+                         String json = gson.toJson(CurrentSalesModel);
+                          apiUrl = ApiUrl;
+                         apiUrl += SubmitDisplayModel + "Username=" + UserName + "&AppVersion="
+                                 + MainActivity.Current.getCurrentVersion()
+                                 + Encode.ToObject(CurrentSalesModel);
+                        //
+                        /* getActivity().runOnUiThread(new Runnable() {
+                             public void run() {
+                                 new Dialog(getActivity()).setTitle("Message").show(
+                                         apiUrl
+                                 );
+                                 new Dialog(getActivity()).setTitle("Message").show(
+                                         json
+                                 );
+                             }
+                         });*/
+
+
                          return server.SubmitDisplayModel(CurrentSalesModel);
                      }
                  });
@@ -225,6 +259,7 @@ import mob.field.harmonkardonff.services.WebService;
      private void ProcessNewSaleResponse(Response response) {
          if (response.status.equalsIgnoreCase("true")) {
              this.ShowToast("Updated successfully!");
+             setTab(1);
             
 
          } else {
@@ -309,6 +344,9 @@ import mob.field.harmonkardonff.services.WebService;
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
                 SelectedProduct = (ProductModel) arg0.getSelectedItem();
+
+                CurrentSalesModel.SKU=SelectedProduct.PID;
+
                 // CurrentSalesModel.PID = SelectedProduct.PID;
                 // fillmop(SelectedProduct);
 
