@@ -10,6 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Bundle;
+import android.util.Log;
+
 import app.core.model.Response;
 import app.core.sqllite.DataEntity;
 
@@ -69,6 +71,7 @@ public class Decode<T extends DataEntity<T>> {
 			/*array.getJSONArray()*/
 			//Jobj.getJSONArray("data").getJSONObject(0).getJSONArray("value")
 		} catch (Exception ex) {
+			Log.e("hvhh","jjj"+ ex.getMessage());
 		}
 		R.data = new ArrayList<T>();
 		for (int i = 0; i < array.length(); i++) {

@@ -9,7 +9,6 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:id="@+id/lv_view"
         android:layout_height="wrap_content"
         android:padding="@dimen/size_10">
 
