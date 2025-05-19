@@ -3,6 +3,7 @@ package com.fieldforce.harmonkardonff;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -47,6 +49,8 @@ import com.fieldforce.harmonhelper.GPSTracker;
 import com.fieldforce.harmonkardonff.Comptition.CompetitionTab;
 import com.fieldforce.harmonkardonff.custom_adapters.NotificationAdpter;
 import com.fieldforce.harmonkardonff.demo_tracking_module.ui.activities.DemoTrackingFragmentsContainer;
+import com.fieldforce.harmonkardonff.homeTrainingDoc.AdapterTrainingMat;
+import com.fieldforce.model.GetDoctypedata;
 import com.fieldforce.model.NotificationResonseMode;
 import com.fieldforce.profile.MyProfileModel;
 
@@ -60,6 +64,8 @@ import com.grid.GridActivity;
 import com.grid.GridItem;
 import com.jmedeisis.draglinearlayout.DragLinearLayout;
 import com.suveyform.SurveytypeActivity;
+
+import java.util.List;
 
 import app.core.adapter.GenricAdapter;
 import app.core.adapter.IAdapter;
@@ -253,6 +259,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
 		  MainActivity.MyInfo.EmployeeCode).TryRegisterDevice();*/
         checkForLogin();
         // initialize();
+        //apiCallfordataofdocuments();
          saveVersionUpdationFromServerToLocal();
         // toastForLastestVersion();
 
@@ -324,6 +331,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         popBuilder.setView(view);
 
     }
+
     private void getDataForMultipleImageFromServer() {
         BackgroundProcess bp = new BackgroundProcess(this).showProgress(false);
         bp.setProgressMessage("Please wait...");
@@ -411,6 +419,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
     private void saveVersionUpdationFromServerToLocal() {
         if (isNetworkAvailable()) {
             checkForAppVersionOnServer();
+            checkForuserOnServer();
         }
         //loadVersionDetailAndReflect();
     }
@@ -553,6 +562,45 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
                 Log.e("daaaa", resdata.get(0).toString());
 
             hideProgress();
+        } else {
+            new Dialog(this).setTitle("Error").show(response.errormsg);
+        }
+
+    }
+    private void checkForuserOnServer() {
+        BackgroundProcess bp = new BackgroundProcess(this).showProgress(false);
+        bp.setbackgroundProcess(new IProcess() {
+
+            @SuppressWarnings("rawtypes")
+            @Override
+            public void processResponse(Object arg0) throws Exception {
+                // TODO Auto-generated method stub
+                processuseractiveResponse((Response) arg0);
+
+            }
+
+            @Override
+            public Object underProcess() throws Exception {
+
+                return web.GetISPActiveStatus();
+            }
+        });
+
+        bp.execute();
+
+    }
+    protected void processuseractiveResponse(Response response) {
+
+        // TODO Auto-generated method stub
+        Response res = (Response)response;
+        ArrayList<VersionUpdationModel> resdata = (ArrayList<VersionUpdationModel>) res.data;
+        if (resdata != null && resdata.size() > 0) {
+         Log.e("Daraaa",resdata.get(0).IsActive+"nio");
+          if(resdata.get(0).IsActive.equalsIgnoreCase("false")) {
+
+              goToLogin();
+              hideProgress();
+          }
         } else {
             new Dialog(this).setTitle("Error").show(response.errormsg);
         }
@@ -754,6 +802,72 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         Intent intent = new Intent(this, MyInfoActivity.class);
         this.startActivity(intent);
     }
+
+    private void apiCallfordataofdocuments() {
+        BackgroundProcess bp = new BackgroundProcess(this).showProgress(false);
+        bp.setbackgroundProcess(new IProcess() {
+
+            @SuppressWarnings("rawtypes")
+            @Override
+            public void processResponse(Object arg0) throws Exception {
+                // TODO Auto-generated method stub
+                processDoclistResponse((Response) arg0);
+
+            }
+
+            @Override
+            public Object underProcess() throws Exception {
+
+                return web.getDoclist();
+            }
+        });
+
+        bp.execute();
+    }
+
+    private void processDoclistResponse(Response response) {
+        if (response.isSuccess()) {
+            ArrayList<GetDoctypedata> originalList = response.data;
+            if (originalList != null && !originalList.isEmpty()) {
+
+                List<GetDoctypedata> filteredList = new ArrayList<>();
+
+                for (GetDoctypedata item : originalList) {
+                    if (!"true".equalsIgnoreCase(item.IsSeen)) {
+                        filteredList.add(item);
+                    }
+                }
+
+                if (!filteredList.isEmpty()) {
+                    showTrainingMaterialDialog(MainActivity.this, filteredList);
+                }
+            }
+        }
+    }
+
+    public void showTrainingMaterialDialog(Context context, List<GetDoctypedata> dataList) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.dialog_training_material, null);
+
+        RecyclerView recyclerView = dialogView.findViewById(R.id.recycler_dialog);
+        Button btnClose = dialogView.findViewById(R.id.btn_dialog_close);
+
+        AdapterTrainingMat adapter = new AdapterTrainingMat();
+        adapter.addData(dataList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(adapter);
+
+        AlertDialog dialog = new AlertDialog.Builder(context)
+                .setView(dialogView)
+                .setCancelable(false)
+                .create();
+
+        btnClose.setOnClickListener(v -> dialog.dismiss());
+        Log.e("Cww","c");
+        dialog.show();
+    }
+
+
 
     public void gotoPendingImage() {
         this.startActivityForResult(new Intent(this, ImageGridActivity.class),
@@ -1044,7 +1158,9 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         localStorage.setMessage("add","");
         saveVersionUpdationFromServerToLocal();
         if (isNetworkAvailable()) {
+            apiCallfordataofdocuments();
             preparePopupTask();
+
         } else {
             ShowToast("No internet...");
         }

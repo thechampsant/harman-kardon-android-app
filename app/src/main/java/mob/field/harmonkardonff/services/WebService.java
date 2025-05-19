@@ -14,6 +14,7 @@ import com.fieldforce.harmonkardonff.MainActivity;
 import com.fieldforce.harmonkardonff.ViewModuleModel;
 import com.fieldforce.harmonkardonff.demo_tracking_module.models.EnterDemoRequestModel;
 import com.fieldforce.harmonkardonff.demo_tracking_module.models.ViewDemoResponseModel;
+import com.fieldforce.model.GetDoctypedata;
 import com.fieldforce.model.GetFloorHygieneType;
 import com.fieldforce.model.NotificationResonseMode;
 import com.fieldforce.model.SeenNotificationResonse;
@@ -489,6 +490,7 @@ public class WebService {
     }
 
     String checkMinAppVersion = "CheckMinAppVersion?";
+    String GetISPActiveStatus = "GetISPActiveStatus?";
 
     @SuppressWarnings({"rawtypes"})
     public Response checkMinAppVersionOnServer() {
@@ -500,6 +502,15 @@ public class WebService {
     }
 
     public String latestAppVersionOnPlaystore = "http://product.infield.co.in:8080/api/login/api_to_get_app_latest_version_on_playstore/?";
+
+    public Response GetISPActiveStatus() {
+        String apiUrl = ApiUrl;
+        apiUrl += GetISPActiveStatus;
+        apiUrl += "LoginId="+MainActivity.MyInfo.UserID;
+
+        Log.d("GetISPActiveStatus",apiUrl);
+        return server.getResponse(apiUrl,new VersionUpdationModel());
+    }
 
     public Response checkLatestAppVersionOnPlaystore(String version) {
         String apiUrl = "";
@@ -800,6 +811,12 @@ public class WebService {
         String apiUrl = ApiUrl;
         apiUrl += getNotificationMethod + "username=" + getUsername();
         return server.getResponse(apiUrl, new MNotification());
+    }
+    String GetISPConfuguredData = "GetISPConfuguredData?";
+    public Response getDoclist() {
+        String apiUrl = ApiUrl;
+        apiUrl += GetISPConfuguredData + "LoginId=" + getUsername();
+        return server.getResponse(apiUrl, new GetDoctypedata());
     }
 
 
