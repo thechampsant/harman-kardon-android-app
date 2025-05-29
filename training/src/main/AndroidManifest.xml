@@ -8,7 +8,9 @@
     <application>
         <activity android:name="com.ariston.training_module.modules.training_module.ui.activities.ProfileActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
         <activity
             android:name="com.ariston.training_module.modules.training_module.ui.activities.FaqActivity"
             android:screenOrientation="portrait"
@@ -25,6 +27,7 @@
             android:name="com.ariston.training_module.modules.training_module.ui.activities.QuizActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <activity
             android:name="com.ariston.training_module.modules.training_module.ui.activities.QuizeTrainerActivity"
             android:screenOrientation="portrait"

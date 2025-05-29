@@ -72,6 +72,14 @@
         android:theme="@style/ApplicationStyle"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".home.VideoPlayerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".home.DocViewerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name=".Model_Display"
             android:exported="false" />
 

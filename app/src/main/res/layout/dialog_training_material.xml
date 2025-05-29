@@ -8,12 +8,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_dialog"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/btn_dialog_close"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:text="Close" />
 </LinearLayout>

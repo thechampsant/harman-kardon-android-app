@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/size_30"
             android:background="@drawable/line_rv_tr_desc" />
 
-        <com.ariston.training_module.utility.widgets.RobotoBoldTextView
+        <TextView
             android:id="@+id/tv__label_tr_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

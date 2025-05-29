@@ -5,7 +5,7 @@ import app.core.sqllite.DataTypes;
 import mob.field.harmonkardonff.entitiymodels.VersionUpdationModel;
 
 public class GetDoctypedata  extends DataEntity<GetDoctypedata> {
-    public int DocID;
+    public String DocID;
     public String DocUrl;
     public String IsSeen;
     public String DocType;

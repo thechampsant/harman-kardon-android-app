@@ -49,14 +49,13 @@ import com.fieldforce.harmonhelper.GPSTracker;
 import com.fieldforce.harmonkardonff.Comptition.CompetitionTab;
 import com.fieldforce.harmonkardonff.custom_adapters.NotificationAdpter;
 import com.fieldforce.harmonkardonff.demo_tracking_module.ui.activities.DemoTrackingFragmentsContainer;
-import com.fieldforce.harmonkardonff.homeTrainingDoc.AdapterTrainingMat;
+import com.fieldforce.harmonkardonff.home.AdapterTrainingMat;
 import com.fieldforce.model.GetDoctypedata;
 import com.fieldforce.model.NotificationResonseMode;
 import com.fieldforce.profile.MyProfileModel;
 
 import com.fieldforce.utility.CommonUtility;
 import com.fieldforce.utility.Helper;
-import com.fieldforce.utility.Storage;
 import com.fieldforce.utility.clicklisteners.PushDownAnim;
 import com.fieldforce.utility.widgets.RobotoBoldTextView;
 import com.fieldforce.utility.widgets.RobotoTextView;
@@ -833,7 +832,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
                 List<GetDoctypedata> filteredList = new ArrayList<>();
 
                 for (GetDoctypedata item : originalList) {
-                    if (!"true".equalsIgnoreCase(item.IsSeen)) {
+                    if ("true".equalsIgnoreCase(item.IsSeen)) {
                         filteredList.add(item);
                     }
                 }
@@ -906,7 +905,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
     public void RegisterTableInfoForLocalDB() {
         this.RegisterTableForDataEntity(new ProductModel());
         this.RegisterTableForDataEntity(new Viewsalemodel());
-
         this.RegisterTableForDataEntity(new MDAT());
         this.RegisterTableForDataEntity(new Feedback());
         this.RegisterTableForDataEntity(new Complain());
