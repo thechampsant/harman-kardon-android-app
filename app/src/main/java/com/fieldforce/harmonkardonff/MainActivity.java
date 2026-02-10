@@ -342,7 +342,6 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
                 // TODO Auto-generated method stub
                 Response res = (Response) arg0;
                 if (res.status.equalsIgnoreCase("true")) {
-                    //show popup dialog
                     ArrayList<MainActivityPopupResponse> list = res.data;
                     if (list.size() > 0) {
                         mAdapter.setData(list);
