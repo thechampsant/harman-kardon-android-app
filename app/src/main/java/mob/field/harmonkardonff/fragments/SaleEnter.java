@@ -78,6 +78,7 @@ public class SaleEnter extends IFragment {
     String SelectedDemonstration = null;
     WebService server = new WebService();
     LinearLayout linearLayout = null;
+    SearchableSpinner searchableSpinner_combo_spinner;
     LinearLayout linear_invc = null;
     CardView cvUploadInvoice,cv_upload_price;
 
@@ -93,6 +94,7 @@ public class SaleEnter extends IFragment {
             linear_invc = this.getLinearLayout(R.id.lnr_invoc);
             cvUploadInvoice = (CardView) findViewById(R.id.cv_upload_invoice);
             cv_upload_price = (CardView) findViewById(R.id.cv_upload_price);
+            searchableSpinner_combo_spinner = (SearchableSpinner) findViewById(R.id.searchableSpinner_combo_spinner);
 
             float radius = Math.max(Helper.getViewHeight(cvUploadInvoice), Helper.getViewWidth(cvUploadInvoice));
             radius = radius % 2 == 0 ? radius : radius + 1;
@@ -309,7 +311,9 @@ public class SaleEnter extends IFragment {
             if (validate(true)) {
              //   SubmitSaleOnServer();
                 Log.e("Storetype",MainActivity.MyInfo.Storetype);
+                Log.e("searchableSpinner_combo_spinner",searchableSpinner_combo_spinner.getSelectedItem().toString());
              //   CurrentSalesModel.Price= GetEditTextAsString(R.id.tbxqty).trim();
+                CurrentSalesModel.Combo= searchableSpinner_combo_spinner.getSelectedItem().toString();
                 if(MainActivity.MyInfo.Storetype.equalsIgnoreCase("GT")||MainActivity.MyInfo.Storetype.equalsIgnoreCase("AI RR"))
 				if (CurrentSalesModel.DocIDs.equalsIgnoreCase("")){
 					ShowToast("Please upload invoice first");
@@ -402,19 +406,16 @@ public class SaleEnter extends IFragment {
             ShowToast("Please select the date..");
             return false;
         }
-        if (ConvertStringToDate(CurrentSalesModel.ForDate).after(
-                GetCurrentDate())) {
+        if (ConvertStringToDate(CurrentSalesModel.ForDate).after(GetCurrentDate())) {
             ShowToast("Future Dates are not allowed");
             return false;
-        } else if (ConvertStringToDate(CurrentSalesModel.ForDate).before(
-                getBackDate(backday))) {
+        } /*else if (ConvertStringToDate(CurrentSalesModel.ForDate).before(getBackDate(backday))) {
             ShowToast("Past Dates are not allowed");
             //ShowToast("Only past " + backday + " days sale is allowed");
             return false;
-        } else
+        }*/ else
             return true;
     }
-
     private boolean validate(boolean canSubmit) {
         if (validateDates() && validateCustomer() && validateQty(canSubmit) && validatePrice() /*&& validatebar()*/) {
             if (canSubmit) {

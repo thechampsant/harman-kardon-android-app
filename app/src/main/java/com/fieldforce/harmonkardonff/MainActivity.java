@@ -288,7 +288,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) ivBg.getLayoutParams();
         layoutParams.height = (int) (Helper.getViewHeight(rlHeader) - Helper.getSizeInDp(this, 10));
         ivBg.setLayoutParams(layoutParams);
-        ivBg.setImageResource(R.drawable.bg_top_home);
+        ivBg.setImageResource(com.ariston.training_module.R.drawable.bg_top_home);
 
 
     }
@@ -879,27 +879,26 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.action_fullgrid:
-                setcolumns(3);
-                return true;
-            case R.id.action_grd2:
-                setcolumns(2);
-                return true;
-            case R.id.action_grd1:
-                setcolumns(1);
-                return true;
-            case R.id.action_logout:
-                this.setUserLogged(false);
+        int id = item.getItemId();
 
-                goToLogin();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        if (id == R.id.action_fullgrid) {
+            setcolumns(3);
+            return true;
+        } else if (id == R.id.action_grd2) {
+            setcolumns(2);
+            return true;
+        } else if (id == R.id.action_grd1) {
+            setcolumns(1);
+            return true;
+        } else if (id == R.id.action_logout) {
+            this.setUserLogged(false);
+            goToLogin();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
+
 
     @Override
     public void RegisterTableInfoForLocalDB() {
@@ -1039,6 +1038,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
        data.add(new GridItem().setItem("Incentive", NewTrainingActivity.class, R.drawable.ic_incentive));
        data.add(new GridItem().setItem("Sales Pitch", SalesPitch.class, R.drawable.ic_sales_pitch));
        data.add(new GridItem().setItem("Target vs Achievements", TargetScreenManagerActivity.class, R.drawable.ic_target_vs_achievement));
+        data.add(new GridItem().setItem("SKU-wise Qty", TargetScreenManagerQTYActivity.class, R.drawable.ic_target_vs_achievement));
        data.add(new GridItem().setItem("Display Compliance", HygieneStoreListActivity.class, R.drawable.ic_floor_hygiene));
        data.add(new GridItem().setItem("Survey Form", SurveytypeActivity.class, R.drawable.ic_floor_hygiene));
        data.add(new GridItem().setItem("Counter share\n(MTD)", CompetitionTab.class, R.drawable.ic_floor_hygiene));
@@ -1340,28 +1340,23 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.iv_survey:
-                Helper.openNextActivity(MainActivity.this, CoronaSurvey_Tabs.class, null, false, -1);
-                break;
-            case R.id.iv_hr_helpline:
-                Helper.openNextActivity(MainActivity.this, HelpLine.class, null, false, -1);
-                break;
-            case R.id.iv_settings:
-                Helper.openNextActivity(MainActivity.this, SettingActivity.class, null, false, -1);
-                break;
-            case R.id.iv_fl_log_out:
-                logout();
-                break;
-            case R.id.bt_corona_bot:
-                Helper.openNextActivity(MainActivity.this, CoronaActivity.class, null, false, -1);
-                break;
-            case R.id.iv_notification:
-                Helper.openNextActivity(MainActivity.this, NotificationView.class, null, false, -1);
-                break;
+        int id = v.getId();
 
+        if (id == R.id.iv_survey) {
+            Helper.openNextActivity(MainActivity.this, CoronaSurvey_Tabs.class, null, false, -1);
+        } else if (id == R.id.iv_hr_helpline) {
+            Helper.openNextActivity(MainActivity.this, HelpLine.class, null, false, -1);
+        } else if (id == R.id.iv_settings) {
+            Helper.openNextActivity(MainActivity.this, SettingActivity.class, null, false, -1);
+        } else if (id == R.id.iv_fl_log_out) {
+            logout();
+        } else if (id == R.id.bt_corona_bot) {
+            Helper.openNextActivity(MainActivity.this, CoronaActivity.class, null, false, -1);
+        } else if (id == R.id.iv_notification) {
+            Helper.openNextActivity(MainActivity.this, NotificationView.class, null, false, -1);
         }
     }
+
 
     @Override
     public void updateSeenData(NotificationResonseMode obj, int position) {

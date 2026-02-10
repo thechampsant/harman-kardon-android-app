@@ -216,7 +216,7 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
                     Gallery=true;
                   /*  String URI=saveImageToPhone(bm);
                     galleryImage=new File(URI);*/
-                    Bitmap resizedBitmap = resizeBitmap(bm, 300, 200);
+                    Bitmap resizedBitmap = resizeBitmap(bm, 1080, 1920);
 
                     galleryImage=saveBitMap(this,resizedBitmap);
                     if (!galleryImage.isFile()) {
@@ -255,8 +255,7 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
         ShowToast("Saving image...");
 
         // Downscale the bitmap if it's too large
-        Bitmap resizedBitmap = resizeBitmap(finalBitmap, 300, 200);  // Adjust max size as needed
-
+        Bitmap resizedBitmap = resizeBitmap(finalBitmap, 1080, 1920);
         File pictureFileDir = new File(
                 context.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
                 "SavedImages"
@@ -283,7 +282,7 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
         try (FileOutputStream fos = new FileOutputStream(pictureFile);
              BufferedOutputStream bos = new BufferedOutputStream(fos)) {
 
-            boolean success = resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 10, bos);
+            boolean success = resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bos);
             bos.flush();
 
             if (!success) {
@@ -624,36 +623,32 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_click: {
-                //startCameraTask();
-                if(DocType.equalsIgnoreCase("SaleEnter"))
-                 dispatchTakePictureIntent();
-                else
-                {
-                    Intent cameraActivity = new Intent(SimpleCameraActivity.this, CameraActivity.class);
-                    startActivityForResult(cameraActivity, REQUEST_TAKE_PHOTO);
-                }
-                break;
+        int id = v.getId();
+
+        if (id == R.id.btn_click) {
+            if (DocType.equalsIgnoreCase("SaleEnter")) {
+                dispatchTakePictureIntent();
+            } else {
+                Intent cameraActivity = new Intent(SimpleCameraActivity.this, CameraActivity.class);
+                startActivityForResult(cameraActivity, REQUEST_TAKE_PHOTO);
             }
-            case R.id.btn_reAttach: {
-                if(DocType.equalsIgnoreCase("SaleEnter"))
-                    dispatchTakePictureIntent();
-                else
-                {
-                    Intent cameraActivity = new Intent(SimpleCameraActivity.this, CameraActivity.class);
-                    startActivityForResult(cameraActivity, REQUEST_TAKE_PHOTO);
-                }
-                break;
+
+        } else if (id == R.id.btn_reAttach) {
+            if (DocType.equalsIgnoreCase("SaleEnter")) {
+                dispatchTakePictureIntent();
+            } else {
+                Intent cameraActivity = new Intent(SimpleCameraActivity.this, CameraActivity.class);
+                startActivityForResult(cameraActivity, REQUEST_TAKE_PHOTO);
             }
-            case R.id.btn_upload: {
-                if(!photoURI.equals(""))
+
+        } else if (id == R.id.btn_upload) {
+            if (!photoURI.equals("")) {
                 buttonUpload.setEnabled(false);
-                uploadImage();
-                break;
             }
+            uploadImage();
         }
     }
+
 
     private Bitmap compressImage(Context context, Uri selectedImage) {
         Bitmap bm = null;

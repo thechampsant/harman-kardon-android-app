@@ -85,7 +85,7 @@ public class SplashScreen extends Activity implements ViewSwitcher.ViewFactory {
         ImageView imageView = findViewById(R.id.jblImage);
 
         Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.slide_from_right);
+                com.ariston.training_module.R.anim.slide_from_right);
         animSlide.setDuration(1000);
 // Start the animation like this
         imageView.startAnimation(animSlide);
@@ -169,10 +169,10 @@ public class SplashScreen extends Activity implements ViewSwitcher.ViewFactory {
 
     private void startAnimatedBackground() {
         Animation aniIn = AnimationUtils.loadAnimation(this,
-                R.anim.fragment_fade_enter);
+                androidx.fragment.R.anim.fragment_fade_enter);
         aniIn.setDuration(1500);
         Animation aniOut = AnimationUtils.loadAnimation(this,
-                R.anim.fragment_fade_exit);
+                androidx.fragment.R.anim.fragment_fade_exit);
         aniOut.setDuration(200);
 
         final ImageSwitcher imageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher1);

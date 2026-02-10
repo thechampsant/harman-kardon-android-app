@@ -239,23 +239,26 @@ public class SaleDisplay extends IFragment {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
-				.getMenuInfo();
-		switch (item.getItemId()) {
-		case R.id.fdelete:
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		int id = item.getItemId();
+
+		if (id == R.id.fdelete) {
 			Delete(info);
 			SetVisibilityOFUpdateButton();
 			SetList();
 			return true;
-		case R.id.fupdate:
+
+		} else if (id == R.id.fupdate) {
 			Update(info);
 			SetVisibilityOFUpdateButton();
 			SetList();
 			return true;
-		default:
+
+		} else {
 			return super.onContextItemSelected(item);
 		}
 	}
+
 
 	private void Update(AdapterContextMenuInfo info) {
 		// TODO Auto-generated method stub
@@ -287,35 +290,39 @@ public class SaleDisplay extends IFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle item selection
-		switch (item.getItemId()) {
-		case R.id.action_update_all:
+		int id = item.getItemId();
+
+		if (id == R.id.action_update_all) {
 			UpdateAllPendingSale();
 			SetVisibilityOFUpdateButton();
 			SetList();
 			return true;
-		case R.id.action_clear_saved:
+
+		} else if (id == R.id.action_clear_saved) {
 			MainActivity.Database.CleanAllSavedSale();
 			SetVisibilityOFUpdateButton();
 			SetList();
-			ShowToast("Opration Ok");
+			ShowToast("Operation Ok");
 			return true;
-		case R.id.action_clear_all_pending:
+
+		} else if (id == R.id.action_clear_all_pending) {
 			MainActivity.Database.CleanAllPendingSale();
 			SetVisibilityOFUpdateButton();
 			SetList();
-			ShowToast("Opration Ok");
+			ShowToast("Operation Ok");
 			return true;
-		case R.id.action_clear_all:
+
+		} else if (id == R.id.action_clear_all) {
 			MainActivity.Database.CleanAllSale();
 			SetVisibilityOFUpdateButton();
 			SetList();
-			ShowToast("Opration Ok");
+			ShowToast("Operation Ok");
 			return true;
 
-		default:
+		} else {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
 
 }

@@ -100,7 +100,7 @@ public class MarkAttActivity extends InnosolsActivity implements OnMapReadyCallb
 
     private void initializeMap() {
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(com.example.helpers.newone.R.id.map);
         mapFragment.getMapAsync(this);
     }
 

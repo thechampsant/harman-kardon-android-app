@@ -2,6 +2,7 @@ package com.fieldforce.harmonkardonff.Comptition;
 
 import android.os.Bundle;
 
+
 import com.fieldforce.harmonkardonff.R;
 
 import linq.ArrayList;
@@ -40,6 +41,7 @@ public class CompetitionTab extends FragmentTabActivity {
     @Override
     public int setFragmentLayout() {
         // TODO Auto-generated method stub
+
         return R.layout.tab_fragment;
     }
 

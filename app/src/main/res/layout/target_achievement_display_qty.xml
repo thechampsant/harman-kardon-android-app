@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- TOP SECTION (Toolbar + Background) -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_bg_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_top_home" />
+
+        <!-- Toolbar -->
+        <LinearLayout
+            android:id="@+id/toolbaar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:onClick="actionBarBackButtonClicked"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                android:src="@drawable/ic_back_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:text="SKU-wise Qty"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <!-- Category (Right Text) -->
+        <TextView
+            android:id="@+id/target_vs_ach_isp_cat_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbaar"
+            android:layout_marginTop="5dp"
+            android:gravity="right"
+            android:layout_marginRight="@dimen/size_10"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <!-- User Name (Right Text) -->
+        <TextView
+            android:id="@+id/target_vs_ach_current_user_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/size_10"
+            android:layout_below="@+id/target_vs_ach_isp_cat_textview"
+            android:gravity="right"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+
+    <!-- BOTTOM SECTION -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Fixed Header Row -->
+        <include layout="@layout/row_target_header" />
+
+        <!-- RecyclerView (scrolls) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/targetlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+</LinearLayout>

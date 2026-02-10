@@ -36,6 +36,7 @@ public class NewSaleModel  extends DataEntity<NewSaleModel>{
 	public int TotalAmount=0;
 	public String Remarks;
 	public String IsUpdated="false";
+	public String Combo="Yes";
 	public String SerialNo="";
 	public String Prices="";
 	public String Price="";
@@ -91,14 +92,12 @@ public class NewSaleModel  extends DataEntity<NewSaleModel>{
 		this.RegisterMapping("UserName", DataTypes.TEXT);
 		this.RegisterMapping("DocIDs",DataTypes.TEXT);
 		this.RegisterMapping("Barcode",DataTypes.TEXT);
-
 		this.RegisterMapping("Cat1", DataTypes.TEXT);
 		this.RegisterMapping("Cat2", DataTypes.TEXT);
 		this.RegisterMapping("Cat3", DataTypes.TEXT);
 		this.RegisterMapping("IsNoSale", DataTypes.TEXT);
 		this.RegisterMapping("ModeOfPayment", DataTypes.TEXT);
 		this.RegisterMapping("SKU", DataTypes.TEXT);
-
 		this.RegisterMapping("BarCodeValue", DataTypes.TEXT);
 		this.RegisterMapping("IsManual", DataTypes.TEXT);
 		this.RegisterMapping("Longitude", DataTypes.TEXT);

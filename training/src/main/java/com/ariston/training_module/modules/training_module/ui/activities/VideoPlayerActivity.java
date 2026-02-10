@@ -216,7 +216,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements VideoRende
 
 
     private void initViews() {
-        timeBar = findViewById(R.id.exo_progress);
+        timeBar = findViewById(com.google.android.exoplayer2.R.id.exo_progress);
         timeBar.setForceDisabled(true);
 
 

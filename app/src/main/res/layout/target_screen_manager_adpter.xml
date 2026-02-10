@@ -13,7 +13,7 @@
         
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
-        app:cardUseCompatPadding="true"
+
         app:contentPaddingLeft="@dimen/size_20"
         app:contentPaddingRight="@dimen/size_20"
         app:cardElevation="@dimen/size_20"
@@ -38,6 +38,65 @@
                 android:textStyle="bold"
                 android:textSize="25sp"
                 />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:id="@+id/contribution"
+                android:layout_marginTop="@dimen/size_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Contribution"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="  :  "
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/target_acheivement_contribution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:textSize="14sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/size_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Last Year"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="  :  "
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/target_acheivement_LY"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:textSize="14sp" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

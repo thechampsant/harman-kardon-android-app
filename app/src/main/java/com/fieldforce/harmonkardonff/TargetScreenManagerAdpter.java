@@ -1,9 +1,11 @@
 package com.fieldforce.harmonkardonff;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,8 +36,22 @@ public class TargetScreenManagerAdpter  extends RecyclerView.Adapter<TargetScree
         viewHolder.catName.setText(trMatItem.getCategory() != null ? trMatItem.getCategory() : "");
         viewHolder.target.setText(trMatItem.getTarget() != null ? trMatItem.getTarget() : "");
         viewHolder.targetAchievement.setText(trMatItem.getSales() != null ? trMatItem.getSales() : "");
+        viewHolder.target_acheivement_LY.setText(trMatItem.getLYsales() != null ? trMatItem.getLYsales() : "");
+        String contribution = trMatItem.getContribution();
+
+        if (contribution != null &&
+                !contribution.trim().isEmpty() &&
+                !contribution.equalsIgnoreCase("null")) {
+
+            Log.e("Contribution", contribution);
+            viewHolder.target_acheivement_contribution.setVisibility(View.VISIBLE);
+            viewHolder.target_acheivement_contribution.setText(contribution);
+
+        } else {
+            viewHolder.contribution.setVisibility(View.GONE);
+        }
 //        viewHolder.target_category.setText(trMatItem.getSales() != null ? trMatItem.getSales() : "");
-        viewHolder.targetachievementpercenatege.setText(trMatItem.getAch_perc() != null ? trMatItem.getAch_perc() : "");
+        viewHolder.targetachievementpercenatege.setText((trMatItem.getAch_perc() != null ? trMatItem.getAch_perc() : ""));
         // Glide.with(viewHolder.itemView.getContext()).load(getThumbnail(trMatItem.getFileType())).into(viewHolder.ivItem);
     }
 
@@ -52,7 +68,8 @@ public class TargetScreenManagerAdpter  extends RecyclerView.Adapter<TargetScree
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView catName,target,targetAchievement,targetachievementpercenatege,target_category;
+        TextView catName,target,targetAchievement,targetachievementpercenatege,target_category,target_acheivement_contribution,target_acheivement_LY;
+        LinearLayout contribution;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -60,6 +77,9 @@ public class TargetScreenManagerAdpter  extends RecyclerView.Adapter<TargetScree
             targetachievementpercenatege = itemView.findViewById(R.id.target_acheivement_percentage);
             catName = itemView.findViewById(R.id.cat_name);
             target = itemView.findViewById(R.id.target_acheivement_target);
+            target_acheivement_contribution = itemView.findViewById(R.id.target_acheivement_contribution);
+            target_acheivement_LY = itemView.findViewById(R.id.target_acheivement_LY);
+            contribution = itemView.findViewById(R.id.contribution);
 
             targetAchievement = itemView.findViewById(R.id.acheivement_target);
 

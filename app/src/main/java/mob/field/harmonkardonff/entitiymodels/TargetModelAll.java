@@ -19,6 +19,25 @@ public class TargetModelAll extends DataEntity<TargetModelAll>{
 	public String remarks;
 	public String till_Date;
 
+	public String getLYsales() {
+		return LYsales;
+	}
+
+	public void setLYsales(String LYsales) {
+		this.LYsales = LYsales;
+	}
+
+	public String getContribution() {
+		return Contribution;
+	}
+
+	public void setContribution(String contribution) {
+		Contribution = contribution;
+	}
+
+	public String LYsales;
+	public String Contribution;
+
 	public void setISPCategory(String ISPCategory) {
 		this.ISPCategory = ISPCategory;
 	}

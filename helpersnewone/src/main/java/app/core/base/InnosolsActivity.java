@@ -1493,7 +1493,7 @@ public abstract class InnosolsActivity extends FragmentActivity implements
 	}
 
     // -------------------image save information------------------//
-
+/*
 	public String getDeviceId() {
 		// TODO Auto-generated method stub
 		try {
@@ -1506,7 +1506,7 @@ public abstract class InnosolsActivity extends FragmentActivity implements
 		} catch (Exception ex) {
 			return "NA";
 		}
-	}
+	}*/
 
 	public boolean IsFolderSave() {
         return !getSharedPreference(IsFolderSaveKey, "false").equalsIgnoreCase(

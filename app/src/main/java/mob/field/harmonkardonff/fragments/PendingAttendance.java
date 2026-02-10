@@ -193,24 +193,25 @@ public class PendingAttendance extends IFragment {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
-				.getMenuInfo();
-		switch (item.getItemId()) {
-		case R.id.fdelete:
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		int id = item.getItemId();
+
+		if (id == R.id.fdelete) {
 			Delete(info);
 			this.RefreshDAT();
 			SetVisibilityOFUpdateButton();
 			SetList();
 			return true;
-		case R.id.fupdate:
+		} else if (id == R.id.fupdate) {
 			Update(info);
 			SetVisibilityOFUpdateButton();
 			SetList();
 			return true;
-		default:
+		} else {
 			return super.onContextItemSelected(item);
 		}
 	}
+
 
 	public void UpdatePendingDAT(final MDAT model) {
 		if (!this.isNetworkFoundDialog())
@@ -272,38 +273,42 @@ public class PendingAttendance extends IFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle item selection
-		switch (item.getItemId()) {
-		case R.id.action_update_all:
+		int id = item.getItemId();
+
+		if (id == R.id.action_update_all) {
 			this.UpdateAllPending();
 			SetVisibilityOFUpdateButton();
 			SetList();
 			return true;
-		case R.id.action_clear_saved:
+
+		} else if (id == R.id.action_clear_saved) {
 			MainActivity.Database.CleanAllSavedDAT();
 			this.RefreshDAT();
 			SetVisibilityOFUpdateButton();
 			SetList();
-			ShowToast("Opration Ok");
+			ShowToast("Operation Ok");
 			return true;
-		case R.id.action_clear_all_pending:
+
+		} else if (id == R.id.action_clear_all_pending) {
 			MainActivity.Database.CleanAllPendingDAT();
 			this.RefreshDAT();
 			SetVisibilityOFUpdateButton();
 			SetList();
-			ShowToast("Opration Ok");
+			ShowToast("Operation Ok");
 			return true;
-		case R.id.action_clear_all:
+
+		} else if (id == R.id.action_clear_all) {
 			MainActivity.Database.CleanAllDAT();
 			this.RefreshDAT();
 			SetVisibilityOFUpdateButton();
 			SetList();
-			ShowToast("Opration Ok");
+			ShowToast("Operation Ok");
 			return true;
 
-		default:
+		} else {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
 
 }

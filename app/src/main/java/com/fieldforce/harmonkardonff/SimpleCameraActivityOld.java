@@ -312,25 +312,34 @@ public class SimpleCameraActivityOld extends InnosolsActivity implements View.On
             }
         }
     }
-
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_click: {
-                //startCameraTask();
+        int id = v.getId();
+
+        if (id == R.id.btn_click) {
+            if (DocType.equalsIgnoreCase("SaleEnter")) {
                 dispatchTakePictureIntent();
-                break;
+            } else {
+                Intent cameraActivity = new Intent(SimpleCameraActivityOld.this, CameraActivity.class);
+                startActivityForResult(cameraActivity, REQUEST_TAKE_PHOTO);
             }
-            case R.id.btn_reAttach: {
+
+        } else if (id == R.id.btn_reAttach) {
+            if (DocType.equalsIgnoreCase("SaleEnter")) {
                 dispatchTakePictureIntent();
-                break;
+            } else {
+                Intent cameraActivity = new Intent(SimpleCameraActivityOld.this, CameraActivity.class);
+                startActivityForResult(cameraActivity, REQUEST_TAKE_PHOTO);
             }
-            case R.id.btn_upload: {
-                uploadImage();
-                break;
+
+        } else if (id == R.id.btn_upload) {
+            if (!photoURI.equals("")) {
+                buttonUpload.setEnabled(false);
             }
+            uploadImage();
         }
     }
+
 
     private Bitmap compressImage(Context context, Uri selectedImage) {
         Bitmap bm = null;
@@ -347,7 +356,7 @@ public class SimpleCameraActivityOld extends InnosolsActivity implements View.On
         OutputStream os;
         try {
             os = new FileOutputStream(photoFile);
-            bm.compress(Bitmap.CompressFormat.JPEG, 80, os);
+            bm.compress(Bitmap.CompressFormat.JPEG, 90, os);
             os.flush();
             os.close();
         } catch (Exception ignored) {

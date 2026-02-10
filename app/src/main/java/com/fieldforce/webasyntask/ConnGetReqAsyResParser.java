@@ -138,7 +138,7 @@ public class ConnGetReqAsyResParser extends
 				if (needToShowMsgDialog) {
 
 					if(isStyleRequired) {
-						ContextThemeWrapper ctw = new ContextThemeWrapper(activity, R.style.AlertDialogCustom);
+						ContextThemeWrapper ctw = new ContextThemeWrapper(activity, com.ariston.training_module.R.style.AlertDialogCustom);
 						new app.core.utils.Dialog(activity).show("" + someOtherMsg
 								+ res.errormsg);
 					}else{

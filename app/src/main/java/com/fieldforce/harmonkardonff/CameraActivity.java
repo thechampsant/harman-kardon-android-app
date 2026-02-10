@@ -259,30 +259,25 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.edit:
-                edit();
-                break;
-            case R.id.capturePicture:
-                capturePicture();
-                break;
-            case R.id.capturePictureSnapshot:
-                capturePictureSnapshot();
-                break;
-            case R.id.captureVideo:
-                captureVideo();
-                break;
-            case R.id.captureVideoSnapshot:
-                captureVideoSnapshot();
-                break;
-            case R.id.toggleCamera:
-                toggleCamera();
-                break;
-            case R.id.changeFilter:
-                changeCurrentFilter();
-                break;
+        int id = view.getId();
+
+        if (id == R.id.edit) {
+            edit();
+        } else if (id == R.id.capturePicture) {
+            capturePicture();
+        } else if (id == R.id.capturePictureSnapshot) {
+            capturePictureSnapshot();
+        } else if (id == R.id.captureVideo) {
+            captureVideo();
+        } else if (id == R.id.captureVideoSnapshot) {
+            captureVideoSnapshot();
+        } else if (id == R.id.toggleCamera) {
+            toggleCamera();
+        } else if (id == R.id.changeFilter) {
+            changeCurrentFilter();
         }
     }
+
 
     @Override
     public void onBackPressed() {

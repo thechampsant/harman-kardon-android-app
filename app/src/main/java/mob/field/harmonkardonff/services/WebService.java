@@ -80,7 +80,7 @@ public class WebService {
     static String loginAction = "TRLogin?";
     static String MarkAttendanceAction = "MarkAttendance2?";
     static String MarkAttendanceAction1 = "MarkAttendance?";
-    static String NewSaleAction = "UpdateSale2?";
+    static String NewSaleAction = "UpdateSaleLatest?";
     public static String SubmitDisplayModel = "SubmitDisplayModel2?";
     static String SubmitDownStock = "SubmitDownStock2?";
     static String MTDSalesAction = "GetMTDSales?";
@@ -702,13 +702,26 @@ public class WebService {
         }
     }
 
-    static String targetVSAchievement = "targetVSAchievement2?";
+    static String targetVSAchievementLatest = "targetVSAchievementLatest?";
+    static String targetVSAchievementQtyWise = "targetVSAchievementQtyWise?";
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     public Response getTargetAchievementFromWeb() {
         try {
             String apiUrl = ApiUrl;
-            apiUrl += targetVSAchievement;
+            apiUrl += targetVSAchievementLatest;
+            apiUrl += "UserName=";
+            apiUrl += URLEncoder.encode(MainActivity.MyInfo.EmployeeCode + "", "UTF-8");
+            return server.getResponse(apiUrl, new TargetModelAll());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(e.getMessage());
+        }
+    }
+    public Response getTargetAchievementFromWebQTY() {
+        try {
+            String apiUrl = ApiUrl;
+            apiUrl += targetVSAchievementQtyWise;
             apiUrl += "UserName=";
             apiUrl += URLEncoder.encode(MainActivity.MyInfo.EmployeeCode + "", "UTF-8");
             return server.getResponse(apiUrl, new TargetModelAll());

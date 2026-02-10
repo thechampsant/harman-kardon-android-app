@@ -36,7 +36,7 @@
             android:layout_marginTop="@dimen/size_10"
             android:layout_marginBottom="@dimen/size_10"
             android:gravity="center"
-
+            android:textStyle="bold"
             android:textColor="@color/labels_rv_training_desc" />
 
         <ImageView

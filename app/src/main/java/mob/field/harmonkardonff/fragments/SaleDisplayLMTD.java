@@ -152,15 +152,15 @@ public class SaleDisplayLMTD extends IFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle item selection
-		switch (item.getItemId()) {
-		case R.id.action_refresh_mtd:
+		int id = item.getItemId();
+
+		if (id == R.id.action_refresh_mtd) {
 			TryRefreshList();
 			return true;
-
-		default:
+		} else {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
 
 }

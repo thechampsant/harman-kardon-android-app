@@ -16,6 +16,12 @@
         <item>SMS</item>
         <item>BOTH</item>
     </string-array>
+
+    <string-array name="combo_option_array">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
     <string-array name="categoryarray">
         <item>Select</item>
         <item>Direct Cool </item>

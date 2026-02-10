@@ -100,7 +100,7 @@ public class AdapterTrainingMat extends RecyclerView.Adapter<AdapterTrainingMat.
         switch (fileType.toLowerCase()) {
             case "doc":
             case ".doc":
-                id = R.drawable.word_thumb;
+                id = com.ariston.training_module.R.drawable.word_thumb;
                 break;
             case "pptx":
             case ".pptx":

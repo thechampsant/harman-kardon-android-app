@@ -23,7 +23,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fieldforce.harmonkardonff.R;;
+import com.fieldforce.harmonkardonff.R;
 import com.fieldforce.utility.ColorConstants;
 import com.suveyform.ImageResponse;
 import com.suveyform.SurveytypeActivity;

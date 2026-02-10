@@ -79,9 +79,9 @@
             android:name=".home.DocViewerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".Model_Display"
-            android:exported="false" />
+       <!-- <activity
+            android:name=".Module_Display"
+            android:exported="false" />-->
 
         <activity
             android:name=".View_Module_List"
@@ -138,7 +138,7 @@
         <!-- </intent-filter> -->
         <!-- </activity> -->
         <activity android:name="mob.field.gcm.NotificationView" />
-        <activity android:name=".Module_Display" />
+        <activity android:name=".Module_Display"/>
         <activity android:name=".SubmitDownStock" />
         <activity
             android:name=".MainActivity"
@@ -222,6 +222,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".TargetScreenManagerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_target"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".TargetScreenManagerQTYActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_target"
             android:parentActivityName=".MainActivity"
@@ -319,7 +326,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="Checkout"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            tools:targetApi="33" />
         <activity
             android:name=".TurnGpsOnActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
