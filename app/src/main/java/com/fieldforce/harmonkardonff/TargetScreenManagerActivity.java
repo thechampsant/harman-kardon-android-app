@@ -37,7 +37,8 @@ public class TargetScreenManagerActivity extends InnosolsActivity {
 		setContentView(R.layout.target_achievement_display);
 		activate();
 		((TextView) findViewById(R.id.target_vs_ach_current_user_textview)).setText("Current User : "+WebService.UserName);
-		((TextView) findViewById(R.id.target_vs_ach_isp_cat_textview)).setText("ISP Category : "+MainActivity.MyInfo.ISPCategory);
+//		((TextView) findViewById(R.id.target_vs_ach_isp_cat_textview)).setText("ISP Category : "+MainActivity.MyInfo.ISPCategory);
+		((TextView) findViewById(R.id.target_vs_ach_store_grade_textview)).setText("Store Grade : "+MainActivity.MyInfo.StoreGrade);
 
 		targetlist=findViewById(R.id.targetlist);
 		setupRecycler();

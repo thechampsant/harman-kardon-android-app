@@ -41,12 +41,21 @@ public class TargetModelAll extends DataEntity<TargetModelAll>{
 	public void setISPCategory(String ISPCategory) {
 		this.ISPCategory = ISPCategory;
 	}
+	public void setStoreGrade(String StoreGrade) {
+		this.StoreGrade = StoreGrade;
+	}
 
 	public String getISPCategory() {
 		return ISPCategory;
 	}
 
+	public String getStoreGrade() {
+		return StoreGrade;
+	}
+
+
 	public String ISPCategory;
+	public String StoreGrade;
 
 	
 

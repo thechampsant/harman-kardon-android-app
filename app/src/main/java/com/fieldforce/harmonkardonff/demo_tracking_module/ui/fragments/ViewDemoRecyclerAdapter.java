@@ -49,6 +49,7 @@ public class ViewDemoRecyclerAdapter extends RecyclerView.Adapter<ViewDemoRecycl
         private TextView textViewCustomerAge;
         private TextView textViewProductName;
         private TextView textViewSubmittedDate;
+        private TextView textViewLeadType;
         public ViewDemoViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewCustomerName = itemView.findViewById(R.id.tv_customerNameValue);
@@ -57,6 +58,7 @@ public class ViewDemoRecyclerAdapter extends RecyclerView.Adapter<ViewDemoRecycl
             textViewCustomerAge = itemView.findViewById(R.id.tv_customerAgeValue);
             textViewProductName = itemView.findViewById(R.id.tv_productValue);
             textViewSubmittedDate = itemView.findViewById(R.id.tv_submittedDateValue);
+            textViewLeadType = itemView.findViewById(R.id.tv_leadTypeValue);
         }
 
         public void bindValues(ViewDemoResponseModel obj){
@@ -86,6 +88,7 @@ public class ViewDemoRecyclerAdapter extends RecyclerView.Adapter<ViewDemoRecycl
 
 
             textViewSubmittedDate.setText(obj.SubmittedOn);
+            textViewLeadType.setText(!obj.LeadType.equalsIgnoreCase("") ? obj.LeadType : "NA");
         }
     }
 }

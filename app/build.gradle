@@ -12,11 +12,11 @@ android {
     defaultConfig {
         applicationId "com.fieldforce.harmonkardonff"
         minSdkVersion 24
-        targetSdkVersion 35
+        targetSdkVersion 35 
         multiDexEnabled true
-        versionCode 81
+        versionCode 83
         vectorDrawables.useSupportLibrary = true
-        versionName "5.34"
+        versionName "5.36"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         packagingOptions {
             exclude 'META-INF/DEPENDENCIES'
@@ -65,8 +65,17 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
+    signingConfigs {
+        release {
+            storeFile file('../keystore/harmonKardonisp.jks')
+            storePassword 'hitech'
+            keyAlias 'harmonkardon'
+            keyPassword 'hitech'
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -100,7 +109,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
-
     implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
     implementation 'com.google.zxing:core:3.3.0'
     implementation 'me.dm7.barcodescanner:zxing:1.9.8'

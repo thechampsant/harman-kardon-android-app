@@ -67,25 +67,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_customerNumberValue" />
 
         <TextView
-            android:id="@+id/tv_customerAgeTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No Demo: "
-
-            android:textColor="#AC000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_productTitle" />
-
-        <TextView
-            android:id="@+id/tv_customerAgeValue"
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-            android:text="NA"
-            app:layout_constraintStart_toEndOf="@+id/tv_customerAgeTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tv_productTitle" />
-
-        <TextView
             android:id="@+id/tv_productTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,13 +84,47 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_customerNumberValue" />
 
         <TextView
+            android:id="@+id/tv_leadTypeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lead Type : "
+            android:textColor="#AC000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_productTitle" />
+
+        <TextView
+            android:id="@+id/tv_leadTypeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NA"
+            app:layout_constraintStart_toEndOf="@+id/tv_leadTypeTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tv_productTitle" />
+
+        <TextView
+            android:id="@+id/tv_customerAgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Demo: "
+            android:textColor="#AC000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_leadTypeTitle" />
+
+        <TextView
+            android:id="@+id/tv_customerAgeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NA"
+            app:layout_constraintStart_toEndOf="@+id/tv_customerAgeTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tv_leadTypeTitle" />
+
+        <TextView
             android:id="@+id/tv_submittedDateValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NA"
             android:textColor="@color/orange"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_productTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_leadTypeTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

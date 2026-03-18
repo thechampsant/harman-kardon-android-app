@@ -300,9 +300,48 @@
 
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/tv_leadTypeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_10"
+            android:layout_marginTop="10dp"
+            android:text="Lead Type"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="normal" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/leadTypeCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_5"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/size_5">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_2">
 
+                <Spinner
+                    android:id="@+id/spinner_leadTypeInDemo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:minHeight="@dimen/size_45" />
+
+                <ImageView
+                    android:layout_width="@dimen/size_20"
+                    android:layout_height="@dimen/size_20"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/size_5"
+                    android:src="@drawable/ic_dropdown" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tv_emailTitle"

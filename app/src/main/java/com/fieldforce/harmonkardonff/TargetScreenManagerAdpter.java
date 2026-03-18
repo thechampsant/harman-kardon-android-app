@@ -39,17 +39,18 @@ public class TargetScreenManagerAdpter  extends RecyclerView.Adapter<TargetScree
         viewHolder.target_acheivement_LY.setText(trMatItem.getLYsales() != null ? trMatItem.getLYsales() : "");
         String contribution = trMatItem.getContribution();
 
-        if (contribution != null &&
-                !contribution.trim().isEmpty() &&
-                !contribution.equalsIgnoreCase("null")) {
-
-            Log.e("Contribution", contribution);
-            viewHolder.target_acheivement_contribution.setVisibility(View.VISIBLE);
-            viewHolder.target_acheivement_contribution.setText(contribution);
-
-        } else {
-            viewHolder.contribution.setVisibility(View.GONE);
-        }
+//        if (contribution != null &&
+//                !contribution.trim().isEmpty() &&
+//                !contribution.equalsIgnoreCase("null")) {
+//
+//            Log.e("Contribution", contribution);
+//            viewHolder.target_acheivement_contribution.setVisibility(View.VISIBLE);
+//            viewHolder.target_acheivement_contribution.setText(contribution);
+//
+//        } else {
+//            viewHolder.contribution.setVisibility(View.GONE);
+//        }
+        viewHolder.target_acheivement_contribution.setText(contribution != null ? contribution : "null");
 //        viewHolder.target_category.setText(trMatItem.getSales() != null ? trMatItem.getSales() : "");
         viewHolder.targetachievementpercenatege.setText((trMatItem.getAch_perc() != null ? trMatItem.getAch_perc() : ""));
         // Glide.with(viewHolder.itemView.getContext()).load(getThumbnail(trMatItem.getFileType())).into(viewHolder.ivItem);

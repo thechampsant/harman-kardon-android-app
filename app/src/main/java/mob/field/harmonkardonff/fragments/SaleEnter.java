@@ -311,11 +311,16 @@ public class SaleEnter extends IFragment {
             if (validate(true)) {
              //   SubmitSaleOnServer();
                 Log.e("Storetype",MainActivity.MyInfo.Storetype);
+                if (searchableSpinner_combo_spinner.getSelectedItem() == null || searchableSpinner_combo_spinner.getSelectedItem().toString().equalsIgnoreCase("Select")) {
+                    ShowToast("Please select Combo...");
+                    return;
+                }
                 Log.e("searchableSpinner_combo_spinner",searchableSpinner_combo_spinner.getSelectedItem().toString());
-             //   CurrentSalesModel.Price= GetEditTextAsString(R.id.tbxqty).trim();
+               //   CurrentSalesModel.Price= GetEditTextAsString(R.id.tbxqty).trim();
                 CurrentSalesModel.Combo= searchableSpinner_combo_spinner.getSelectedItem().toString();
                 if(MainActivity.MyInfo.Storetype.equalsIgnoreCase("GT")||MainActivity.MyInfo.Storetype.equalsIgnoreCase("AI RR"))
-				if (CurrentSalesModel.DocIDs.equalsIgnoreCase("")){
+
+                    if (CurrentSalesModel.DocIDs.equalsIgnoreCase("")){
 					ShowToast("Please upload invoice first");
 				}
 				else {

@@ -209,8 +209,8 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:background="@null"
-                        android:visibility="gone"
-                        android:text="Mobile No"
+                        android:visibility="visible"
+                        android:text="Customer Mobile (Optional)"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textSize="12sp" />
 
@@ -218,7 +218,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="43dp"
                         android:layout_marginStart="10dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="@dimen/size_10"
                         android:layout_weight="1"

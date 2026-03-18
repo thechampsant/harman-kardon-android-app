@@ -503,6 +503,22 @@ public class WebService {
 
     public String latestAppVersionOnPlaystore = "http://product.infield.co.in:8080/api/login/api_to_get_app_latest_version_on_playstore/?";
 
+    public java.util.List<String> GetLeadType() {
+        String apiUrl = ApiUrl + "GetLeadType";
+        java.util.List<String> list = new java.util.ArrayList<>();
+        try {
+            org.json.JSONArray jsonArray = server.getServerResponse(apiUrl);
+            org.json.JSONObject obj = jsonArray.getJSONObject(0);
+            org.json.JSONArray data = obj.getJSONArray("data");
+            for (int i = 0; i < data.length(); i++) {
+                list.add(data.getString(i));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public Response GetISPActiveStatus() {
         String apiUrl = ApiUrl;
         apiUrl += GetISPActiveStatus;

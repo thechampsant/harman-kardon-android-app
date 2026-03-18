@@ -35,6 +35,7 @@ public class EnterDemoFragment extends IFragment {
     private Spinner spinnerCat;
     private Spinner spinnerSubCat;
     private Spinner spinnerModel;
+    private Spinner spinnerLeadType;
 
     private EditText editTextName;
     private Button btn_no_sale;
@@ -79,6 +80,7 @@ public class EnterDemoFragment extends IFragment {
         spinnerCat = (Spinner) findViewById(R.id.spinner_categoryInDemo);
         spinnerSubCat = (Spinner) findViewById(R.id.spinner_subCategoryInDemo);
         spinnerModel = (Spinner) findViewById(R.id.spinner_modelInDemo);
+        spinnerLeadType = (Spinner) findViewById(R.id.spinner_leadTypeInDemo);
         btn_no_sale = (Button) findViewById(R.id.btn_no_sale);
 
         editTextName = (EditText) findViewById(R.id.et_custNameInDemo);
@@ -99,6 +101,7 @@ public class EnterDemoFragment extends IFragment {
     private void initSpinnersTask(){
 
         getProductDemoList();
+        getLeadTypeList();
         attachListenerToModelSpinner();
       /*  populateCategorySpinner();
         AttachListenerToCatSpinner();
@@ -182,8 +185,13 @@ public class EnterDemoFragment extends IFragment {
     }
 
     private boolean validation(){
+        
         if (editTextName.getText().toString().trim().length()<2){
             ShowToast("Please provide valid customer name...");
+            return false;
+        }
+        if (spinnerLeadType.getSelectedItem() == null || spinnerLeadType.getSelectedItem().toString().equalsIgnoreCase("Select")) {
+            ShowToast("Please select Lead Type...");
             return false;
         }
         else {
@@ -235,7 +243,29 @@ public class EnterDemoFragment extends IFragment {
        /* model.CustomerPhone = editTextNumber.getText().toString();
         model.CustomerEmail = editTextMail.getText().toString();
         model.CustomerAge = editTextAge.getText().toString();*/
-        model.DemoProdId =SelectedProduct.ID;
+        model.DemoProdId = SelectedProduct.ID;
+        model.LeadType = spinnerLeadType.getSelectedItem() != null ? spinnerLeadType.getSelectedItem().toString() : "";
+    }
+
+    private void getLeadTypeList() {
+        BackgroundProcess bp = new BackgroundProcess(this).showProgress(false);
+        bp.setbackgroundProcess(new IProcess() {
+            @Override
+            public void processResponse(Object arg0) throws Exception {
+                java.util.List<String> list = (java.util.List<String>) arg0;
+                if (list != null && !list.isEmpty()) {
+                    list.add(0, "Select");
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
+                            android.R.layout.simple_spinner_dropdown_item, list);
+                    spinnerLeadType.setAdapter(adapter);
+                }
+            }
+            @Override
+            public Object underProcess() throws Exception {
+                return webService.GetLeadType();
+            }
+        });
+        bp.execute();
     }
 
     private void getProductDemoList() {

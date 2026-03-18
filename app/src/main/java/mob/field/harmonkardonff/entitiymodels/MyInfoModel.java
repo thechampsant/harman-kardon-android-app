@@ -32,6 +32,7 @@ public class MyInfoModel extends DataEntity<MyInfoModel> implements Parcelable {
     public String V5ID;
     public String TrainingType;
     public String ISPCategory;
+    public String StoreGrade;
 
 
 
@@ -50,6 +51,7 @@ public class MyInfoModel extends DataEntity<MyInfoModel> implements Parcelable {
         LastUpdatedOn = in.readString();
         FileUrl = in.readString();
         ISPCategory = in.readString();
+        StoreGrade = in.readString();
     }
 
     public static final Creator<MyInfoModel> CREATOR = new Creator<MyInfoModel>() {
@@ -82,6 +84,7 @@ public class MyInfoModel extends DataEntity<MyInfoModel> implements Parcelable {
         this.RegisterMapping("FileUrl", DataTypes.TEXT);
         this.RegisterMapping("TrainingType", DataTypes.TEXT);
         this.RegisterMapping("ISPCategory", DataTypes.TEXT);
+        this.RegisterMapping("StoreGrade", DataTypes.TEXT);
         this.RegisterMapping("Storetype", DataTypes.TEXT);
     }
 
@@ -108,6 +111,7 @@ public class MyInfoModel extends DataEntity<MyInfoModel> implements Parcelable {
                 ", LastUpdatedOn='" + LastUpdatedOn + '\'' +
                 ", FileUrl='" + FileUrl + '\'' +
                 ", ISPCategory='" + ISPCategory + '\'' +
+                ", StoreGrade='" + StoreGrade + '\'' +
                 '}';
     }
 
@@ -132,5 +136,6 @@ public class MyInfoModel extends DataEntity<MyInfoModel> implements Parcelable {
         dest.writeString(LastUpdatedOn);
         dest.writeString(FileUrl);
         dest.writeString(ISPCategory);
+        dest.writeString(StoreGrade);
     }
 }

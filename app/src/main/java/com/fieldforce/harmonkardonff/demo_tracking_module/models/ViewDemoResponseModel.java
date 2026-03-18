@@ -19,6 +19,7 @@ public class ViewDemoResponseModel extends DataEntity<ViewDemoResponseModel> {
     public String CustomerEmail="";
     public String CustomerAge="";
     public String SubmittedOn="";
+    public String LeadType="";
 
     public ViewDemoResponseModel() {
         super(TableName);
