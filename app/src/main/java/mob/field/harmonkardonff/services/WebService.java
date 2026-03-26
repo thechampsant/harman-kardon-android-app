@@ -20,6 +20,7 @@ import com.fieldforce.model.NotificationResonseMode;
 import com.fieldforce.model.SeenNotificationResonse;
 import com.fieldforce.networkconnection.Parser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -1056,11 +1057,29 @@ public class WebService {
 
 
     String GeTrainingSeenNotification = "GeTrainingSeenNotification?";
+
     public Response getSeenNotification() {
         String apiUrl = ApiUrl;
         apiUrl += GeTrainingSeenNotification + "LoginId=" + getUsername();
         //Log.i("apiWa",""+apiUrl);
         return server.getResponse(apiUrl, new SeenNotificationResonse());
+    }
+
+    public org.json.JSONArray getMDQData(String storeId) throws Exception {
+        String apiUrl = ApiUrl;
+        apiUrl += "GetISPMDQData?UserName=" + getUsername() + "&StoreId=" + storeId;
+        return server.getServerResponse(apiUrl);
+    }
+
+    public Response submitMDQData(String jsonBody) {
+        try {
+            String apiUrl = ApiUrl + "SubmitMDQData";
+            JSONArray bodyArray = new JSONArray(jsonBody);
+            return server.getResponse(apiUrl, bodyArray);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

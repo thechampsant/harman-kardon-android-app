@@ -4,7 +4,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,23 +36,53 @@ public class TargetScreenManagerAdpter  extends RecyclerView.Adapter<TargetScree
         viewHolder.target.setText(trMatItem.getTarget() != null ? trMatItem.getTarget() : "");
         viewHolder.targetAchievement.setText(trMatItem.getSales() != null ? trMatItem.getSales() : "");
         viewHolder.target_acheivement_LY.setText(trMatItem.getLYsales() != null ? trMatItem.getLYsales() : "");
-        String contribution = trMatItem.getContribution();
+        viewHolder.targetachievementpercenatege.setText(trMatItem.getAch_perc() != null ? trMatItem.getAch_perc() : "");
+        boolean isTotal = trMatItem.getCategory() != null && trMatItem.getCategory().equalsIgnoreCase("Total");
 
-//        if (contribution != null &&
-//                !contribution.trim().isEmpty() &&
-//                !contribution.equalsIgnoreCase("null")) {
-//
-//            Log.e("Contribution", contribution);
-//            viewHolder.target_acheivement_contribution.setVisibility(View.VISIBLE);
-//            viewHolder.target_acheivement_contribution.setText(contribution);
-//
-//        } else {
-//            viewHolder.contribution.setVisibility(View.GONE);
-//        }
-        viewHolder.target_acheivement_contribution.setText(contribution != null ? contribution : "null");
-//        viewHolder.target_category.setText(trMatItem.getSales() != null ? trMatItem.getSales() : "");
-        viewHolder.targetachievementpercenatege.setText((trMatItem.getAch_perc() != null ? trMatItem.getAch_perc() : ""));
-        // Glide.with(viewHolder.itemView.getContext()).load(getThumbnail(trMatItem.getFileType())).into(viewHolder.ivItem);
+        if (isTotal) {
+            viewHolder.contribution.setVisibility(View.GONE);
+            viewHolder.llLastYear.setVisibility(View.GONE);
+            // Move premium contribution to last position
+            ViewGroup parent = (ViewGroup) viewHolder.llPremiumContribution.getParent();
+            parent.removeView(viewHolder.llPremiumContribution);
+            parent.addView(viewHolder.llPremiumContribution);
+        } else {
+            viewHolder.llLastYear.setVisibility(View.GONE);
+            String contribution = trMatItem.getContribution();
+            if (contribution != null && !contribution.trim().isEmpty() && !contribution.equalsIgnoreCase("null")) {
+                viewHolder.contribution.setVisibility(View.VISIBLE);
+                viewHolder.target_acheivement_contribution.setText(contribution);
+            } else {
+                viewHolder.contribution.setVisibility(View.GONE);
+            }
+        }
+
+        String premiumContribution = trMatItem.getPremiumContribution();
+        if (premiumContribution != null && !premiumContribution.equalsIgnoreCase("null")) {
+            viewHolder.llPremiumContribution.setVisibility(View.VISIBLE);
+            viewHolder.target_acheivement_premium_contribution.setText(premiumContribution);
+        } else {
+            viewHolder.llPremiumContribution.setVisibility(View.GONE);
+        }
+
+        // Set bottom margin on last visible item
+        ViewGroup parent = (ViewGroup) viewHolder.llTarget.getParent();
+        LinearLayout lastVisible = null;
+        for (int j = 0; j < parent.getChildCount(); j++) {
+            View child = parent.getChildAt(j);
+            if (child.getVisibility() == View.VISIBLE && child instanceof LinearLayout) {
+                lastVisible = (LinearLayout) child;
+            }
+        }
+        int[] childIndices = new int[parent.getChildCount()];
+        for (int j = 0; j < parent.getChildCount(); j++) {
+            View child = parent.getChildAt(j);
+            if (child instanceof LinearLayout) {
+                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) child.getLayoutParams();
+                lp.bottomMargin = (child == lastVisible) ? dpToPx(child.getContext(), 20) : 0;
+                child.setLayoutParams(lp);
+            }
+        }
     }
 
 
@@ -68,9 +97,13 @@ public class TargetScreenManagerAdpter  extends RecyclerView.Adapter<TargetScree
         notifyDataSetChanged();
     }
 
+    private int dpToPx(android.content.Context context, int dp) {
+        return Math.round(dp * context.getResources().getDisplayMetrics().density);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView catName,target,targetAchievement,targetachievementpercenatege,target_category,target_acheivement_contribution,target_acheivement_LY;
-        LinearLayout contribution;
+        TextView catName,target,targetAchievement,targetachievementpercenatege,target_category,target_acheivement_contribution,target_acheivement_LY,target_acheivement_premium_contribution;
+        LinearLayout contribution, llPremiumContribution, llLastYear, llAchievement, llAchievementPerc, llTarget;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -81,9 +114,13 @@ public class TargetScreenManagerAdpter  extends RecyclerView.Adapter<TargetScree
             target_acheivement_contribution = itemView.findViewById(R.id.target_acheivement_contribution);
             target_acheivement_LY = itemView.findViewById(R.id.target_acheivement_LY);
             contribution = itemView.findViewById(R.id.contribution);
-
+            llPremiumContribution = itemView.findViewById(R.id.ll_premium_contribution);
+            target_acheivement_premium_contribution = itemView.findViewById(R.id.target_acheivement_premium_contribution);
             targetAchievement = itemView.findViewById(R.id.acheivement_target);
-
+            llLastYear = itemView.findViewById(R.id.ll_last_year);
+            llAchievement = itemView.findViewById(R.id.ll_achievement);
+            llAchievementPerc = itemView.findViewById(R.id.ll_achievement_perc);
+            llTarget = itemView.findViewById(R.id.ll_target);
         }
     }
 

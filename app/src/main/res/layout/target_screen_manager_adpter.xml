@@ -36,13 +36,14 @@
                 android:layout_marginTop="@dimen/size_10"
                 android:text="Infinity"
                 android:textStyle="bold"
-                android:textSize="25sp"
-                />
+                android:textSize="25sp" />
+
+            <!-- Contribution (hidden for Total) -->
             <LinearLayout
+                android:id="@+id/contribution"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:id="@+id/contribution"
                 android:layout_marginTop="@dimen/size_10"
                 android:orientation="horizontal">
 
@@ -68,37 +69,10 @@
                     android:text="0"
                     android:textSize="14sp" />
             </LinearLayout>
+
+            <!-- Target -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:visibility="gone"
-                android:layout_marginTop="@dimen/size_10"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Last Year"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="  :  "
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/target_acheivement_LY"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0"
-                    android:textSize="14sp" />
-            </LinearLayout>
-            <LinearLayout
+                android:id="@+id/ll_target"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -127,7 +101,43 @@
                     android:text="0"
                     android:textSize="14sp" />
             </LinearLayout>
+
+            <!-- Premium Contribution -->
             <LinearLayout
+                android:id="@+id/ll_premium_contribution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/size_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Premium Contribution"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="  :  "
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/target_acheivement_premium_contribution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Achievement -->
+            <LinearLayout
+                android:id="@+id/ll_achievement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -157,11 +167,12 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- Achievement % -->
             <LinearLayout
+                android:id="@+id/ll_achievement_perc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_10"
-                android:layout_marginBottom="25dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -188,14 +199,42 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- Last Year (hidden by default) -->
+            <LinearLayout
+                android:id="@+id/ll_last_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/size_10"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Last Year"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="  :  "
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/target_acheivement_LY"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
         </LinearLayout>
 
-
     </androidx.cardview.widget.CardView>
-
-
 
 </LinearLayout>

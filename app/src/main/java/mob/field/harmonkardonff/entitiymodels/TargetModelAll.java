@@ -37,6 +37,15 @@ public class TargetModelAll extends DataEntity<TargetModelAll>{
 
 	public String LYsales;
 	public String Contribution;
+	public String PremiumContribution;
+
+	public String getPremiumContribution() {
+		return PremiumContribution;
+	}
+
+	public void setPremiumContribution(String premiumContribution) {
+		PremiumContribution = premiumContribution;
+	}
 
 	public void setISPCategory(String ISPCategory) {
 		this.ISPCategory = ISPCategory;
