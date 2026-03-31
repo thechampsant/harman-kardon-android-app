@@ -442,6 +442,9 @@
             android:name=".ISPRatingActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ScoreCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".MDQActivity"
             android:screenOrientation="portrait" />
         <activity
