@@ -1065,6 +1065,14 @@ public class WebService {
         return server.getResponse(apiUrl, new SeenNotificationResonse());
     }
 
+    String GetISPDashData = "GetISPDashData?";
+
+    public org.json.JSONArray getISPDashData() throws Exception {
+        String apiUrl = ApiUrl;
+        apiUrl += GetISPDashData + "LoginId=" + getUsername();
+        return server.getServerResponse(apiUrl);
+    }
+
     public org.json.JSONArray getMDQData(String storeId) throws Exception {
         String apiUrl = ApiUrl;
         apiUrl += "GetISPMDQData?UserName=" + getUsername() + "&StoreId=" + storeId;

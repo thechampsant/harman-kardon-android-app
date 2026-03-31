@@ -439,6 +439,9 @@
             android:name=".demo_tracking_module.ui.activities.DemoTrackingFragmentsContainer"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ISPRatingActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".MDQActivity"
             android:screenOrientation="portrait" />
         <activity
