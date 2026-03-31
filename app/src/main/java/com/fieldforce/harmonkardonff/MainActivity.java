@@ -250,7 +250,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         super.onCreate(savedInstanceState);
         SetPolicy();
         gpsTracker = new GPSTracker(MainActivity.this);
-        this.EnableLocalDatabase("MyyDbb0055", 56);
+        this.EnableLocalDatabase("MyyDbb0056", 57);
         Database = new Database(this);
         startService(new Intent(this, WHPL_MainService.class));
         // new GCMResponseManager();
@@ -1037,7 +1037,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
        data.add(new GridItem().setItem("Incentive", NewTrainingActivity.class, R.drawable.ic_incentive));
        data.add(new GridItem().setItem("Sales Pitch", SalesPitch.class, R.drawable.ic_sales_pitch));
        data.add(new GridItem().setItem("Target vs Achievements", TargetScreenManagerActivity.class, R.drawable.ic_target_vs_achievement));
-//        data.add(new GridItem().setItem("SKU-wise Qty", TargetScreenManagerQTYActivity.class, R.drawable.ic_target_vs_achievement));
+        data.add(new GridItem().setItem("SKU-wise Qty", TargetScreenManagerQTYActivity.class, R.drawable.ic_target_vs_achievement));
        data.add(new GridItem().setItem("Display Compliance", HygieneStoreListActivity.class, R.drawable.ic_floor_hygiene));
        data.add(new GridItem().setItem("Survey Form", SurveytypeActivity.class, R.drawable.ic_floor_hygiene));
        data.add(new GridItem().setItem("Counter share\n(MTD)", CompetitionTab.class, R.drawable.ic_floor_hygiene));
@@ -1049,6 +1049,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
  /* data.add(new GridItem().setItem("Last 7 days Sale",
                 SaleScreenManagerActivity.class, R.drawable.seven_days_sale));*/
         data.add(new GridItem().setItem("Demo Tracking", DemoTrackingFragmentsContainer.class, R.drawable.ic_demo_tracking));
+        data.add(new GridItem().setItem("MDQ", MDQActivity.class, R.drawable.ic_enter_sale));
 
 
 //        data.add(new GridItem().setItem("HR Helpline", HelpLine.class, R.drawable.help));

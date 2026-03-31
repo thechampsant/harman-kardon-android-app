@@ -6,20 +6,18 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
@@ -40,13 +38,11 @@ import mob.field.harmonkardonff.services.WebService;
 
 public class MDQActivity extends Activity {
 
-    private RecyclerView recyclerView;
-    private MDQAdapter mAdapter;
     private Button btn_Submit;
     private AppCompatEditText searchField;
     private SearchableSpinner store_category;
     private TextView storeName, dpsalefor;
-    private LinearLayout searchView, llview;
+    private LinearLayout searchView, llview, llItemsContainer;
     private boolean categorySelected = false;
 
     private List<MDQSkuModel> allSkuList = new ArrayList<>();
@@ -71,20 +67,12 @@ public class MDQActivity extends Activity {
             currentStoreId = MainActivity.MyInfo.StoreID != null ? MainActivity.MyInfo.StoreID : "";
         }
 
-        recyclerView = findViewById(R.id.rv_pic_cat);
         store_category = findViewById(R.id.store_category);
         searchField = findViewById(R.id.searchField);
         btn_Submit = findViewById(R.id.bt_submit);
         searchView = findViewById(R.id.search_view);
         llview = findViewById(R.id.llview);
-
-        mAdapter = new MDQAdapter(allSkuList, this);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setAutoMeasureEnabled(true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(mAdapter);
+        llItemsContainer = findViewById(R.id.ll_items_container);
 
         searchField.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -109,7 +97,7 @@ public class MDQActivity extends Activity {
     private void filter(String text) {
         List<MDQSkuModel> source = selectedCategory.equalsIgnoreCase("ALL") ? allSkuList : categoryFilteredList;
         if (text.isEmpty()) {
-            mAdapter.updateList(source);
+            updateRecyclerView(source);
             return;
         }
         List<MDQSkuModel> temp = new ArrayList<>();
@@ -118,7 +106,7 @@ public class MDQActivity extends Activity {
                 temp.add(d);
             }
         }
-        mAdapter.updateList(temp);
+        updateRecyclerView(temp);
     }
 
     private void setupCategorySpinner() {
@@ -135,25 +123,64 @@ public class MDQActivity extends Activity {
         store_category.setAdapter(adapter);
 
         store_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            boolean isFirstCall = true;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (isFirstCall) {
+                    isFirstCall = false;
+                    updateRecyclerView(allSkuList);
+                    return;
+                }
                 String selected = categoryList.get(position);
                 categorySelected = true;
-                recyclerView.setVisibility(View.VISIBLE);
+                llItemsContainer.setVisibility(View.VISIBLE);
                 selectedCategory = selected;
                 categoryFilteredList.clear();
                 if (selected.equalsIgnoreCase("ALL")) {
-                    mAdapter.updateList(allSkuList);
+                    updateRecyclerView(allSkuList);
                 } else {
                     for (MDQSkuModel item : allSkuList) {
                         if (selected.equals(item.parent_value)) categoryFilteredList.add(item);
                     }
-                    mAdapter.updateList(categoryFilteredList);
+                    updateRecyclerView(categoryFilteredList);
                 }
                 searchField.setText("");
             }
             @Override public void onNothingSelected(AdapterView<?> parent) {}
         });
+    }
+
+    private void updateRecyclerView(List<MDQSkuModel> list) {
+        llItemsContainer.removeAllViews();
+        LayoutInflater inflater = LayoutInflater.from(this);
+        for (MDQSkuModel sku : list) {
+            View row = inflater.inflate(R.layout.mdq_layout, llItemsContainer, false);
+            ((TextView) row.findViewById(R.id.spin1Cap)).setText(sku.value);
+            ((AppCompatTextView) row.findViewById(R.id.set_qty)).setText(String.valueOf(sku.set_qty));
+            ((AppCompatTextView) row.findViewById(R.id.slm_value)).setText(sku.SLMStatus != null ? sku.SLMStatus : "0");
+            AppCompatEditText actualQty = row.findViewById(R.id.actual_qty);
+            actualQty.setText(String.valueOf(sku.actual_qty));
+            actualQty.addTextChangedListener(new TextWatcher() {
+                @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                @Override public void afterTextChanged(Editable s) {
+                    try { sku.actual_qty = s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString()); }
+                    catch (NumberFormatException ignored) {}
+                }
+            });
+            Spinner spinner = row.findViewById(R.id.yes_no_spinner);
+            ArrayAdapter<String> yesNoAdapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_spinner_dropdown_item, new String[]{"Yes", "No"});
+            spinner.setAdapter(yesNoAdapter);
+            spinner.setSelection("No".equalsIgnoreCase(sku.yesNo) ? 1 : 0, false);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override public void onItemSelected(AdapterView<?> p, View v, int pos, long id) {
+                    sku.yesNo = p.getItemAtPosition(pos).toString();
+                }
+                @Override public void onNothingSelected(AdapterView<?> p) {}
+            });
+            llItemsContainer.addView(row);
+        }
     }
 
     private void submitData() {
@@ -210,7 +237,7 @@ public class MDQActivity extends Activity {
                         sku.yesNo = "Yes";
                         allSkuList.add(sku);
                     }
-                    mAdapter.updateList(allSkuList);
+                    updateRecyclerView(allSkuList);
                     setupCategorySpinner();
                 } else {
                     Toast.makeText(MDQActivity.this, "Failed to load data", Toast.LENGTH_SHORT).show();
