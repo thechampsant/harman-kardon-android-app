@@ -1073,6 +1073,14 @@ public class WebService {
         return server.getServerResponse(apiUrl);
     }
 
+    String GetChampionShipData = "GetChampionShipData?";
+
+    public org.json.JSONArray getChampionShipData() throws Exception {
+        String apiUrl = ApiUrl;
+        apiUrl += GetChampionShipData + "LoginId=" + getUsername();
+        return server.getServerResponse(apiUrl);
+    }
+
     String GetScoreRatingData = "GetScoreRatingData?";
 
     public org.json.JSONArray getScoreRatingData(int month, int year) throws Exception {
