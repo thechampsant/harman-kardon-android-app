@@ -1,101 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@color/white">
 
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/iv_bg_top"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="100dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_top_home" />
+
+    <LinearLayout
+        android:id="@+id/toolbaar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/iv_bg_top"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bg_top_home" />
-
-        <LinearLayout
-            android:id="@+id/toolbaar"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:onClick="actionBarBackButtonClicked"
-                android:scaleX="0.6"
-                android:scaleY="0.6"
-                android:src="@drawable/ic_back_icon" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:gravity="center_vertical"
-                android:text="Championship Board"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_content"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbaar"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:background="@color/white">
+            android:layout_marginLeft="5dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:onClick="actionBarBackButtonClicked"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:src="@drawable/ic_back_icon" />
 
-            <!-- Spinner card -->
-            <androidx.cardview.widget.CardView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="Championship Board"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
 
-                <Spinner
-                    android:id="@+id/spinner_champ_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp" />
+    <LinearLayout
+        android:id="@+id/ll_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbaar"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_marginTop="50dp"
+        android:paddingTop="8dp" />
 
-            </androidx.cardview.widget.CardView>
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:fillViewport="true">
-
-                <LinearLayout
-                    android:id="@+id/ll_championship_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="16dp" />
-
-            </ScrollView>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>
