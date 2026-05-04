@@ -45,11 +45,13 @@ public class HygieneUploadStoreImagesActivity extends InnosolsActivity {
     private TextView tvImg1;
     private TextView tvImg2;
     private TextView tvImg3;
+    private ImageView imageCap4;
+    private TextView tvImg4;
     private ImageView selectedView;
     private Spinner selectedType;
     private RobotoTextView tvStoreName;
     //
-    Spinner sp3, sp2, sp;
+    Spinner sp4, sp3, sp2, sp;
     private String docIDs = "";
     private WebService webService;
     private RobotoTextView tvDate;
@@ -70,16 +72,18 @@ public class HygieneUploadStoreImagesActivity extends InnosolsActivity {
         imageCap1 = findViewById(R.id.image1Cap);
         imageCap2 = findViewById(R.id.image2Cap);
         imageCap3 = findViewById(R.id.image3Cap);
+        imageCap4 = findViewById(R.id.image4Cap);
         tvStoreName = findViewById(R.id.tv_store_name);
         tvDate = findViewById(R.id.txtDate);
         tvImg1 = findViewById(R.id.tv_img_1);
         tvImg2 = findViewById(R.id.tv_img_2);
         tvImg3 = findViewById(R.id.tv_img_3);
-
+        tvImg4 = findViewById(R.id.tv_img_4);
 
         imageCap1.setOnClickListener(selectedView1 -> capturePhoto((ImageView) selectedView1));
         imageCap2.setOnClickListener(selectedView2 -> capturePhoto((ImageView) selectedView2));
         imageCap3.setOnClickListener(selectedView3 -> capturePhoto((ImageView) selectedView3));
+        imageCap4.setOnClickListener(selectedView4 -> capturePhoto((ImageView) selectedView4));
         initDatePicker(R.id.rlDateSelect);
         tvStoreName.setText(MainActivity.MyInfo.CurrentStore);
         if (webService == null) {
@@ -194,8 +198,10 @@ public class HygieneUploadStoreImagesActivity extends InnosolsActivity {
         sp3 = (Spinner) this.findViewById(R.id.spin3Cap);
         ArrayAdapter<String> spinnerArrayAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, GetFloorHygieneType);
         sp3.setAdapter(spinnerArrayAdapter3);
+        sp4 = (Spinner) this.findViewById(R.id.spin4Cap);
+        ArrayAdapter<String> spinnerArrayAdapter4 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, GetFloorHygieneType);
+        sp4.setAdapter(spinnerArrayAdapter4);
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -229,6 +235,11 @@ public class HygieneUploadStoreImagesActivity extends InnosolsActivity {
                     findViewById(R.id.ll_sp3).setVisibility(View.GONE);
                     TypeID = sp3.getSelectedItem().toString();
                     tvImg3.setText("Uploaded");
+                }
+                if (selectedView.getId() == R.id.image4Cap) {
+                    findViewById(R.id.ll_sp4).setVisibility(View.GONE);
+                    TypeID = sp4.getSelectedItem().toString();
+                    tvImg4.setText("Uploaded");
                 }
                 docIDs += docIDs.isEmpty() ? DocID + "-" + TypeID : "," + DocID + "-" + TypeID;
 

@@ -134,9 +134,28 @@ public class MarkAttendanceActivity extends InnosolsActivity implements OnMapRea
 
     }
 
+    private static final int PERM_REQ_BACKGROUND_LOCATION = 1001;
+
     private void checkForAllPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(RuntimePermissionContainer.getPermissionsForCheckIn(), AppConstant.PERM_REQ_CODE);
+        }
+    }
+
+    private void requestBackgroundLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            new android.app.AlertDialog.Builder(this)
+                .setTitle("Background Location Required")
+                .setMessage("This app needs 'Allow all the time' location access for geofencing to work properly. Please select 'Allow all the time' on the next screen.")
+                .setPositiveButton("OK", (dialog, which) -> {
+                    requestPermissions(RuntimePermissionContainer.getBackgroundLocationPermission(), PERM_REQ_BACKGROUND_LOCATION);
+                })
+                .setNegativeButton("Skip", (dialog, which) -> {
+                    weHavePermissionsToProceed();
+                })
+                .show();
+        } else {
+            weHavePermissionsToProceed();
         }
     }
 
@@ -201,8 +220,10 @@ public class MarkAttendanceActivity extends InnosolsActivity implements OnMapRea
             }
             if (isAllPermissionGranted) {
                 ShowToast("Permissions Granted");
-                weHavePermissionsToProceed();
+                requestBackgroundLocationPermission();
             }
+        } else if (requestCode == PERM_REQ_BACKGROUND_LOCATION) {
+            weHavePermissionsToProceed();
         }
     }
 

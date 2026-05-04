@@ -115,14 +115,16 @@
                     android:layout_marginStart="@dimen/size_10"
                     android:text="Select Store" />
 
-                <ImageView
+                <!--<ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/size_10"
                     android:rotation="180"
-                    android:src="@drawable/arrow_upward" />
+                    android:src="@drawable/arrow_upward" />-->
+
+
 
 
             </RelativeLayout>
@@ -150,7 +152,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="10dp"
                         android:orientation="vertical"
-                        android:weightSum="3">
+                        android:weightSum="4">
 
                         <LinearLayout
 
@@ -323,6 +325,60 @@
                                 android:layout_marginBottom="@dimen/size_5"
                                 android:text="Image 3" />
 
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/ll_sp4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/border_green"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/size_10">
+
+                                <Spinner
+                                    android:id="@+id/spin4Cap"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="45"
+                                    android:background="@android:color/transparent"
+                                    android:gravity="center"
+                                    android:paddingLeft="@dimen/size_10"
+                                    android:spinnerMode="dropdown" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="5"
+                                    app:srcCompat="@drawable/down_arrow" />
+
+                            </LinearLayout>
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/image4Cap"
+                                android:layout_width="@dimen/size_50"
+                                android:layout_height="@dimen/size_50"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/size_10"
+                                android:src="@drawable/ic_camera_48dp" />
+
+                            <com.ariston.training_module.utility.widgets.RobotoTextView
+                                android:id="@+id/tv_img_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/size_5"
+                                android:text="Image 4" />
 
                         </LinearLayout>
 
