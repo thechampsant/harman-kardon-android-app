@@ -20,7 +20,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private ProfileViewModel profileViewModel;
     ConnectionDetector _conn = null;
-     RobotoTextView rtv_errorMessage,userName,userMobile,userID,education,counter,address,assigned,helpline;
+    RobotoTextView rtv_errorMessage, userName, userMobile, userID, education, counter, address, assigned, helpline;
     ProgressBar progressBar;
     RelativeLayout iv_backView;
     CardView cv_noDataContainer;
@@ -44,7 +44,6 @@ public class ProfileActivity extends AppCompatActivity {
         getData();
 
         iv_backView.setOnClickListener(view -> onBackPressed());
-
     }
 
     public void initObserver() {
@@ -52,7 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void initViews() {
-        UserID=getIntent().getStringExtra("UserID");
+        UserID = getIntent().getStringExtra("UserID");
         progressBar = findViewById(R.id.pbload);
         iv_backView = findViewById(R.id.iv_backView);
         cv_noDataContainer = findViewById(R.id.cv_noDataContainer);
@@ -67,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
         helpline = findViewById(R.id.helpline);
     }
 
-    public void getData(){
+    public void getData() {
         profileViewModel.getProfileResponse().observe(this, trainingMaterialResponse -> {
             progressBar.setVisibility(View.GONE);
             if (trainingMaterialResponse.getmStatus()) {
@@ -80,13 +79,10 @@ public class ProfileActivity extends AppCompatActivity {
                 assigned.setText(trainingMaterialResponse.getData().get(0).getAssignedOn() != null ? trainingMaterialResponse.getData().get(0).getAssignedOn().toString() : "");
                 education.setText(trainingMaterialResponse.getData().get(0).getEducation() != null ? trainingMaterialResponse.getData().get(0).getEducation().toString() : "");
                 address.setText(trainingMaterialResponse.getData().get(0).getAddress() != null ? trainingMaterialResponse.getData().get(0).getAddress().toString() : "");
-
             } else {
                 Toast.makeText(this, trainingMaterialResponse.getmErrormsg(), Toast.LENGTH_SHORT).show();
                 cv_noDataContainer.setVisibility(View.VISIBLE);
             }
-
         });
-
     }
 }

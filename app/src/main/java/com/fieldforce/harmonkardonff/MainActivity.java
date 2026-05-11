@@ -36,7 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.APIService.FeedbackUrlConfigModel;
 import com.APIService.ProfileURLModel;
-import com.ariston.training_module.modules.training_module.ui.activities.ProfileActivity;
+import com.fieldforce.harmonkardonff.ProfileActivity;
 import com.ariston.training_module.utility.TrainingConstants;
 import com.bumptech.glide.Glide;
 import com.fieldforce.checkversion.AppVersionController;
@@ -147,7 +147,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
     AppVersionController appVersionController;
     private Button message_button;
     private RobotoBoldTextView tvName,tvUSerID,tvV5ID;
-    private ImageView iv_profile_pic;
+    public de.hdodenhof.circleimageview.CircleImageView iv_profile_pic;
     private RecyclerView notificationlist;
     private Bundle dataForTraining = new Bundle();
     NotificationAdpter notificationAdpter;
@@ -1158,6 +1158,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         LocalStorage localStorage=new LocalStorage(this);
         localStorage.setMessage("add","");
         saveVersionUpdationFromServerToLocal();
+        loadProfileImageOnHome();
         if (isNetworkAvailable()) {
             apiCallfordataofdocuments();
             preparePopupTask();
@@ -1383,6 +1384,13 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
             });
             backgroundProcess.execute(null, null, null);
 
+        }
+    }
+
+    private void loadProfileImageOnHome() {
+        if (iv_profile_pic == null) return;
+        if (MyInfo.FileUrl != null && !MyInfo.FileUrl.isEmpty()) {
+            Glide.with(this).load(MyInfo.FileUrl).into(iv_profile_pic);
         }
     }
 

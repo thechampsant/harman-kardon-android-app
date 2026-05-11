@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import org.json.JSONObject;
 
 import java.util.List;
@@ -102,6 +104,12 @@ public class ChampionshipPodiumActivity extends Activity {
         circle.setStroke(dpToPx(2), Color.BLACK);
         avatar.setBackground(circle);
         avatar.setClipToOutline(true);
+
+        String picPath = obj.optString("ProfilePicture", "");
+        if (!picPath.isEmpty() && !picPath.equals("null")) {
+            String picUrl = "http://harman.infield.co.in/" + picPath;
+            Glide.with(this).load(picUrl).circleCrop().placeholder(R.drawable.profile_new).into(avatar);
+        }
 
         return card;
     }

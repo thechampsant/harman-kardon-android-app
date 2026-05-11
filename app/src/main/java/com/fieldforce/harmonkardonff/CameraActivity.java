@@ -11,6 +11,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -168,6 +169,43 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         animator.start();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (camera != null && !camera.isOpened()) {
+            try {
+                camera.open();
+            } catch (Exception e) {
+                Log.e("CameraActivity", "Error opening camera: " + e.getMessage());
+                message("Failed to open camera: " + e.getMessage(), true);
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (camera != null && camera.isOpened()) {
+            try {
+                camera.close();
+            } catch (Exception e) {
+                Log.e("CameraActivity", "Error closing camera: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (camera != null) {
+            try {
+                camera.destroy();
+            } catch (Exception e) {
+                Log.e("CameraActivity", "Error destroying camera: " + e.getMessage());
+            }
+        }
+    }
+
     private void message(@NonNull String content, boolean important) {
         if (important) {
             LOG.w(content);
@@ -192,7 +230,11 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         @Override
         public void onCameraError(@NonNull CameraException exception) {
             super.onCameraError(exception);
-            message("Got CameraException #" + exception.getReason(), true);
+            Log.e("CameraActivity", "Camera error: " + exception.getMessage(), exception);
+            message("Camera error: " + exception.getReason() + ". Please try again.", true);
+            if (exception.getReason() == CameraException.REASON_FAILED_TO_START_PREVIEW) {
+                finish();
+            }
         }
 
         @Override

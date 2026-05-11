@@ -26,6 +26,18 @@ public class ProfileModel {
     @Expose
     private String helpline;
 
+    @SerializedName("ProfilePicUrl")
+    @Expose
+    private String profilePicUrl;
+
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public void setProfilePicUrl(String profilePicUrl) {
+        this.profilePicUrl = profilePicUrl;
+    }
+
     public Integer getUserId() {
         return userId;
     }

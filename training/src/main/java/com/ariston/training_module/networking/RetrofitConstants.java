@@ -5,6 +5,7 @@ public class RetrofitConstants {
     static final String BASE_URL = "http://harman.infield.co.in/ispmobile/";
     //https://aristonfieldforce.infield.co.in/
     public static final String IMAGE_PREFIX = "https://aristonfieldforce.infield.co.in/ispmobile";
+    public static final String PROFILE_PICTURE_UPLOAD_URL = "http://harman.infield.co.in/FileUploader/ISD/Harman_Kardon/ProfilePictureHandler.ashx?UploadedBy=";
 
     private RetrofitConstants() {
 

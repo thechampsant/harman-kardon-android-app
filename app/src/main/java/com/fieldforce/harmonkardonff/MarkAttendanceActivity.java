@@ -144,6 +144,10 @@ public class MarkAttendanceActivity extends InnosolsActivity implements OnMapRea
 
     private void requestBackgroundLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                weHavePermissionsToProceed();
+                return;
+            }
             new android.app.AlertDialog.Builder(this)
                 .setTitle("Background Location Required")
                 .setMessage("This app needs 'Allow all the time' location access for geofencing to work properly. Please select 'Allow all the time' on the next screen.")
