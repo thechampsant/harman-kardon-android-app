@@ -384,12 +384,36 @@ public class CheckoutActivity extends InnosolsActivity implements OnMapReadyCall
         if (response.status.equalsIgnoreCase("true")) {
             this.ShowToast("Checkout marked successfully!");
             check_out.InsertOrUpdate();
+            stopGeofencing();
             finish();
         } else {
             this.ShowToast(response.errormsg);
 
         }
 
+    }
+
+    private void stopGeofencing() {
+        try {
+            android.util.Log.d(TAG, "stopGeofencing: Stopping geofence monitoring");
+            com.google.android.gms.location.GeofencingClient geofencingClient = 
+                com.google.android.gms.location.LocationServices.getGeofencingClient(this);
+            
+            java.util.List<String> geofenceIds = new java.util.ArrayList<>();
+            geofenceIds.add("MARK_IN_FENCE");
+            
+            geofencingClient.removeGeofences(geofenceIds)
+                .addOnSuccessListener(aVoid -> {
+                    android.util.Log.d(TAG, "stopGeofencing: Geofence removed successfully");
+                    // Clear shared preferences
+                    getSharedPreferences("geofence_prefs", MODE_PRIVATE).edit().clear().apply();
+                })
+                .addOnFailureListener(e -> 
+                    android.util.Log.e(TAG, "stopGeofencing: Failed to remove geofence - " + e.getMessage())
+                );
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "stopGeofencing: Error - " + e.getMessage());
+        }
     }
 
 

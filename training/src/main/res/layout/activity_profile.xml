@@ -314,6 +314,68 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10">
+
+                    <com.ariston.training_module.utility.widgets.RobotoTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="Store Grade"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="14sp" />
+
+                    <com.ariston.training_module.utility.widgets.RobotoTextView
+                        android:id="@+id/storeGrade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/storeGrade"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:background="@color/light_gray" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10">
+
+                    <com.ariston.training_module.utility.widgets.RobotoTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="Channel"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="14sp" />
+
+                    <com.ariston.training_module.utility.widgets.RobotoTextView
+                        android:id="@+id/channel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/channel"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:background="@color/light_gray" />
+
+                </RelativeLayout>
+
             </LinearLayout>
 
             <ProgressBar

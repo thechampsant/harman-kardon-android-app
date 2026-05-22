@@ -48,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private ProfileViewModel profileViewModel;
     ConnectionDetector _conn = null;
-    RobotoTextView rtv_errorMessage, userName, userMobile, userID, education, counter, address, assigned, helpline;
+    RobotoTextView rtv_errorMessage, userName, userMobile, userID, education, counter, address, assigned, helpline, storeGrade, channel;
     ProgressBar progressBar;
     RelativeLayout iv_backView;
     CardView cv_noDataContainer;
@@ -113,6 +113,8 @@ public class ProfileActivity extends AppCompatActivity {
         address = findViewById(com.ariston.training_module.R.id.address);
         assigned = findViewById(com.ariston.training_module.R.id.assigned);
         helpline = findViewById(com.ariston.training_module.R.id.helpline);
+        storeGrade = findViewById(com.ariston.training_module.R.id.storeGrade);
+        channel = findViewById(com.ariston.training_module.R.id.channel);
         profilePic = findViewById(com.ariston.training_module.R.id.profilePic);
         iv_camera = findViewById(com.ariston.training_module.R.id.iv_camera);
     }
@@ -398,6 +400,8 @@ public class ProfileActivity extends AppCompatActivity {
                 assigned.setText(response.getData().get(0).getAssignedOn() != null ? response.getData().get(0).getAssignedOn().toString() : "");
                 education.setText(response.getData().get(0).getEducation() != null ? response.getData().get(0).getEducation().toString() : "");
                 address.setText(response.getData().get(0).getAddress() != null ? response.getData().get(0).getAddress().toString() : "");
+                storeGrade.setText(response.getData().get(0).getStoreGrade() != null ? response.getData().get(0).getStoreGrade().toString() : "");
+                channel.setText(response.getData().get(0).getChannel() != null ? response.getData().get(0).getChannel().toString() : "");
 
                 String picUrl = sanitizeImageUrl(response.getData().get(0).getProfilePicUrl());
                 if (picUrl != null && !picUrl.isEmpty()) {

@@ -93,9 +93,13 @@ public class ChampionshipPodiumActivity extends Activity {
         cv.setCardElevation(dpToPx(8));
 
         ((TextView) card.findViewById(R.id.tv_rank_label)).setText(medals[rank - 1] + "  Rank " + rank);
-        ((TextView) card.findViewById(R.id.tv_name)).setText("Name : " + obj.optString("Name"));
-        ((TextView) card.findViewById(R.id.tv_userid)).setText("UserID : " + obj.optInt("UserID"));
-        ((TextView) card.findViewById(R.id.tv_rating)).setText("Rating : " + obj.optString("Rating"));
+        ((TextView) card.findViewById(R.id.tv_name)).setText("Name : " + val(obj.optString("Name")));
+        card.findViewById(R.id.tv_name).setVisibility(View.GONE);
+        ((TextView) card.findViewById(R.id.tv_userid)).setText("Employee ID : " + val(obj.optString("EmployeeID")));
+        ((TextView) card.findViewById(R.id.tv_rating)).setText("Rating : " + val(obj.optString("Rating")));
+        // card.findViewById(R.id.tv_rating).setVisibility(View.GONE);
+        ((TextView) card.findViewById(R.id.tv_account)).setText("Account : " + val(obj.optString("Account")));
+        ((TextView) card.findViewById(R.id.tv_store_location)).setText("Store Location : " + val(obj.optString("StoreLocation")));
 
         ImageView avatar = card.findViewById(R.id.iv_avatar);
         GradientDrawable circle = new GradientDrawable();
@@ -126,6 +130,10 @@ public class ChampionshipPodiumActivity extends Activity {
         tv.setGravity(Gravity.CENTER);
         tv.setTextColor(Color.parseColor("#888888"));
         llContainer.addView(tv);
+    }
+
+    private String val(String s) {
+        return (s == null || s.trim().isEmpty() || s.equalsIgnoreCase("null")) ? "--" : s;
     }
 
     private int dpToPx(int dp) {

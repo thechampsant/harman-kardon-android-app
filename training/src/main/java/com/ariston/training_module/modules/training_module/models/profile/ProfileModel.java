@@ -30,12 +30,36 @@ public class ProfileModel {
     @Expose
     private String profilePicUrl;
 
+    @SerializedName("StoreGrade")
+    @Expose
+    private String storeGrade;
+
+    @SerializedName("Channel")
+    @Expose
+    private String channel;
+
     public String getProfilePicUrl() {
         return profilePicUrl;
     }
 
     public void setProfilePicUrl(String profilePicUrl) {
         this.profilePicUrl = profilePicUrl;
+    }
+
+    public String getStoreGrade() {
+        return storeGrade;
+    }
+
+    public void setStoreGrade(String storeGrade) {
+        this.storeGrade = storeGrade;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
     }
 
     public Integer getUserId() {

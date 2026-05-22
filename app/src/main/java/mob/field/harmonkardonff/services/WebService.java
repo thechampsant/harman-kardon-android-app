@@ -1099,7 +1099,9 @@ public class WebService {
         try {
             String apiUrl = ApiUrl + "SubmitMDQData";
             JSONArray bodyArray = new JSONArray(jsonBody);
-            return server.getResponse(apiUrl, bodyArray);
+            JSONObject requestBody = new JSONObject();
+            requestBody.put("mdqData", bodyArray);
+            return server.getResponse(apiUrl, requestBody);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

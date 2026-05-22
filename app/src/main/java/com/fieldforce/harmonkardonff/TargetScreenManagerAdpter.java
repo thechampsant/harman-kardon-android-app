@@ -36,7 +36,7 @@ public class TargetScreenManagerAdpter  extends RecyclerView.Adapter<TargetScree
         viewHolder.target.setText(trMatItem.getTarget() != null ? trMatItem.getTarget() : "");
         viewHolder.targetAchievement.setText(trMatItem.getSales() != null ? trMatItem.getSales() : "");
         viewHolder.target_acheivement_LY.setText(trMatItem.getLYsales() != null ? trMatItem.getLYsales() : "");
-        viewHolder.targetachievementpercenatege.setText(trMatItem.getAch_perc() != null ? trMatItem.getAch_perc() : "");
+        viewHolder.targetachievementpercenatege.setText(trMatItem.getAch_perc() != null ? trMatItem.getAch_perc() + " %" : "");
         boolean isTotal = trMatItem.getCategory() != null && trMatItem.getCategory().equalsIgnoreCase("Total");
 
         if (isTotal) {
@@ -51,7 +51,7 @@ public class TargetScreenManagerAdpter  extends RecyclerView.Adapter<TargetScree
             String contribution = trMatItem.getContribution();
             if (contribution != null && !contribution.trim().isEmpty() && !contribution.equalsIgnoreCase("null")) {
                 viewHolder.contribution.setVisibility(View.VISIBLE);
-                viewHolder.target_acheivement_contribution.setText(contribution);
+                viewHolder.target_acheivement_contribution.setText(contribution + " %");
             } else {
                 viewHolder.contribution.setVisibility(View.GONE);
             }
