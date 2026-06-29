@@ -617,19 +617,15 @@ public class AttendanceMark extends IFragment implements OnMapReadyCallback {
 	}
 
 	private void getLatituteLogitute() {
-
-		// Storage.ShowToast(""+gpsTracker.latitude+" : "+gpsTracker.longitude,
-		// this);
-		// CurrentMDAT.Latitude = String.valueOf(gpsTracker.getLatitude());
-		// CurrentMDAT.Longitude = String.valueOf(gpsTracker.getLongitude());
-		CurrentMDAT.Latitude = "28.4328522220454198"; // static store lat (testing)
-		CurrentMDAT.Longitude = "77.10640396468618"; // static store long (testing)
-		// if (CurrentMDAT.Latitude.equalsIgnoreCase("0.0")
-		// || CurrentMDAT.Longitude.equalsIgnoreCase("0.0")) {
-		// ShowToast("Problem to get location");
-		// return false;
-		// }
-		// return true;
+		if (gpsTracker != null) {
+			CurrentMDAT.Latitude = String.valueOf(gpsTracker.getLatitude());
+			CurrentMDAT.Longitude = String.valueOf(gpsTracker.getLongitude());
+			Log.d("AttendanceMark", "getLatituteLogitute: Current location - Lat: " + CurrentMDAT.Latitude + ", Long: " + CurrentMDAT.Longitude);
+		} else {
+			Log.e("AttendanceMark", "getLatituteLogitute: GPSTracker is null");
+			CurrentMDAT.Latitude = "0.0";
+			CurrentMDAT.Longitude = "0.0";
+		}
 	}
 
 	private void UpdateAttendance() {
@@ -669,8 +665,30 @@ public class AttendanceMark extends IFragment implements OnMapReadyCallback {
 		Log.d("AttendanceMark", "OnUpdateComplete: status = " + status);
 		if (status == true) {
 			Log.d("AttendanceMark", "OnUpdateComplete: Attendance marked successfully, starting geofencing");
-			// startGeofencing(Double.parseDouble(CurrentMDAT.Latitude), Double.parseDouble(CurrentMDAT.Longitude));
-		startGeofencing(28.4328522220454198, 77.10640396468618);
+			try {
+				double lat = Double.parseDouble(CurrentMDAT.Latitude);
+				double lng = Double.parseDouble(CurrentMDAT.Longitude);
+				if (lat != 0.0 && lng != 0.0) {
+					Log.d("AttendanceMark", "========== GEOFENCE SETUP START ==========");
+					Log.d("AttendanceMark", "Location: Lat=" + lat + ", Lng=" + lng);
+					Log.d("AttendanceMark", "Radius: 200 meters");
+					Log.d("AttendanceMark", "User: " + CurrentMDAT.UserName);
+					Log.d("AttendanceMark", "Store: " + CurrentMDAT.StoreID);
+					startGeofencing(lat, lng);
+					Log.d("AttendanceMark", "========== GEOFENCE SETUP END ==========");
+					
+					// Show toast for testing
+					getActivity().runOnUiThread(() -> 
+						Toast.makeText(getActivity(), 
+							"Geofence Active! Walk 200m away to test.", 
+							Toast.LENGTH_LONG).show()
+					);
+				} else {
+					Log.e("AttendanceMark", "OnUpdateComplete: Invalid coordinates, geofencing not started");
+				}
+			} catch (Exception e) {
+				Log.e("AttendanceMark", "OnUpdateComplete: Error parsing coordinates - " + e.getMessage());
+			}
 			this.setTab(1);
 		}
 	}
@@ -681,43 +699,62 @@ public class AttendanceMark extends IFragment implements OnMapReadyCallback {
 		GeofencingClient geofencingClient = LocationServices.getGeofencingClient(getActivity());
 		Log.d("AttendanceMark", "startGeofencing: GeofencingClient initialized");
 
+		// Remove existing geofences first to avoid duplicates
+		geofencingClient.removeGeofences(java.util.Collections.singletonList("MARK_IN_FENCE"))
+				.addOnSuccessListener(aVoid -> {
+					Log.d("AttendanceMark", "startGeofencing: Old geofences removed successfully");
+					registerNewGeofence(geofencingClient, lat, lng);
+				})
+				.addOnFailureListener(e -> {
+					Log.d("AttendanceMark", "startGeofencing: No old geofences to remove or error: " + e.getMessage());
+					registerNewGeofence(geofencingClient, lat, lng);
+				});
+	}
+
+	private void registerNewGeofence(GeofencingClient geofencingClient, double lat, double lng) {
+		// Calculate milliseconds until midnight
+		Calendar midnight = Calendar.getInstance();
+		midnight.set(Calendar.HOUR_OF_DAY, 23);
+		midnight.set(Calendar.MINUTE, 59);
+		midnight.set(Calendar.SECOND, 59);
+		long millisecondsUntilMidnight = midnight.getTimeInMillis() - System.currentTimeMillis();
+		Log.d("AttendanceMark", "registerNewGeofence: Geofence will expire at midnight in " + (millisecondsUntilMidnight / 1000 / 60) + " minutes");
+
 		getActivity().getSharedPreferences("geofence_prefs", Context.MODE_PRIVATE).edit()
 				.putString("login_id", CurrentMDAT.UserName)
 				.putString("store_id", CurrentMDAT.StoreID)
 				.putString("lat", String.valueOf(lat))
 				.putString("lng", String.valueOf(lng))
+				.putString("start_date", GetCurrentDateInString())
 				.apply();
-		Log.d("AttendanceMark", "startGeofencing: SharedPreferences saved - loginId=" + CurrentMDAT.UserName
-				+ ", storeId=" + CurrentMDAT.StoreID + ", lat=" + lat + ", lng=" + lng);
+		Log.d("AttendanceMark", "registerNewGeofence: SharedPreferences saved");
 
 		Geofence geofence = new Geofence.Builder()
 				.setRequestId("MARK_IN_FENCE")
-				.setCircularRegion(lat, lng, 50f) // 50 meter radius (testing)
-				.setExpirationDuration(Geofence.NEVER_EXPIRE)
+				.setCircularRegion(lat, lng, 200f)
+				.setExpirationDuration(millisecondsUntilMidnight)
 				.setTransitionTypes(Geofence.GEOFENCE_TRANSITION_EXIT)
 				.build();
-		Log.d("AttendanceMark", "startGeofencing: Geofence built with radius=0.5m, center=(" + lat + "," + lng + ")");
+		Log.d("AttendanceMark", "registerNewGeofence: Geofence built with radius=200m");
 
 		GeofencingRequest request = new GeofencingRequest.Builder()
 				.setInitialTrigger(0)
 				.addGeofence(geofence)
 				.build();
-		Log.d("AttendanceMark", "startGeofencing: GeofencingRequest built");
 
 		Intent intent = new Intent(getActivity(), GeofenceBroadcastReceiver.class);
 		int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
 				? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE
 				: PendingIntent.FLAG_UPDATE_CURRENT;
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, flags);
-		Log.d("AttendanceMark", "startGeofencing: PendingIntent created");
 
 		if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-			Log.d("AttendanceMark", "startGeofencing: Permission granted, registering geofence...");
+			Log.d("AttendanceMark", "registerNewGeofence: Registering new geofence...");
 			geofencingClient.addGeofences(request, pendingIntent)
-					.addOnSuccessListener(aVoid -> Log.d("AttendanceMark", "startGeofencing: Geofence registered successfully at (" + lat + ", " + lng + ") with 0.5m radius"))
-					.addOnFailureListener(e -> Log.e("AttendanceMark", "startGeofencing: Geofence registration FAILED - " + e.getMessage()));
+					.addOnSuccessListener(aVoid -> Log.d("AttendanceMark", "registerNewGeofence: SUCCESS - Geofence registered at (" + lat + ", " + lng + ") with 200m radius"))
+					.addOnFailureListener(e -> Log.e("AttendanceMark", "registerNewGeofence: FAILED - " + e.getMessage()));
 		} else {
-			Log.e("AttendanceMark", "startGeofencing: Location permission NOT granted, geofence not registered");
+			Log.e("AttendanceMark", "registerNewGeofence: Location permission NOT granted");
 		}
 	}
 

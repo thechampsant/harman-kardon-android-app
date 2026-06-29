@@ -94,7 +94,6 @@ public class ChampionshipPodiumActivity extends Activity {
 
         ((TextView) card.findViewById(R.id.tv_rank_label)).setText(medals[rank - 1] + "  Rank " + rank);
         ((TextView) card.findViewById(R.id.tv_name)).setText("Name : " + val(obj.optString("Name")));
-        card.findViewById(R.id.tv_name).setVisibility(View.GONE);
         ((TextView) card.findViewById(R.id.tv_userid)).setText("Employee ID : " + val(obj.optString("EmployeeID")));
         ((TextView) card.findViewById(R.id.tv_rating)).setText("Rating : " + val(obj.optString("Rating")));
         // card.findViewById(R.id.tv_rating).setVisibility(View.GONE);

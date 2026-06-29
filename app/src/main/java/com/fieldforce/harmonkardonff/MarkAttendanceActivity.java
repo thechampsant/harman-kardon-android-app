@@ -29,6 +29,10 @@ import android.widget.Toast;
 
 import com.fieldforce.utility.RuntimePermissionContainer;
 import com.fieldforce.utility.Storage;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -41,6 +45,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+
+import android.app.PendingIntent;
+import android.content.SharedPreferences;
 
 import app.core.async.BackgroundProcess;
 import app.core.async.IProcess;
@@ -707,6 +714,12 @@ public class MarkAttendanceActivity extends InnosolsActivity implements OnMapRea
     private void ProcessAttendanceResponse(Response response) {
         if (response.isSuccess() && response.isDataFound()) {
             this.ShowToast("Attendance updated successfully!");
+            
+            // Save attendance and trigger geofencing
+            SaveAttendanceInLocalDb("false", (MDAT) response.data.First());
+            NotifyService.unNotityForPendingAttendance();
+            OnUpdateComplete(true);
+            
             if (isNetworkAvailable()) {
 
                 BackgroundProcess backgroundProcess = new BackgroundProcess(MarkAttendanceActivity.this);
@@ -726,9 +739,7 @@ public class MarkAttendanceActivity extends InnosolsActivity implements OnMapRea
                                     .setMessage(res.errormsg)
                                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            SaveAttendanceInLocalDb("false", (MDAT) response.data.First());
-                                            NotifyService.unNotityForPendingAttendance();
-                                            OnUpdateComplete(true);
+                                            dialog.dismiss();
                                         }
                                     })
                                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -873,8 +884,91 @@ public class MarkAttendanceActivity extends InnosolsActivity implements OnMapRea
 
     private void OnUpdateComplete(boolean status) {
         if (status == true) {
+            Log.d(TAG, "OnUpdateComplete: Attendance marked successfully");
+            
+            // Start geofencing only if attendance option is "Present" (P)
+            if (CurrentMDAT.option != null && CurrentMDAT.option.equalsIgnoreCase("P")) {
+                Log.d(TAG, "OnUpdateComplete: Attendance option is Present, starting geofencing");
+                
+                // Parse coordinates and start geofencing
+                try {
+                    double lat = Double.parseDouble(CurrentMDAT.Latitude);
+                    double lng = Double.parseDouble(CurrentMDAT.Longitude);
+                    
+                    if (lat != 0.0 && lng != 0.0) {
+                        Log.d(TAG, "OnUpdateComplete: Starting geofencing at lat=" + lat + ", lng=" + lng);
+                        startGeofencing(lat, lng);
+                        Toast.makeText(this, "Geofence Active! Walk 200m away to test.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Log.e(TAG, "OnUpdateComplete: Invalid coordinates, skipping geofencing");
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "OnUpdateComplete: Error parsing coordinates", e);
+                }
+            } else {
+                Log.d(TAG, "OnUpdateComplete: Attendance option is " + CurrentMDAT.option + ", skipping geofencing");
+            }
+            
             startActivity(DatTab.class);
         }
+    }
+    
+    @SuppressLint("MissingPermission")
+    private void startGeofencing(double latitude, double longitude) {
+        Log.d(TAG, "startGeofencing: Initializing geofence");
+        
+        GeofencingClient geofencingClient = LocationServices.getGeofencingClient(this);
+        
+        // Calculate midnight expiration
+        Calendar midnight = Calendar.getInstance();
+        midnight.set(Calendar.HOUR_OF_DAY, 23);
+        midnight.set(Calendar.MINUTE, 59);
+        midnight.set(Calendar.SECOND, 59);
+        long expirationTime = midnight.getTimeInMillis() - System.currentTimeMillis();
+        
+        Log.d(TAG, "startGeofencing: Geofence will expire in " + (expirationTime / 1000 / 60) + " minutes");
+        
+        Geofence geofence = new Geofence.Builder()
+                .setRequestId("MARK_IN_FENCE")
+                .setCircularRegion(latitude, longitude, 200)
+                .setExpirationDuration(expirationTime)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_EXIT | Geofence.GEOFENCE_TRANSITION_ENTER)
+                .build();
+        
+        GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
+                .setInitialTrigger(0)
+                .addGeofence(geofence)
+                .build();
+        
+        Intent intent = new Intent(this, GeofenceBroadcastReceiver.class);
+        PendingIntent geofencePendingIntent = PendingIntent.getBroadcast(
+                this, 0, intent,
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.S 
+                        ? PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_UPDATE_CURRENT
+                        : PendingIntent.FLAG_UPDATE_CURRENT
+        );
+        
+        geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "startGeofencing: Geofence added successfully");
+                    
+                    // Save geofence data to SharedPreferences
+                    SharedPreferences prefs = getSharedPreferences("GeofencePrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("login_id", MainActivity.MyInfo.UserID);
+                    editor.putString("store_id", MainActivity.MyInfo.StoreID);
+                    editor.putString("lat", String.valueOf(latitude));
+                    editor.putString("lng", String.valueOf(longitude));
+                    editor.putString("start_date", GetCurrentDateInString());
+                    editor.putLong("geofence_start_time", System.currentTimeMillis()); // Add start time
+                    editor.apply();
+                    
+                    Log.d(TAG, "startGeofencing: Saved to SharedPreferences - UserID=" + MainActivity.MyInfo.UserID + ", StoreID=" + MainActivity.MyInfo.StoreID);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "startGeofencing: Failed to add geofence", e);
+                    Toast.makeText(this, "Geofence setup failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
     private void SaveForEachLeaveDay() {

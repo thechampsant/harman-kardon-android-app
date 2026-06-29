@@ -3,12 +3,20 @@ package com.fieldforce.harmonkardonff;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationServices;
 /*import androidx.appcompat.widget.LinearLayoutManager;
 import androidx.appcompat.widget.PagerSnapHelper;
 import androidx.appcompat.widget.RecyclerView;*/
@@ -263,6 +271,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         // toastForLastestVersion();
 
         checkForPendingAttendance();
+        restoreGeofenceIfNeeded();
         grd.setPadding(20, 20, 20, 0);
         iv_profile_pic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1124,6 +1133,17 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
     }
 
     private void logout() {
+        Log.d("MainActivity", "========== LOGOUT INITIATED ==========");
+        
+        // STEP 1: Clear SharedPreferences FIRST to block any new API calls
+        SharedPreferences prefs = getSharedPreferences("GeofencePrefs", MODE_PRIVATE);
+        prefs.edit().clear().apply();
+        Log.d("MainActivity", "Geofence SharedPreferences cleared - all events will be blocked now");
+        
+        // STEP 2: Stop geofencing synchronously before proceeding
+        stopGeofencingSync();
+        
+        // STEP 3: Now safe to logout
         setUserLogged(false);
         goToLogin();
     }
@@ -1423,5 +1443,119 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         }
         return false;
 
+    }
+
+    private void restoreGeofenceIfNeeded() {
+        try {
+            SharedPreferences prefs = getSharedPreferences("GeofencePrefs", MODE_PRIVATE);
+            String startDate = prefs.getString("start_date", "");
+            String loginId = prefs.getString("login_id", "");
+            String storeId = prefs.getString("store_id", "");
+            double lat = Double.parseDouble(prefs.getString("lat", "0"));
+            double lng = Double.parseDouble(prefs.getString("lng", "0"));
+
+            String currentDate = GetCurrentDateInString();
+
+            if (!startDate.isEmpty() && startDate.equals(currentDate) && lat != 0 && lng != 0) {
+                Log.d("MainActivity", "Restoring geofence: " + loginId + ", " + storeId);
+                
+                // Check and enable GPS if needed
+                if (gpsTracker != null && !gpsTracker.canGetLocation()) {
+                    Log.d("MainActivity", "GPS is OFF, enabling GPS...");
+                    gpsTracker.showSettingsAlert();
+                } else {
+                    Log.d("MainActivity", "GPS is already ON");
+                }
+                
+                setupGeofence(lat, lng);
+            } else {
+                Log.d("MainActivity", "No valid geofence to restore");
+            }
+        } catch (Exception e) {
+            Log.e("MainActivity", "Error restoring geofence: " + e.getMessage());
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private void setupGeofence(double latitude, double longitude) {
+        try {
+            Geofence geofence = new Geofence.Builder()
+                    .setRequestId("MARK_IN_FENCE")
+                    .setCircularRegion(latitude, longitude, 200)
+                    .setExpirationDuration(getMillisecondsUntilMidnight())
+                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_EXIT | Geofence.GEOFENCE_TRANSITION_ENTER)
+                    .build();
+
+            GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
+                    .setInitialTrigger(0)
+                    .addGeofence(geofence)
+                    .build();
+
+            Intent intent = new Intent(this, GeofenceBroadcastReceiver.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                    this, 0, intent,
+                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+                            ? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE
+                            : PendingIntent.FLAG_UPDATE_CURRENT
+            );
+
+            GeofencingClient geofencingClient = LocationServices.getGeofencingClient(this);
+            geofencingClient.addGeofences(geofencingRequest, pendingIntent)
+                    .addOnSuccessListener(aVoid -> {
+                        Log.d("MainActivity", "Geofence restored successfully");
+                        
+                        // Update start time for restored geofence
+                        SharedPreferences prefs = getSharedPreferences("GeofencePrefs", MODE_PRIVATE);
+                        prefs.edit().putLong("geofence_start_time", System.currentTimeMillis()).apply();
+                    })
+                    .addOnFailureListener(e -> Log.e("MainActivity", "Failed to restore geofence: " + e.getMessage()));
+        } catch (Exception e) {
+            Log.e("MainActivity", "Error in setupGeofence: " + e.getMessage());
+        }
+    }
+
+    private long getMillisecondsUntilMidnight() {
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.set(java.util.Calendar.HOUR_OF_DAY, 23);
+        calendar.set(java.util.Calendar.MINUTE, 59);
+        calendar.set(java.util.Calendar.SECOND, 59);
+        return calendar.getTimeInMillis() - System.currentTimeMillis();
+    }
+    
+    private void stopGeofencingSync() {
+        try {
+            Log.d("MainActivity", "Stopping geofencing SYNCHRONOUSLY on logout");
+            
+            GeofencingClient geofencingClient = LocationServices.getGeofencingClient(this);
+            
+            // Remove geofence synchronously using Task.await() equivalent
+            com.google.android.gms.tasks.Task<Void> removeTask = 
+                geofencingClient.removeGeofences(java.util.Collections.singletonList("MARK_IN_FENCE"));
+            
+            // Wait for removal to complete (blocking call)
+            int attempts = 0;
+            while (!removeTask.isComplete() && attempts < 50) { // Max 5 seconds wait
+                try {
+                    Thread.sleep(100); // Wait 100ms
+                    attempts++;
+                } catch (InterruptedException e) {
+                    Log.e("MainActivity", "Interrupted while waiting for geofence removal");
+                    break;
+                }
+            }
+            
+            if (removeTask.isSuccessful()) {
+                Log.d("MainActivity", "✓ Geofence removed SUCCESSFULLY and SYNCHRONOUSLY");
+            } else if (removeTask.isComplete()) {
+                Log.e("MainActivity", "✗ Geofence removal FAILED: " + removeTask.getException());
+            } else {
+                Log.w("MainActivity", "⚠ Geofence removal TIMEOUT after 5 seconds");
+            }
+            
+        } catch (Exception e) {
+            Log.e("MainActivity", "Error stopping geofence synchronously: " + e.getMessage());
+        }
+        
+        Log.d("MainActivity", "========== LOGOUT COMPLETE ==========");
     }
 }
