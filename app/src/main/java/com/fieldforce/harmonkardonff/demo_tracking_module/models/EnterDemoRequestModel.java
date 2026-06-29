@@ -18,6 +18,7 @@ public class EnterDemoRequestModel extends DataEntity<EnterDemoRequestModel> {
     public String CustomerAge ="";
     public String NoDemo ="";
     public String LeadType ="";
+    public String Remarks ="";
 
     public EnterDemoRequestModel() {
         super(TableName);

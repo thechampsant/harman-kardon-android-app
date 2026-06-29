@@ -344,6 +344,42 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/tv_remarksTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Remarks"
+            android:textColor="#000"
+            android:layout_marginStart="@dimen/size_10"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_5"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/size_5">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_2">
+
+                <EditText
+                    android:id="@+id/et_remarksInDemo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:hint="Enter remarks (optional)"
+                    android:minHeight="@dimen/size_45"
+                    android:padding="4dp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
             android:id="@+id/tv_emailTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

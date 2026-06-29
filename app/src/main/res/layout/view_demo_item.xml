@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/demo_item_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/size_10"
@@ -118,13 +119,51 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_leadTypeTitle" />
 
         <TextView
+            android:id="@+id/tv_remarksTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remarks : "
+            android:textColor="#AC000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_customerAgeTitle" />
+
+        <TextView
+            android:id="@+id/tv_remarksValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="NA"
+            app:layout_constraintStart_toEndOf="@+id/tv_remarksTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_customerAgeTitle" />
+
+        <TextView
             android:id="@+id/tv_submittedDateValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NA"
             android:textColor="@color/orange"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_leadTypeTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_remarksValue" />
+
+        <ImageButton
+            android:id="@+id/btn_whatsapp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="WhatsApp"
+            android:src="@drawable/message_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_remarksValue" />
+
+        <ImageButton
+            android:id="@+id/btn_call"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Call"
+            android:src="@drawable/phone"
+            app:layout_constraintStart_toEndOf="@+id/btn_whatsapp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_remarksValue" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

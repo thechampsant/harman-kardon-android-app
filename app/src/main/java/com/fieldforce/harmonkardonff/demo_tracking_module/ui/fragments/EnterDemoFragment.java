@@ -42,6 +42,7 @@ public class EnterDemoFragment extends IFragment {
     private EditText editTextNumber;
     private EditText editTextMail;
     private EditText editTextAge;
+    private EditText editTextRemarks;
     private TextView textViewSubmit;
 
     private String MastCat="";
@@ -87,6 +88,7 @@ public class EnterDemoFragment extends IFragment {
         editTextNumber = (EditText) findViewById(R.id.et_custPhoneInDemo);
         editTextMail = (EditText) findViewById(R.id.et_mailInDemo);
         editTextAge = (EditText) findViewById(R.id.et_ageInDemo);
+        editTextRemarks = (EditText) findViewById(R.id.et_remarksInDemo);
         textViewSubmit = (TextView) findViewById(R.id.tv_submitDemo);
         btn_no_sale.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,6 +247,7 @@ public class EnterDemoFragment extends IFragment {
         model.CustomerAge = editTextAge.getText().toString();*/
         model.DemoProdId = SelectedProduct.ID;
         model.LeadType = spinnerLeadType.getSelectedItem() != null ? spinnerLeadType.getSelectedItem().toString() : "";
+        model.Remarks = editTextRemarks.getText().toString().trim();
     }
 
     private void getLeadTypeList() {
