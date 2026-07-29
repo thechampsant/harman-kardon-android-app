@@ -32,6 +32,9 @@ public class ChampionshipPodiumActivity extends Activity {
         TextView tvTitle = findViewById(R.id.tv_title);
         tvTitle.setText(type != null ? type + " Board" : "Championship Board");
 
+        // PanIndiaNPI type shows Ranking instead of Rating on cards
+        showRanking = "Pan India NPI".equalsIgnoreCase(type) || "PanIndiaNPI".equalsIgnoreCase(type);
+
         List<JSONObject> items = ChampionshipBoardActivity.groups.get(type);
         if (items == null || items.isEmpty()) {
             showMessage("No data available");
@@ -41,6 +44,9 @@ public class ChampionshipPodiumActivity extends Activity {
     }
 
     public void actionBarBackButtonClicked(View v) { onBackPressed(); }
+
+    // Whether the current board type should show Ranking instead of Rating
+    private boolean showRanking = false;
 
     private void buildPodium(List<JSONObject> items) {
         llContainer.removeAllViews();
@@ -95,10 +101,21 @@ public class ChampionshipPodiumActivity extends Activity {
         ((TextView) card.findViewById(R.id.tv_rank_label)).setText(medals[rank - 1] + "  Rank " + rank);
         ((TextView) card.findViewById(R.id.tv_name)).setText("Name : " + val(obj.optString("Name")));
         ((TextView) card.findViewById(R.id.tv_userid)).setText("Employee ID : " + val(obj.optString("EmployeeID")));
-        ((TextView) card.findViewById(R.id.tv_rating)).setText("Rating : " + val(obj.optString("Rating")));
-        // card.findViewById(R.id.tv_rating).setVisibility(View.GONE);
+        ((TextView) card.findViewById(R.id.tv_rating)).setText(
+                showRanking
+                        ? "Entry Time : " + val(obj.optString("EntryTime"))
+                        : "Rating : "  + val(obj.optString("Rating")));
         ((TextView) card.findViewById(R.id.tv_account)).setText("Account : " + val(obj.optString("Account")));
         ((TextView) card.findViewById(R.id.tv_store_location)).setText("Store Location : " + val(obj.optString("StoreLocation")));
+
+        // Quantity field — only visible for PanIndiaNPI
+        TextView tvQuantity = card.findViewById(R.id.tv_quantity);
+        if (showRanking) {
+            tvQuantity.setVisibility(View.VISIBLE);
+            tvQuantity.setText("Quantity : " + val(obj.optString("Quantity")));
+        } else {
+            tvQuantity.setVisibility(View.GONE);
+        }
 
         ImageView avatar = card.findViewById(R.id.iv_avatar);
         GradientDrawable circle = new GradientDrawable();

@@ -469,6 +469,9 @@
             android:name=".demo_tracking_module.ui.activities.DemoTrackingFragmentsContainer"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".customer_rating_module.ui.activities.CustomerRatingActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ISPRatingActivity"
             android:screenOrientation="portrait" />
         <activity

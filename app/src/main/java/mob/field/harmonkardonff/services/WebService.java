@@ -109,6 +109,7 @@ public class WebService {
     static String Getsale = "GetSalesBtwDate?";
 
     static String NewStockAction = "UpdateStock?";
+    static String CustomerRatingAction = "CustomerRating/Rate?";
     public static final String ApiUrl = Web + WebController;
 
     //public static String WebServiceURL = "http://harmankardon.infield.co.in/"; old
@@ -125,6 +126,13 @@ public class WebService {
     public static String Password;
     public static String UserID;
     Server server = new Server();
+
+    public String getCustomerRatingUrl() {
+        String apiUrl = WebServiceURL;
+        apiUrl += CustomerRatingAction;
+        apiUrl += "ispId=" + MainActivity.MyInfo.UserID;
+        return apiUrl;
+    }
 
     public void setUser(String _UserName, String _Password) {
         UserName = _UserName;

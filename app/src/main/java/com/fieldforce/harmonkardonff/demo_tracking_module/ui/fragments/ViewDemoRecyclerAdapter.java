@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -26,10 +27,11 @@ import linq.ArrayList;
 public class ViewDemoRecyclerAdapter extends RecyclerView.Adapter<ViewDemoRecyclerAdapter.ViewDemoViewHolder> {
 
     private List<ViewDemoResponseModel> list = new ArrayList<>();
+
     @NonNull
     @Override
     public ViewDemoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.view_demo_item,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.view_demo_item, viewGroup, false);
         return new ViewDemoViewHolder(view);
     }
 
@@ -40,17 +42,17 @@ public class ViewDemoRecyclerAdapter extends RecyclerView.Adapter<ViewDemoRecycl
 
     @Override
     public int getItemCount() {
-        return list!=null?list.size():0;
+        return list != null ? list.size() : 0;
     }
 
-    public void setData(ArrayList<ViewDemoResponseModel> listWa){
+    public void setData(ArrayList<ViewDemoResponseModel> listWa) {
         list = listWa;
         notifyDataSetChanged();
     }
 
-    class ViewDemoViewHolder extends RecyclerView.ViewHolder
-    {
+    class ViewDemoViewHolder extends RecyclerView.ViewHolder {
 
+        private CardView cardView;
         private TextView textViewCustomerName;
         private TextView textViewCustomerNumber;
         private TextView textViewCustomerMail;
@@ -61,9 +63,10 @@ public class ViewDemoRecyclerAdapter extends RecyclerView.Adapter<ViewDemoRecycl
         private TextView textViewRemarks;
         private ImageButton buttonWhatsApp;
         private ImageButton buttonCall;
-        private CardView cardViewItem;
+
         public ViewDemoViewHolder(@NonNull View itemView) {
             super(itemView);
+            cardView = itemView.findViewById(R.id.demo_item_card);
             textViewCustomerName = itemView.findViewById(R.id.tv_customerNameValue);
             textViewCustomerNumber = itemView.findViewById(R.id.tv_customerNumberValue);
             textViewCustomerMail = itemView.findViewById(R.id.tv_customerMailValue);
@@ -74,41 +77,52 @@ public class ViewDemoRecyclerAdapter extends RecyclerView.Adapter<ViewDemoRecycl
             textViewRemarks = itemView.findViewById(R.id.tv_remarksValue);
             buttonWhatsApp = itemView.findViewById(R.id.btn_whatsapp);
             buttonCall = itemView.findViewById(R.id.btn_call);
-            cardViewItem = itemView.findViewById(R.id.demo_item_card);
         }
 
-        public void bindValues(final ViewDemoResponseModel obj){
-            if(obj.CustomerName != null && !obj.CustomerName.equalsIgnoreCase(""))
+        public void bindValues(final ViewDemoResponseModel obj) {
+            if (obj.CustomerName != null && !obj.CustomerName.equalsIgnoreCase(""))
                 textViewCustomerName.setText(obj.CustomerName);
             else
                 textViewCustomerName.setText("NA");
 
-
-            if(obj.CustomerMob != null && !obj.CustomerMob.equalsIgnoreCase(""))
+            if (obj.CustomerMob != null && !obj.CustomerMob.equalsIgnoreCase(""))
                 textViewCustomerNumber.setText(obj.CustomerMob);
             else
                 textViewCustomerNumber.setText("NA");
 
-
-
-           // textViewCustomerMail.setText(obj.CustomerEmail);
-            if(obj.NoDemo != null && obj.NoDemo.equalsIgnoreCase("true"))
-             textViewCustomerAge.setText("No Demo");
+            if (obj.NoDemo != null && obj.NoDemo.equalsIgnoreCase("true"))
+                textViewCustomerAge.setText("No Demo");
             else
                 textViewCustomerAge.setText("NA");
 
-            if(obj.ProductName != null && !obj.ProductName.equalsIgnoreCase(""))
+            if (obj.ProductName != null && !obj.ProductName.equalsIgnoreCase(""))
                 textViewProductName.setText(obj.ProductName);
             else
                 textViewProductName.setText("NA");
 
-
             textViewSubmittedDate.setText(obj.SubmittedOn != null ? obj.SubmittedOn : "NA");
             textViewLeadType.setText(obj.LeadType != null && !obj.LeadType.equalsIgnoreCase("") ? obj.LeadType : "NA");
             textViewRemarks.setText(obj.Remarks != null && !obj.Remarks.equalsIgnoreCase("") ? obj.Remarks : "NA");
-            applyLeadColor(obj.LeadType);
+
+            // Color code the entire card based on Lead Type
+            if (obj.LeadType != null) {
+                String leadTypeLower = obj.LeadType.trim().toLowerCase();
+                android.util.Log.d("LeadTypeDebug", "LeadType value: '" + obj.LeadType + "'");
+                if (leadTypeLower.contains("hot")) {
+                    cardView.setCardBackgroundColor(Color.parseColor("#FFCDD2")); // Light Red
+                } else if (leadTypeLower.contains("warm")) {
+                    cardView.setCardBackgroundColor(Color.parseColor("#FFF9C4")); // Light Yellow
+                } else if (leadTypeLower.contains("cold")) {
+                    cardView.setCardBackgroundColor(Color.parseColor("#C8E6C9")); // Light Green
+                } else {
+                    cardView.setCardBackgroundColor(Color.WHITE);
+                }
+            } else {
+                cardView.setCardBackgroundColor(Color.WHITE);
+            }
 
             final String phoneNumber = obj.CustomerMob != null ? obj.CustomerMob.trim() : "";
+
             buttonCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -134,30 +148,30 @@ public class ViewDemoRecyclerAdapter extends RecyclerView.Adapter<ViewDemoRecycl
                         Toast.makeText(v.getContext(), "Phone number not available", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    String cleanedPhone = phoneNumber.replaceAll("[^0-9]", "");
-                    if (!cleanedPhone.isEmpty()) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/" + cleanedPhone));
-                        v.getContext().startActivity(intent);
+
+                    // Check if WhatsApp is installed on the device
+                    boolean isWhatsAppInstalled;
+                    try {
+                        v.getContext().getPackageManager()
+                                .getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
+                        isWhatsAppInstalled = true;
+                    } catch (PackageManager.NameNotFoundException e) {
+                        isWhatsAppInstalled = false;
                     }
+
+                    if (!isWhatsAppInstalled) {
+                        Toast.makeText(v.getContext(), "WhatsApp is not installed on this device.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // WhatsApp is installed — open chat directly (WhatsApp will handle unregistered numbers)
+                    String cleanedPhone = phoneNumber.replaceAll("[^0-9]", "");
+                    Intent intent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://wa.me/" + cleanedPhone));
+                    intent.setPackage("com.whatsapp");
+                    v.getContext().startActivity(intent);
                 }
             });
-        }
-
-        private void applyLeadColor(String leadType) {
-            if (leadType == null) {
-                cardViewItem.setCardBackgroundColor(Color.WHITE);
-                return;
-            }
-            String normalized = leadType.toLowerCase();
-            if (normalized.contains("hot")) {
-                cardViewItem.setCardBackgroundColor(Color.parseColor("#FFEBEE"));
-            } else if (normalized.contains("warm")) {
-                cardViewItem.setCardBackgroundColor(Color.parseColor("#FFF8E1"));
-            } else if (normalized.contains("cold")) {
-                cardViewItem.setCardBackgroundColor(Color.parseColor("#E8F5E9"));
-            } else {
-                cardViewItem.setCardBackgroundColor(Color.WHITE);
-            }
         }
     }
 }
