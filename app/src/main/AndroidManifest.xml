@@ -487,6 +487,9 @@
             android:name=".MDQActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".LeaveBalanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.fieldforce.floorhygiene.HygieneUploadStoreImagesActivity"
             android:screenOrientation="portrait" />
         <activity

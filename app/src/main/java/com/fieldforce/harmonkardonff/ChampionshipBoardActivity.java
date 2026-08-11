@@ -97,6 +97,7 @@ public class ChampionshipBoardActivity extends Activity {
                     JSONObject obj = data.getJSONObject(i);
                     String type = obj.optString("ChampType", "Other");
                     if (type.equals("PAN")) type = "All India";
+                    if (type.equalsIgnoreCase("Pan India NPI") || type.equalsIgnoreCase("PanIndiaNPI")) type = "T ANC Ka Badshah";
                     if (!groups.containsKey(type)) groups.put(type, new ArrayList<>());
                     groups.get(type).add(obj);
                 }

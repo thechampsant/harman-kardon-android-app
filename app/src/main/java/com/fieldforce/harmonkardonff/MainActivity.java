@@ -1063,6 +1063,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         data.add(new GridItem().setItem("Score Card", ScoreCardActivity.class, R.drawable.ic_target_vs_achievement));
         data.add(new GridItem().setItem("Championship Board", ChampionshipBoardActivity.class, R.drawable.ic_target_vs_achievement));
         data.add(new GridItem().setItem("Customer Rating", CustomerRatingActivity.class, R.drawable.ic_demo_tracking));
+        data.add(new GridItem().setItem("Leave Balance", LeaveBalanceActivity.class, R.drawable.ic_target_vs_achievement));
 
 
 //        data.add(new GridItem().setItem("HR Helpline", HelpLine.class, R.drawable.help));

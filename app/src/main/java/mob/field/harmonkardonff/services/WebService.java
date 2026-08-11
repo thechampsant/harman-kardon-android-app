@@ -1089,6 +1089,22 @@ public class WebService {
         return server.getServerResponse(apiUrl);
     }
 
+    String GetTrainingHelpDesk = "GetTrainingHelpDesk";
+
+    public org.json.JSONArray getHelpDeskData() throws Exception {
+        String apiUrl = ApiUrl;
+        apiUrl += GetTrainingHelpDesk;
+        return server.getServerResponse(apiUrl);
+    }
+
+    String GetLeaveBalance = "GetLeaveBalance?";
+
+    public org.json.JSONArray getLeaveBalance() throws Exception {
+        String apiUrl = ApiUrl;
+        apiUrl += GetLeaveBalance + "username=" + getUsername();
+        return server.getServerResponse(apiUrl);
+    }
+
     String GetScoreRatingData = "GetScoreRatingData?";
 
     public org.json.JSONArray getScoreRatingData(int month, int year) throws Exception {

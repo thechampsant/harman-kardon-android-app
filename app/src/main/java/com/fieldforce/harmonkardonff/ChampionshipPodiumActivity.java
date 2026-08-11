@@ -32,8 +32,10 @@ public class ChampionshipPodiumActivity extends Activity {
         TextView tvTitle = findViewById(R.id.tv_title);
         tvTitle.setText(type != null ? type + " Board" : "Championship Board");
 
-        // PanIndiaNPI type shows Ranking instead of Rating on cards
-        showRanking = "Pan India NPI".equalsIgnoreCase(type) || "PanIndiaNPI".equalsIgnoreCase(type);
+        // T ANC Ka Badshah, Bar Ka Badshah, Partybox AI Ka Badshah show Quantity + EntryTime instead of Rating
+        showRanking = "T ANC Ka Badshah".equalsIgnoreCase(type)
+                || "Bar Ka Badshah".equalsIgnoreCase(type)
+                || "Partybox AI Ka Badshah".equalsIgnoreCase(type);
 
         List<JSONObject> items = ChampionshipBoardActivity.groups.get(type);
         if (items == null || items.isEmpty()) {
@@ -45,7 +47,7 @@ public class ChampionshipPodiumActivity extends Activity {
 
     public void actionBarBackButtonClicked(View v) { onBackPressed(); }
 
-    // Whether the current board type should show Ranking instead of Rating
+    // Whether the current board type should show Quantity + EntryTime instead of Rating
     private boolean showRanking = false;
 
     private void buildPodium(List<JSONObject> items) {
@@ -101,19 +103,25 @@ public class ChampionshipPodiumActivity extends Activity {
         ((TextView) card.findViewById(R.id.tv_rank_label)).setText(medals[rank - 1] + "  Rank " + rank);
         ((TextView) card.findViewById(R.id.tv_name)).setText("Name : " + val(obj.optString("Name")));
         ((TextView) card.findViewById(R.id.tv_userid)).setText("Employee ID : " + val(obj.optString("EmployeeID")));
-        ((TextView) card.findViewById(R.id.tv_rating)).setText(
-                showRanking
-                        ? "Entry Time : " + val(obj.optString("EntryTime"))
-                        : "Rating : "  + val(obj.optString("Rating")));
         ((TextView) card.findViewById(R.id.tv_account)).setText("Account : " + val(obj.optString("Account")));
         ((TextView) card.findViewById(R.id.tv_store_location)).setText("Store Location : " + val(obj.optString("StoreLocation")));
 
-        // Quantity field — only visible for PanIndiaNPI
-        TextView tvQuantity = card.findViewById(R.id.tv_quantity);
+        TextView tvRating   = card.findViewById(R.id.tv_rating);
+        TextView tvEntryTime = card.findViewById(R.id.tv_entry_time);
+        TextView tvQuantity  = card.findViewById(R.id.tv_quantity);
+
         if (showRanking) {
+            // T ANC Ka Badshah / Bar Ka Badshah / Partybox AI Ka Badshah — show Quantity + EntryTime
+            tvRating.setVisibility(View.GONE);
+            tvEntryTime.setVisibility(View.VISIBLE);
+            tvEntryTime.setText("Entry Time : " + val(obj.optString("EntryTime")));
             tvQuantity.setVisibility(View.VISIBLE);
             tvQuantity.setText("Quantity : " + val(obj.optString("Quantity")));
         } else {
+            // All India / Region / Channel — show Rating
+            tvRating.setVisibility(View.VISIBLE);
+            tvRating.setText("Rating : " + val(obj.optString("Rating")));
+            tvEntryTime.setVisibility(View.GONE);
             tvQuantity.setVisibility(View.GONE);
         }
 
