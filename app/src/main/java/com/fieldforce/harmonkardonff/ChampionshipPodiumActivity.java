@@ -35,7 +35,7 @@ public class ChampionshipPodiumActivity extends Activity {
         // T ANC Ka Badshah, Bar Ka Badshah, Partybox AI Ka Badshah show Quantity + EntryTime instead of Rating
         showRanking = "T ANC Ka Badshah".equalsIgnoreCase(type)
                 || "Bar Ka Badshah".equalsIgnoreCase(type)
-                || "Partybox AI Ka Badshah".equalsIgnoreCase(type);
+                || "BAPPA KA CHAMPION".equalsIgnoreCase(type);
 
         List<JSONObject> items = ChampionshipBoardActivity.groups.get(type);
         if (items == null || items.isEmpty()) {
