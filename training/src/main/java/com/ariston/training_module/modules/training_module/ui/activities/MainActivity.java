@@ -61,6 +61,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import com.ariston.training_module.utility.SystemBarInsets;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_training);
+        SystemBarInsets.install(this);
         screenWidth = Helper.getScreenWidth(this);
         initObjects();
         initWidgets();

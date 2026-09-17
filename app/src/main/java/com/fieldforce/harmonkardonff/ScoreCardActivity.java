@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import mob.field.harmonkardonff.services.WebService;
+import com.fieldforce.utility.SystemBarInsets;
 
 public class ScoreCardActivity extends Activity {
 
@@ -36,6 +37,7 @@ public class ScoreCardActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_card);
+        SystemBarInsets.install(this);
         llContainer = findViewById(R.id.ll_score_container);
         spinnerMonth = findViewById(R.id.spinner_month);
         spinnerYear = findViewById(R.id.spinner_year);

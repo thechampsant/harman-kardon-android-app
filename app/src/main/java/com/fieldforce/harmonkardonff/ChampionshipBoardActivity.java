@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import mob.field.harmonkardonff.services.WebService;
+import com.fieldforce.utility.SystemBarInsets;
 
 public class ChampionshipBoardActivity extends Activity {
 
@@ -30,6 +31,7 @@ public class ChampionshipBoardActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_championship_board);
+        SystemBarInsets.install(this);
         llButtons = findViewById(R.id.ll_buttons);
         new LoadChampionship().execute();
     }

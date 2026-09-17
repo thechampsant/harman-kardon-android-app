@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import mob.field.harmonkardonff.services.WebService;
+import com.fieldforce.utility.SystemBarInsets;
 
 public class ISPRatingActivity extends Activity {
 
@@ -27,6 +28,7 @@ public class ISPRatingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_isp_rating);
+        SystemBarInsets.install(this);
         llContainer = findViewById(R.id.ll_dashboard_container);
         new LoadISPDash().execute();
     }

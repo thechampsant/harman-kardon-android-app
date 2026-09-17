@@ -143,20 +143,30 @@ public abstract class InnosolsActivity extends FragmentActivity implements
 	@Override
 	public void setContentView(int layoutResID) {
 		mView = this.inflator.inflate(layoutResID, null);
-		super.setContentView(mView);
-
+		setContentView(mView);
 	}
 
 	public void setContentView(int layoutResID, boolean isViewGroup) {
 		mView = this.inflator.inflate(layoutResID, null, true);
-		super.setContentView(mView);
-
+		setContentView(mView);
 	}
 
 	@Override
 	public void setContentView(View view) {
 		mView = view;
-		super.setContentView(view);
+		installContentWithSystemBarInsets(view);
+	}
+
+	/**
+	 * targetSdk 35+ draws edge-to-edge. Apply the same header-aware insets used
+	 * by Score Card / Training so click-through Innosols screens are not cut.
+	 */
+	private void installContentWithSystemBarInsets(final View content) {
+		if (content.getParent() instanceof ViewGroup) {
+			((ViewGroup) content.getParent()).removeView(content);
+		}
+		super.setContentView(content);
+		app.core.utils.SystemBarInsets.install(this);
 	}
 
 

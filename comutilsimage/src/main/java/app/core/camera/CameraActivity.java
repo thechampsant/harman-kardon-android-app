@@ -33,6 +33,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 import com.example.com.test.image.R;
 
 public class CameraActivity extends Activity implements SensorEventListener {
@@ -73,6 +78,7 @@ public class CameraActivity extends Activity implements SensorEventListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_camera);
+		applySystemBarInsets();
 		this.setCameraIds();
 		// Setting all the path for the image
 		sdRoot = Environment.getExternalStorageDirectory();
@@ -511,6 +517,34 @@ public class CameraActivity extends Activity implements SensorEventListener {
 		intent.putExtra(CameraActivity.PARAMS_IS_IMAGE_CAPTURED, false);
 		setResult(Activity.RESULT_OK, intent);
 		super.onBackPressed();
+	}
+
+	private void applySystemBarInsets() {
+		WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+		final View root = findViewById(R.id.lyt_main_cam);
+		final View footer = findViewById(R.id.linearLayout1);
+		if (root == null) {
+			return;
+		}
+		final int footerPadLeft = footer != null ? footer.getPaddingLeft() : 0;
+		final int footerPadTop = footer != null ? footer.getPaddingTop() : 0;
+		final int footerPadRight = footer != null ? footer.getPaddingRight() : 0;
+		final int footerPadBottom = footer != null ? footer.getPaddingBottom() : 0;
+		ViewCompat.setOnApplyWindowInsetsListener(root, (v, windowInsets) -> {
+			Insets bars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+			if (v.getPaddingLeft() != bars.left || v.getPaddingTop() != bars.top
+					|| v.getPaddingRight() != bars.right) {
+				v.setPadding(bars.left, bars.top, bars.right, 0);
+			}
+			if (footer != null) {
+				int bottom = footerPadBottom + bars.bottom;
+				if (footer.getPaddingBottom() != bottom) {
+					footer.setPadding(footerPadLeft, footerPadTop, footerPadRight, bottom);
+				}
+			}
+			return WindowInsetsCompat.CONSUMED;
+		});
+		ViewCompat.requestApplyInsets(root);
 	}
 
 	/**

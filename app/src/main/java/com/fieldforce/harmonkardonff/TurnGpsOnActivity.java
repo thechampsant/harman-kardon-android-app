@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import com.fieldforce.utility.SystemBarInsets;
 
 public class TurnGpsOnActivity extends Activity {
 
@@ -15,6 +16,7 @@ public class TurnGpsOnActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_turngps);
+        SystemBarInsets.install(this);
 		initialise();
 	}
 

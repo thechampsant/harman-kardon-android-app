@@ -15,6 +15,7 @@ import com.ariston.training_module.R;
 import com.ariston.training_module.modules.training_module.view_models.ProfileViewModel;
 import com.ariston.training_module.utility.ConnectionDetector;
 import com.ariston.training_module.utility.widgets.RobotoTextView;
+import com.ariston.training_module.utility.SystemBarInsets;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -30,6 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        SystemBarInsets.install(this);
         profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
         _conn = new ConnectionDetector(this);
         initViews();

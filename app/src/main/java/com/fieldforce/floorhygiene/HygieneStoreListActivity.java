@@ -20,6 +20,7 @@ import com.fieldforce.floorhygiene.retrofitFloor.MyRetrofitService;
 import com.fieldforce.harmonkardonff.MainActivity;
 import com.fieldforce.harmonkardonff.R;
 import com.ariston.training_module.utility.ItemDecorationAlbumColumns;
+import com.fieldforce.utility.SystemBarInsets;
 import com.fieldforce.utility.widgets.RobotoTextView;
 
 import org.jetbrains.annotations.NotNull;
@@ -46,6 +47,7 @@ public class HygieneStoreListActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_floor_hygiene);
+        SystemBarInsets.install(this);
         rvLayout = findViewById(R.id.rvStoreList);
         fabAddNew = findViewById(R.id.fabAddNew);
         pbFloorHygiene = findViewById(R.id.pb_floor_hygiene);

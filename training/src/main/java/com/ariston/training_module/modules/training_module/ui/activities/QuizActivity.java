@@ -35,6 +35,7 @@ import com.ariston.training_module.utility.widgets.RobotoTextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.ariston.training_module.utility.SystemBarInsets;
 
 public class QuizActivity extends AppCompatActivity {
     private RecyclerView rv_quetionanslist;
@@ -62,6 +63,7 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_tr);
+        SystemBarInsets.install(this);
         quizeViewModel = ViewModelProviders.of(this).get(QuizeViewModel.class);
         resultViewModel = ViewModelProviders.of(this).get(ResultViewModel.class);
         _conn = new ConnectionDetector(this);

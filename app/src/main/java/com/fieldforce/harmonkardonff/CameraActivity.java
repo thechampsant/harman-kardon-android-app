@@ -20,6 +20,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.otaliastudios.cameraview.CameraException;
@@ -59,6 +63,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        applySystemBarInsets();
         CameraLogger.setLogLevel(CameraLogger.LEVEL_VERBOSE);
 
         camera = findViewById(R.id.camera);
@@ -459,6 +464,24 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         File image = new File(storageDir, imageFileName + ".png");
         // Save a file: path for use with ACTION_VIEW intents
         return image;
+    }
+
+    private void applySystemBarInsets() {
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        View root = findViewById(R.id.root);
+        if (root == null) {
+            return;
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(root, (v, windowInsets) -> {
+            Insets bars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+            if (v.getPaddingLeft() != bars.left || v.getPaddingTop() != bars.top
+                    || v.getPaddingRight() != bars.right
+                    || v.getPaddingBottom() != bars.bottom) {
+                v.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+            }
+            return WindowInsetsCompat.CONSUMED;
+        });
+        ViewCompat.requestApplyInsets(root);
     }
     //endregion
 }

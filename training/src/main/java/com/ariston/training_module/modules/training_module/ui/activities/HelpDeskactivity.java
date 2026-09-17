@@ -15,6 +15,7 @@ import com.ariston.training_module.R;
 import com.ariston.training_module.modules.training_module.view_models.GetTrainingHelpDesk;
 import com.ariston.training_module.utility.ConnectionDetector;
 import com.ariston.training_module.utility.widgets.RobotoTextView;
+import com.ariston.training_module.utility.SystemBarInsets;
 
 public class HelpDeskactivity extends AppCompatActivity {
     private GetTrainingHelpDesk getTrainingHelpDeskModel;
@@ -28,6 +29,7 @@ public class HelpDeskactivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_deskactivity);
+        SystemBarInsets.install(this);
         getTrainingHelpDeskModel = ViewModelProviders.of(this).get(GetTrainingHelpDesk.class);
         _conn = new ConnectionDetector(this);
         initViews();

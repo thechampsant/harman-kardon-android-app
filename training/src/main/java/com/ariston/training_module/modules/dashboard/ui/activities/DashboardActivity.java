@@ -24,6 +24,7 @@ import com.ariston.training_module.modules.dashboard.ui.listeners.IDashboardFrag
 import com.ariston.training_module.modules.dashboard.view_models.DashboardViewModel;
 import com.ariston.training_module.utility.TrainingConstants;
 import com.ariston.training_module.utility.services.UserDetailsService;
+import com.ariston.training_module.utility.SystemBarInsets;
 
 public class DashboardActivity extends AppCompatActivity implements IDashboardFragmentsListener {
     private static final String TAG = "DashboardActivity";
@@ -36,6 +37,7 @@ public class DashboardActivity extends AppCompatActivity implements IDashboardFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        SystemBarInsets.install(this);
         init();
         initClicks();
 

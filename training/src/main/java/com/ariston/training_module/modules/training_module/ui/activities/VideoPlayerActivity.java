@@ -47,6 +47,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.google.android.exoplayer2.video.VideoRendererEventListener;
+import com.ariston.training_module.utility.SystemBarInsets;
 
 public class VideoPlayerActivity extends AppCompatActivity implements VideoRendererEventListener {
     private static final String TAG = "MainActivity";
@@ -61,6 +62,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements VideoRende
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
+        SystemBarInsets.install(this);
 
         Uri mp4VideoUri = Uri.parse(getIntent().getStringExtra(TrainingConstants.MEDIA_URL)); //ABC NEWS
 

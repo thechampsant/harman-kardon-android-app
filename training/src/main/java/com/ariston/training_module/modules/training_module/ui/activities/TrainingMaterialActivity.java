@@ -21,6 +21,7 @@ import com.ariston.training_module.utility.Helper;
 import com.ariston.training_module.utility.ItemDecorationAlbumColumns;
 import com.ariston.training_module.utility.TrainingConstants;
 import com.ariston.training_module.utility.services.UserDetailsService;
+import com.ariston.training_module.utility.SystemBarInsets;
 
 public class TrainingMaterialActivity extends AppCompatActivity {
 
@@ -35,6 +36,7 @@ public class TrainingMaterialActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training_material);
+        SystemBarInsets.install(this);
         viewModelTrainingMat = ViewModelProviders.of(this).get(ViewModelTrainingMat.class);
         initObserver();
         initService();

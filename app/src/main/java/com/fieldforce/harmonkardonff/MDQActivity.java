@@ -35,6 +35,7 @@ import java.util.Set;
 
 import app.core.model.Response;
 import mob.field.harmonkardonff.services.WebService;
+import com.fieldforce.utility.SystemBarInsets;
 
 public class MDQActivity extends Activity {
 
@@ -57,6 +58,7 @@ public class MDQActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mdq_view);
+        SystemBarInsets.install(this);
 
         dpsalefor = findViewById(R.id.dpsalefor);
         dpsalefor.setText("Date : " + new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()));

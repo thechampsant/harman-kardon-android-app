@@ -24,6 +24,7 @@ import app.core.model.Response;
 import linq.ArrayList;
 import mob.field.harmonkardonff.entitiymodels.MNotification;
 import mob.field.harmonkardonff.services.WebService;
+import com.fieldforce.utility.SystemBarInsets;
 
 public class NotificationView extends Activity {
 
@@ -40,6 +41,7 @@ public class NotificationView extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification);
+        SystemBarInsets.install(this);
         InFlateListView();
         loadServerData();
         iv_backView.setOnClickListener(view -> onBackPressed());

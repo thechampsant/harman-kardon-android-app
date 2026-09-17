@@ -18,6 +18,7 @@ import com.ariston.training_module.R;
 import com.ariston.training_module.modules.training_module.view_models.DocViewerViewModel;
 import com.ariston.training_module.utility.TrainingConstants;
 import com.ariston.training_module.utility.services.UserDetailsService;
+import com.ariston.training_module.utility.SystemBarInsets;
 
 public class DocViewerActivity extends AppCompatActivity {
     private int i = 0;
@@ -34,6 +35,7 @@ public class DocViewerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doc_viewer);
+        SystemBarInsets.install(this);
         pdfView = findViewById(R.id.webview);
         progress = findViewById(R.id.pb_doc);
         mViewModel = ViewModelProviders.of(this).get(DocViewerViewModel.class);

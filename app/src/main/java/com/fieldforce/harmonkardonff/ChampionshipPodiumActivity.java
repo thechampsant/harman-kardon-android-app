@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.fieldforce.utility.SystemBarInsets;
 
 import org.json.JSONObject;
 
@@ -26,6 +27,7 @@ public class ChampionshipPodiumActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_championship_podium);
+        SystemBarInsets.install(this);
         llContainer = findViewById(R.id.ll_championship_container);
 
         String type = getIntent().getStringExtra("type");

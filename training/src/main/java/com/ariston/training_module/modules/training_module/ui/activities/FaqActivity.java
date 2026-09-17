@@ -17,6 +17,7 @@ import com.ariston.training_module.modules.training_module.adapters.FaqAdpter;
 import com.ariston.training_module.modules.training_module.view_models.FaQViewModel;
 import com.ariston.training_module.utility.ConnectionDetector;
 import com.ariston.training_module.utility.widgets.RobotoTextView;
+import com.ariston.training_module.utility.SystemBarInsets;
 
 public class FaqActivity extends AppCompatActivity {
     private FaQViewModel faQViewModel;
@@ -31,6 +32,7 @@ public class FaqActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
+        SystemBarInsets.install(this);
         faQViewModel = ViewModelProviders.of(this).get(FaQViewModel.class);
         _conn = new ConnectionDetector(this);
         initViews();

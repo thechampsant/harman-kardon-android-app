@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import com.fieldforce.utility.SystemBarInsets;
 
 public class NetworkNotAvailableActivity extends Activity {
 
@@ -16,6 +17,7 @@ public class NetworkNotAvailableActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_turngps);
+        SystemBarInsets.install(this);
 //		initialize();
 		enableInternetWarningMessageView();
 	}

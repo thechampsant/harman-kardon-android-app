@@ -27,6 +27,7 @@ import com.ariston.training_module.utility.services.UserDetailsService;
 import com.ariston.training_module.utility.widgets.ReadMoreTextView;
 import com.ariston.training_module.utility.widgets.RobotoBoldTextView;
 import com.ariston.training_module.utility.widgets.RobotoTextView;
+import com.ariston.training_module.utility.SystemBarInsets;
 
 public class TrainingDescriptionActivity extends AppCompatActivity implements AdapterRvTrDesc.AdapterRvTrDescCallbacks {
     private RobotoTextView tvTimings;
@@ -50,6 +51,7 @@ public class TrainingDescriptionActivity extends AppCompatActivity implements Ad
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training_desc);
+        SystemBarInsets.install(this);
         initViews();
         setupRecycler();
         setDescription();

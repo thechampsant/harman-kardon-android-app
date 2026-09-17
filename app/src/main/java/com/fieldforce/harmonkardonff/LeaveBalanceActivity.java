@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import mob.field.harmonkardonff.services.WebService;
+import com.fieldforce.utility.SystemBarInsets;
 
 public class LeaveBalanceActivity extends Activity {
 
@@ -25,6 +26,7 @@ public class LeaveBalanceActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leave_balance);
+        SystemBarInsets.install(this);
         llContainer = findViewById(R.id.ll_leave_container);
         new LoadLeaveBalance().execute();
     }

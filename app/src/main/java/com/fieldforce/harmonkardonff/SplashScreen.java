@@ -17,6 +17,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 import com.fieldforce.utility.PermissionUtils;
 
 import app.core.image.slider.AppConstant;
@@ -45,6 +50,7 @@ public class SplashScreen extends Activity implements ViewSwitcher.ViewFactory {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        applySystemBarInsets();
 
        /* if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.LOLLIPOP) {
             // Do something for lollipop and above versions
@@ -227,5 +233,23 @@ public class SplashScreen extends Activity implements ViewSwitcher.ViewFactory {
         isRunning = false;
         Log.e("________", "FINISHED  111ß");
         super.finish();
+    }
+
+    private void applySystemBarInsets() {
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        View root = findViewById(R.id.rlSplash);
+        if (root == null) {
+            return;
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(root, (v, windowInsets) -> {
+            Insets bars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+            if (v.getPaddingLeft() != bars.left || v.getPaddingTop() != bars.top
+                    || v.getPaddingRight() != bars.right
+                    || v.getPaddingBottom() != bars.bottom) {
+                v.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+            }
+            return WindowInsetsCompat.CONSUMED;
+        });
+        ViewCompat.requestApplyInsets(root);
     }
 }

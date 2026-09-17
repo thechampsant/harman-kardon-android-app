@@ -29,6 +29,7 @@ import com.ariston.training_module.modules.training_module.view_models.ProfileVi
 import com.ariston.training_module.networking.RetrofitConstants;
 import com.ariston.training_module.utility.ConnectionDetector;
 import com.ariston.training_module.utility.widgets.RobotoTextView;
+import com.fieldforce.utility.SystemBarInsets;
 import app.core.server.FileUploader;
 
 import java.io.File;
@@ -77,6 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.ariston.training_module.R.layout.activity_profile);
+        SystemBarInsets.install(this);
         profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
         _conn = new ConnectionDetector(this);
         initViews();

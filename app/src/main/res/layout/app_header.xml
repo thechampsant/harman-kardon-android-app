@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_header_parent"
+    android:paddingVertical="15dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,6 +10,8 @@
         android:id="@+id/iv_bg_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/fl_grid_top"
         android:adjustViewBounds="true"
         android:paddingBottom="50dp"
         android:scaleType="centerCrop" />
@@ -99,7 +102,7 @@
         android:layout_width="@dimen/size_100"
         android:layout_height="@dimen/size_100"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/size_60"
+        android:layout_marginTop="@dimen/size_20"
         android:layout_marginEnd="@dimen/size_30"
         android:layout_marginBottom="@dimen/size_10"
         android:src="@drawable/profile_home"

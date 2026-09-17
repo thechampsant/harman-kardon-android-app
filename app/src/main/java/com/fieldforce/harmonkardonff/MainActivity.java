@@ -288,18 +288,19 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
     @Override
     public void TrysetGridHeader() {
         super.TrysetGridHeader();
-        RelativeLayout rlHeader = (RelativeLayout) headerview.getRootView();
+        if (headerview == null) {
+            return;
+        }
         ImageView ivBg = headerview.findViewById(R.id.iv_bg_top);
         tvName = headerview.findViewById(R.id.tv_name);
         tvUSerID = headerview.findViewById(R.id.tv_user_ID);
         tvV5ID = headerview.findViewById(R.id.tv_V5ID);
         iv_profile_pic = headerview.findViewById(R.id.iv_profile_pic);
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) ivBg.getLayoutParams();
-        layoutParams.height = (int) (Helper.getViewHeight(rlHeader) - Helper.getSizeInDp(this, 10));
-        ivBg.setLayoutParams(layoutParams);
-        ivBg.setImageResource(com.ariston.training_module.R.drawable.bg_top_home);
-
-
+        // Height is handled in app_header.xml (align top → fl_grid_top).
+        // Do not size from getRootView() — that made bg full-screen and overlapped modules.
+        if (ivBg != null) {
+            ivBg.setImageResource(com.ariston.training_module.R.drawable.bg_top_home);
+        }
     }
     public void initializeNotificationsRecycler() {
         notificationAdpter = new NotificationAdpter();

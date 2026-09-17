@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 import linq.ArrayList;
+import com.fieldforce.utility.SystemBarInsets;
 
 public class SurveytypeActivity extends AppCompatActivity {
     private SurveyFormViewModel coronaSurveyViewModel;
@@ -39,6 +40,7 @@ public class SurveytypeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_surveytype);
+        SystemBarInsets.install(this);
         linearLayoutProgressBarContainer = (LinearLayout) findViewById(R.id.ll_progressBarContainer);
         linearLayoutErrorContainer = (LinearLayout) findViewById(R.id.ll_errorContainerInCoronaQuestionnaire);
         recyclerView = (RecyclerView) findViewById(R.id.rv_coronaSurvey);
