@@ -1,23 +1,26 @@
 package com.fieldforce.harmonkardonff;
 
 import linq.ArrayList;
+import mob.field.harmonkardonff.db.Database;
 import app.core.entitymodels.ImageInfo;
 import app.core.image.slider.GridImageActivity;
 
 
 public class ImageGridActivity extends GridImageActivity {
 
-
-
-
 	@Override
 	public String setImageUploadUrl() {
-		//return "http://harmankardon.infield.co.in/UploadFileHandler.ashx?";
 		return "http://harman.infield.co.in/UploadFileHandler.ashx?";
 	}
 
 	@Override
 	public ArrayList<ImageInfo> setImageData() {
+		if (MainActivity.Database == null && MainActivity.Current != null) {
+			MainActivity.Database = new Database(MainActivity.Current);
+		}
+		if (MainActivity.Database == null) {
+			return new ArrayList<ImageInfo>();
+		}
 		return MainActivity.Database.LoadAllPendingImageFromDb();
 	}
 

@@ -57,6 +57,7 @@ import com.fieldforce.harmonhelper.GPSTracker;
 import com.fieldforce.harmonkardonff.Comptition.CompetitionTab;
 import com.fieldforce.harmonkardonff.custom_adapters.NotificationAdpter;
 import com.fieldforce.harmonkardonff.demo_tracking_module.ui.activities.DemoTrackingFragmentsContainer;
+import com.fieldforce.harmonkardonff.fixture_resolution_module.ui.activities.FixtureResolutionTabActivity;
 import com.fieldforce.harmonkardonff.customer_rating_module.ui.activities.CustomerRatingActivity;
 import com.fieldforce.harmonkardonff.home.AdapterTrainingMat;
 import com.fieldforce.model.GetDoctypedata;
@@ -1065,6 +1066,7 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         data.add(new GridItem().setItem("Championship Board", ChampionshipBoardActivity.class, R.drawable.ic_target_vs_achievement));
         data.add(new GridItem().setItem("Customer Rating", CustomerRatingActivity.class, R.drawable.ic_demo_tracking));
         data.add(new GridItem().setItem("Leave Balance", LeaveBalanceActivity.class, R.drawable.ic_target_vs_achievement));
+        data.add(new GridItem().setItem("Fixture Resolution", FixtureResolutionTabActivity.class, R.drawable.ic_floor_hygiene));
 
 
 //        data.add(new GridItem().setItem("HR Helpline", HelpLine.class, R.drawable.help));

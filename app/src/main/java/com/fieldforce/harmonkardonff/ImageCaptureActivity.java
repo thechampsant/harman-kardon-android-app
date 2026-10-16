@@ -1,6 +1,7 @@
 package com.fieldforce.harmonkardonff;
 
 import linq.ArrayList;
+import mob.field.harmonkardonff.db.Database;
 import app.core.entitymodels.ImageInfo;
 import app.core.image.capture.ImageActivity;
 
@@ -13,14 +14,19 @@ public class ImageCaptureActivity extends ImageActivity {
 
 	@Override
 	public String setImageUploadUrl() {
-		//return "http://harmankardon.infield.co.in/UploadFileHandler.ashx?";
 		return "http://harman.infield.co.in/UploadFileHandler.ashx?";
 	}
 
 	@SuppressWarnings("static-access")
 	@Override
 	public ArrayList<ImageInfo> setImageData() {
-		return MainActivity.Current.Database.LoadAllPendingImageFromDb();
+		if (MainActivity.Database == null && MainActivity.Current != null) {
+			MainActivity.Database = new Database(MainActivity.Current);
+		}
+		if (MainActivity.Database == null || MainActivity.Current == null) {
+			return new ArrayList<ImageInfo>();
+		}
+		return MainActivity.Database.LoadAllPendingImageFromDb();
 	}
 
 }

@@ -1132,4 +1132,64 @@ public class WebService {
         }
     }
 
+    public JSONObject getFixtureMasterDataWrapper() throws Exception {
+        String apiUrl = ApiUrl + "GetFixtureMasterData";
+        Log.i("getFixtureMasterData", apiUrl);
+        JSONArray result = server.getServerResponse(apiUrl);
+        if (result != null && result.length() > 0) {
+            return result.getJSONObject(0);
+        }
+        return null;
+    }
+
+    public Response raiseFixtureComplaint(String fixtureType, String issueType, String remark, String docId) {
+        try {
+            String apiUrl = ApiUrl + "RaiseFixtureComplaint?";
+            apiUrl += "UserName=" + fixtureApiUserName();
+            apiUrl += "&FixtureType=" + URLEncoder.encode(fixtureType, "UTF-8");
+            apiUrl += "&IssueType=" + URLEncoder.encode(issueType, "UTF-8");
+            apiUrl += "&Remark=" + URLEncoder.encode(remark, "UTF-8");
+            apiUrl += "&DocID=" + URLEncoder.encode(docId, "UTF-8");
+            Log.i("raiseFixtureComplaint", apiUrl);
+            return server.getResponse(apiUrl);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return new Response(e.getMessage());
+        }
+    }
+
+    public JSONObject getFixtureLogsWrapper(String fromDate, String toDate, String statusFilter) throws Exception {
+        String apiUrl = ApiUrl + "GetFixtureLogs?";
+        apiUrl += "UserName=" + fixtureApiUserName();
+        apiUrl += "&FromDate=" + fromDate;
+        apiUrl += "&ToDate=" + toDate;
+        apiUrl += "&StatusFilter=" + URLEncoder.encode(statusFilter, "UTF-8");
+        Log.i("getFixtureLogs", apiUrl);
+        JSONArray result = server.getServerResponse(apiUrl);
+        if (result != null && result.length() > 0) {
+            return result.getJSONObject(0);
+        }
+        return null;
+    }
+
+    public Response closeFixtureComplaint(int complaintId) {
+        String apiUrl = ApiUrl + "CloseFixtureComplaint?";
+        apiUrl += "ComplaintID=" + complaintId;
+        apiUrl += "&UserName=" + fixtureApiUserName();
+        Log.i("closeFixtureComplaint", apiUrl);
+        return server.getResponse(apiUrl);
+    }
+
+    private String fixtureApiUserName() {
+        try {
+            String user = WebService.UserName;
+            if (user == null || user.isEmpty()) {
+                user = MainActivity.MyInfo != null ? MainActivity.MyInfo.UserID : "";
+            }
+            return URLEncoder.encode(user, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return "";
+        }
+    }
+
 }

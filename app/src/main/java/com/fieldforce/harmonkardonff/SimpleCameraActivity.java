@@ -70,6 +70,8 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
     public static final String PARAMS_INSTANCE = "KEYS_CAPTURE_IMAGE";
     public static final String PARAMS_DOC_TITLE = "PARAMS_DOC_TITLE";
     public static final String ACTION_ENABLE_GPS = "ACTION_ENABLE_GPS";
+    public static final String PARAMS_DOC_ID = "DocID";
+    public static final String PARAMS_CAMERA_ONLY = "PARAMS_CAMERA_ONLY";
     private ImageView imageView;
     private ScaleGestureDetector scaleGestureDetector;
     private float mScaleFactor = 1.0f;
@@ -93,6 +95,7 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
     private static final int DEFAULT_MIN_WIDTH_QUALITY = 400;        // min pixels
     public static int minWidthQuality = DEFAULT_MIN_WIDTH_QUALITY;
     private String Qid="NA";
+    private boolean cameraOnly = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +115,13 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
         DocTitle = getIntent().getStringExtra(SimpleCameraActivity.PARAMS_DOC_TITLE);
         UserName = getIntent().getStringExtra(SimpleCameraActivity.PARAMS_USERNAME);
         ModelID = getIntent().getStringExtra(SimpleCameraActivity.PARAMS_MODEL_ID);
-        DocID = GetTimeStamp() + "_" + WebService.UserName;
+        String customDocId = getIntent().getStringExtra(SimpleCameraActivity.PARAMS_DOC_ID);
+        if (customDocId != null && !customDocId.isEmpty()) {
+            DocID = customDocId;
+        } else {
+            DocID = GetTimeStamp() + "_" + WebService.UserName;
+        }
+        cameraOnly = getIntent().getBooleanExtra(SimpleCameraActivity.PARAMS_CAMERA_ONLY, false);
         Qid=getIntent().getStringExtra("QuestionId");
         //  IsDebugToast = getIntent().getBooleanExtra(ImageActivity.DEBUG_SHOW_TOAST, false);
         imageView = findViewById(R.id.iv_storeImageFromCamera);
@@ -406,6 +415,7 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
                 intent.putExtra("IMAGE_CAPTURED", photoURI.toString());
                 intent.putExtra("DocID", DocID);
                 intent.putExtra("QID", Qid);
+                intent.putExtra("IMAGE_UPLOADED", ISimageUpload);
             }
         } else {
             if(DocType.equalsIgnoreCase("Vac")) {
@@ -588,6 +598,13 @@ public class SimpleCameraActivity extends InnosolsActivity implements View.OnCli
     boolean Gallery=false;
     File galleryImage;
     private void dispatchTakePictureIntent() {
+        if (cameraOnly) {
+            if (CameraUtils.isExternalStorageWritable()) {
+                Intent cameraActivity = new Intent(SimpleCameraActivity.this, CameraActivity.class);
+                startActivityForResult(cameraActivity, REQUEST_TAKE_PHOTO);
+            }
+            return;
+        }
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
         AlertDialog.Builder builder = new AlertDialog.Builder(SimpleCameraActivity.this);
         builder.setTitle("Add Photo!");
