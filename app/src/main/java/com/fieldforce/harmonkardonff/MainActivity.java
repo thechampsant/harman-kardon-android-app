@@ -60,6 +60,8 @@ import com.fieldforce.harmonkardonff.demo_tracking_module.ui.activities.DemoTrac
 import com.fieldforce.harmonkardonff.fixture_resolution_module.ui.activities.FixtureResolutionTabActivity;
 import com.fieldforce.harmonkardonff.customer_rating_module.ui.activities.CustomerRatingActivity;
 import com.fieldforce.harmonkardonff.home.AdapterTrainingMat;
+import com.fieldforce.harmonkardonff.home.DocViewerActivity;
+import com.fieldforce.harmonkardonff.home.VideoPlayerActivity;
 import com.fieldforce.model.GetDoctypedata;
 import com.fieldforce.model.NotificationResonseMode;
 import com.fieldforce.profile.MyProfileModel;
@@ -74,6 +76,8 @@ import com.grid.GridItem;
 import com.jmedeisis.draglinearlayout.DragLinearLayout;
 import com.suveyform.SurveytypeActivity;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import app.core.adapter.GenricAdapter;
@@ -160,6 +164,11 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
     private RecyclerView notificationlist;
     private Bundle dataForTraining = new Bundle();
     NotificationAdpter notificationAdpter;
+    private List<GetDoctypedata> ispConfiguredDocQueue;
+    private int ispConfiguredDocIndex;
+    private boolean ispConfiguredSequenceActive;
+    private boolean awaitingReturnFromConfiguredDoc;
+    private AlertDialog ispConfiguredMaterialDialog;
     public static FeedbackUrlConfigModel feedbackURLConfig = null;
     public static ProfileURLModel profileUrlModel = null;
     //------------------------------------ from Abhijai----------------------
@@ -839,22 +848,61 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
             ArrayList<GetDoctypedata> originalList = response.data;
             if (originalList != null && !originalList.isEmpty()) {
 
-                List<GetDoctypedata> filteredList = new ArrayList<>();
+                List<GetDoctypedata> filteredList = new java.util.ArrayList<>();
 
                 for (GetDoctypedata item : originalList) {
-                    if ("true".equalsIgnoreCase(item.IsSeen)) {
+                    if (item != null && "false".equalsIgnoreCase(String.valueOf(item.IsSeen).trim())) {
                         filteredList.add(item);
                     }
                 }
 
-                if (!filteredList.isEmpty()) {
+                Collections.sort(filteredList, new Comparator<GetDoctypedata>() {
+                    @Override
+                    public int compare(GetDoctypedata o1, GetDoctypedata o2) {
+                        return Integer.compare(parseConfiguredDisplayOrder(o1), parseConfiguredDisplayOrder(o2));
+                    }
+                });
+                if (!filteredList.isEmpty() && !ispConfiguredSequenceActive) {
                     showTrainingMaterialDialog(MainActivity.this, filteredList);
                 }
             }
         }
     }
 
+    private static int parseConfiguredDisplayOrder(GetDoctypedata item) {
+        if (item == null || item.DisplayOrder == null) {
+            return Integer.MAX_VALUE;
+        }
+        try {
+            return Integer.parseInt(item.DisplayOrder.trim());
+        } catch (Exception e) {
+            return Integer.MAX_VALUE;
+        }
+    }
+
     public void showTrainingMaterialDialog(Context context, List<GetDoctypedata> dataList) {
+        ispConfiguredDocQueue = new java.util.ArrayList<>(dataList);
+        ispConfiguredDocIndex = 0;
+        ispConfiguredSequenceActive = true;
+        showNextConfiguredMaterialDialog(context);
+    }
+
+    private void showNextConfiguredMaterialDialog(Context context) {
+        if (ispConfiguredDocQueue == null || ispConfiguredDocIndex >= ispConfiguredDocQueue.size()) {
+            finishConfiguredMaterialSequence();
+            return;
+        }
+
+        GetDoctypedata item = ispConfiguredDocQueue.get(ispConfiguredDocIndex);
+        Intent openIntent = buildConfiguredDocIntent(context, item);
+        if (openIntent != null) {
+            awaitingReturnFromConfiguredDoc = true;
+            startActivity(openIntent);
+            return;
+        }
+
+        List<GetDoctypedata> singleItem = Collections.singletonList(item);
+
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.dialog_training_material, null);
 
@@ -862,18 +910,95 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         Button btnClose = dialogView.findViewById(R.id.btn_dialog_close);
 
         AdapterTrainingMat adapter = new AdapterTrainingMat();
-        adapter.addData(dataList);
+        adapter.addData(singleItem);
+        adapter.setConfiguredDocOpenListener(intent -> {
+            awaitingReturnFromConfiguredDoc = true;
+            if (ispConfiguredMaterialDialog != null) {
+                ispConfiguredMaterialDialog.dismiss();
+            }
+            startActivity(intent);
+        });
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapter);
 
-        AlertDialog dialog = new AlertDialog.Builder(context)
+        ispConfiguredMaterialDialog = new AlertDialog.Builder(context)
                 .setView(dialogView)
                 .setCancelable(false)
                 .create();
 
-        btnClose.setOnClickListener(v -> dialog.dismiss());
-        Log.e("Cww","c");
-        dialog.show();
+        btnClose.setOnClickListener(v -> {
+            ispConfiguredMaterialDialog.dismiss();
+            finishConfiguredMaterialSequence();
+        });
+        ispConfiguredMaterialDialog.show();
+    }
+
+    private Intent buildConfiguredDocIntent(Context context, GetDoctypedata item) {
+        if (item == null || item.DocUrl == null) {
+            return null;
+        }
+        String docType = item.DocType != null ? item.DocType.trim().toLowerCase() : "";
+        if (docType.isEmpty()) {
+            String fileName = item.DocUrl.substring(item.DocUrl.lastIndexOf('/') + 1).toLowerCase();
+            if (fileName.endsWith(".mp4") || fileName.endsWith(".mp3")) {
+                docType = "mp4";
+            } else if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png")) {
+                docType = "jpg";
+            }
+        }
+        switch (docType) {
+            case "mp3":
+            case "mp4":
+            case ".mp3":
+            case ".mp4":
+                Intent videoIntent = new Intent(context, VideoPlayerActivity.class);
+                videoIntent.putExtra(TrainingConstants.MEDIA_URL, item.DocUrl);
+                videoIntent.putExtra(TrainingConstants.MAT_ID, item.DocID);
+                videoIntent.putExtra(TrainingConstants.ISP_APP_OPEN_CONTENT, true);
+                return videoIntent;
+            case "doc":
+            case "pptx":
+            case "pdf":
+            case "xlsx":
+            case ".doc":
+            case ".pptx":
+            case ".pdf":
+            case ".xlsx":
+                Intent docIntent = new Intent(context, DocViewerActivity.class);
+                docIntent.putExtra(TrainingConstants.DOC_URL, item.DocUrl);
+                docIntent.putExtra(TrainingConstants.MAT_ID, item.DocID);
+                return docIntent;
+            case "jpg":
+            case "jpeg":
+            case "png":
+            case ".jpg":
+            case ".jpeg":
+            case ".png":
+                Intent imageIntent = new Intent(context, DocViewerActivity.class);
+                imageIntent.putExtra(TrainingConstants.DOC_URL, item.DocUrl);
+                imageIntent.putExtra(TrainingConstants.MAT_ID, item.DocID);
+                imageIntent.putExtra("is_image", true);
+                imageIntent.putExtra(TrainingConstants.ISP_APP_OPEN_CONTENT, true);
+                return imageIntent;
+            default:
+                return null;
+        }
+    }
+
+    private void finishConfiguredMaterialSequence() {
+        ispConfiguredSequenceActive = false;
+        awaitingReturnFromConfiguredDoc = false;
+        ispConfiguredDocQueue = null;
+        ispConfiguredDocIndex = 0;
+        ispConfiguredMaterialDialog = null;
+    }
+
+    private void continueConfiguredMaterialSequenceAfterReturn() {
+        if (!ispConfiguredSequenceActive || ispConfiguredDocQueue == null) {
+            return;
+        }
+        ispConfiguredDocIndex++;
+        showNextConfiguredMaterialDialog(this);
     }
 
 
@@ -1170,6 +1295,10 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
     @Override
     public void onResume() {
         super.onResume();
+        if (awaitingReturnFromConfiguredDoc) {
+            awaitingReturnFromConfiguredDoc = false;
+            continueConfiguredMaterialSequenceAfterReturn();
+        }
         //       notificationViewModule = ViewModelProviders.of(this).get(NotificationViewModule.class);
 //        notificationViewModule.getSurveyHistoryData();
 

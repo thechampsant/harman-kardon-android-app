@@ -21,4 +21,17 @@
         android:text="Show me"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:id="@+id/tv_isp_close"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="12dp"
+        android:background="#80000000"
+        android:gravity="center"
+        android:text="✕"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 </FrameLayout>

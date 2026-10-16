@@ -9,6 +9,9 @@ public class GetDoctypedata  extends DataEntity<GetDoctypedata> {
     public String DocUrl;
     public String IsSeen;
     public String DocType;
+    public String ValidFrom;
+    public String ValidTill;
+    public String DisplayOrder;
 
     @Override
     public void RegisterMappings() {
@@ -16,6 +19,9 @@ public class GetDoctypedata  extends DataEntity<GetDoctypedata> {
         this.RegisterMapping("DocUrl", DataTypes.TEXT);
         this.RegisterMapping("DocType", DataTypes.TEXT);
         this.RegisterMapping("IsSeen", DataTypes.TEXT);
+        this.RegisterMapping("ValidFrom", DataTypes.TEXT);
+        this.RegisterMapping("ValidTill", DataTypes.TEXT);
+        this.RegisterMapping("DisplayOrder", DataTypes.TEXT);
 
     }
 

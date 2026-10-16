@@ -3,12 +3,15 @@ package com.fieldforce.harmonkardonff.home;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,15 +31,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DocViewerActivity extends InnosolsActivity {
+    private static final long ISP_IMAGE_CLOSE_DELAY_MS = 60_000L;
+
     private int i = 0;
 
     private WebView pdfView;
     private ProgressBar progress;
     private Button btn_action1;
+    private TextView tvIspClose;
     private String removePdfTopIcon = "javascript:(function() {" + "document.querySelector('[role=\"toolbar\"]').remove();})()";
 
     private boolean isBound;
     private boolean backDisabled;
+    private boolean ispAppOpenImage;
+    private boolean ispCloseEnabled;
+    private final Handler ispCloseHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public void RegisterTableInfoForLocalDB() {
@@ -50,8 +59,15 @@ public class DocViewerActivity extends InnosolsActivity {
         setContentView(R.layout.activity_doc_viewer_1);
         pdfView = findViewById(R.id.webview);
         progress = findViewById(R.id.pb_doc);
+        tvIspClose = findViewById(R.id.tv_isp_close);
 
-        showPdfFile(getIntent().getStringExtra("DOC_URL"));
+        ispAppOpenImage = getIntent().getBooleanExtra(TrainingConstants.ISP_APP_OPEN_CONTENT, false)
+                && getIntent().getBooleanExtra("is_image", false);
+        if (ispAppOpenImage) {
+            setupIspAppOpenImageCloseDelay();
+        }
+
+        showPdfFile(getIntent().getStringExtra(TrainingConstants.DOC_URL));
 
       /*  Uri uri = Uri.parse(getIntent().getStringExtra("DOC_URL"));
 
@@ -71,14 +87,33 @@ public class DocViewerActivity extends InnosolsActivity {
 
            startActivity(intent);
            finish();*/
-        btn_action1=(Button) findViewById(R.id.btn_action2);
-        btn_action1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btn_action1 = (Button) findViewById(R.id.btn_action2);
+        if (ispAppOpenImage) {
+            btn_action1.setVisibility(View.GONE);
+        } else {
+            btn_action1.setOnClickListener(v -> isSeenVideo());
+        }
+
+    }
+
+    private void setupIspAppOpenImageCloseDelay() {
+        ispCloseEnabled = false;
+        tvIspClose.setVisibility(View.GONE);
+        tvIspClose.setOnClickListener(v -> {
+            if (ispCloseEnabled) {
                 isSeenVideo();
             }
         });
+        ispCloseHandler.postDelayed(() -> {
+            ispCloseEnabled = true;
+            tvIspClose.setVisibility(View.VISIBLE);
+        }, ISP_IMAGE_CLOSE_DELAY_MS);
+    }
 
+    @Override
+    protected void onDestroy() {
+        ispCloseHandler.removeCallbacksAndMessages(null);
+        super.onDestroy();
     }
 
     void isSeenVideo() {
@@ -162,7 +197,9 @@ public class DocViewerActivity extends InnosolsActivity {
 
     @Override
     public void onBackPressed() {
-        /*if (!backDisabled)*/
+        if (ispAppOpenImage && !ispCloseEnabled) {
+            return;
+        }
         super.onBackPressed();
     }
 }

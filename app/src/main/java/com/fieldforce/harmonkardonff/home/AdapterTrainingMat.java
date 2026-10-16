@@ -22,9 +22,19 @@ import com.fieldforce.model.GetDoctypedata;
 import java.util.List;
 
 public class AdapterTrainingMat extends RecyclerView.Adapter<AdapterTrainingMat.ViewHolder> {
+
+    public interface ConfiguredDocOpenListener {
+        void onOpenDoc(Intent intent);
+    }
+
     List<GetDoctypedata> items;
     RelativeLayout lv_view;
     boolean isClicked = false;
+    private ConfiguredDocOpenListener configuredDocOpenListener;
+
+    public void setConfiguredDocOpenListener(ConfiguredDocOpenListener listener) {
+        this.configuredDocOpenListener = listener;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -36,39 +46,37 @@ public class AdapterTrainingMat extends RecyclerView.Adapter<AdapterTrainingMat.
         GetDoctypedata trMatItem = items.get(i);
         String fileName = trMatItem.DocUrl.substring(trMatItem.DocUrl.lastIndexOf('/') + 1);
         viewHolder.tvLabel.setText(fileName != null ? fileName : "");
-        Glide.with(viewHolder.itemView.getContext()).load(getThumbnail(trMatItem.IsSeen)).into(viewHolder.ivItem);
-        if(trMatItem.IsSeen.equalsIgnoreCase("true")) {
+        Glide.with(viewHolder.itemView.getContext()).load(getThumbnail(trMatItem.DocType)).into(viewHolder.ivItem);
+        if (trMatItem.IsSeen != null && trMatItem.IsSeen.equalsIgnoreCase("true")) {
             viewHolder.iv_seen.setVisibility(View.VISIBLE);
         } else
             viewHolder.iv_seen.setVisibility(View.GONE);
 
         viewHolder.itemView.setOnClickListener(v -> {
-            if (isClicked)
+            if (isClicked) {
                 return;
-               isClicked = true;
-            Log.e("gwdwgdd","ljfkrefjref");
-            if (mediaType(items.get(viewHolder.getAdapterPosition()).DocType) == MEDIATYPE.MP4MP3) {
-                Log.e("94u5u5u954i54i",items.get(viewHolder.getAdapterPosition()).DocID);
-                Intent intent = new Intent(viewHolder.itemView.getContext(), VideoPlayerActivity.class);
-                intent.putExtra(TrainingConstants.MEDIA_URL, items.get(viewHolder.getAdapterPosition()).DocUrl);
-                intent.putExtra(TrainingConstants.MAT_ID, items.get(viewHolder.getAdapterPosition()).DocID);
-                ((Activity) viewHolder.itemView.getContext()).startActivity(intent);
-             //   ((Activity) viewHolder.itemView.getContext()).finish();
-            } else if (mediaType(items.get(viewHolder.getAdapterPosition()).DocType) == MEDIATYPE.DOC) {
-                Intent docIntent = new Intent(viewHolder.itemView.getContext(), DocViewerActivity.class);
-                docIntent.putExtra(TrainingConstants.DOC_URL, items.get(viewHolder.getAdapterPosition()).DocUrl);
-                docIntent.putExtra(TrainingConstants.MAT_ID, items.get(viewHolder.getAdapterPosition()).DocID);
-                ((Activity) viewHolder.itemView.getContext()).startActivity(docIntent);
-            } else {
-                Intent docIntent = new Intent(viewHolder.itemView.getContext(), DocViewerActivity.class);
-                docIntent.putExtra("is_image", true);
-                docIntent.putExtra(TrainingConstants.DOC_URL, items.get(viewHolder.getAdapterPosition()).DocUrl);
-                docIntent.putExtra(TrainingConstants.MAT_ID, items.get(viewHolder.getAdapterPosition()).DocID);
-                ((Activity) viewHolder.itemView.getContext()).startActivity(docIntent);
             }
-
-
-//            switchActivityByName(items.get(viewHolder.getAdapterPosition()).getLinkName(), (Activity) viewHolder.itemView.getContext());
+            isClicked = true;
+            GetDoctypedata doc = items.get(viewHolder.getAdapterPosition());
+            Intent launchIntent;
+            if (mediaType(doc.DocType) == MEDIATYPE.MP4MP3) {
+                launchIntent = new Intent(viewHolder.itemView.getContext(), VideoPlayerActivity.class);
+                launchIntent.putExtra(TrainingConstants.MEDIA_URL, doc.DocUrl);
+                launchIntent.putExtra(TrainingConstants.MAT_ID, doc.DocID);
+            } else {
+                launchIntent = new Intent(viewHolder.itemView.getContext(), DocViewerActivity.class);
+                launchIntent.putExtra(TrainingConstants.DOC_URL, doc.DocUrl);
+                launchIntent.putExtra(TrainingConstants.MAT_ID, doc.DocID);
+                if (mediaType(doc.DocType) != MEDIATYPE.DOC) {
+                    launchIntent.putExtra("is_image", true);
+                }
+            }
+            if (configuredDocOpenListener != null) {
+                configuredDocOpenListener.onOpenDoc(launchIntent);
+            } else {
+                viewHolder.itemView.getContext().startActivity(launchIntent);
+            }
+            isClicked = false;
         });
     }
 
@@ -122,10 +130,13 @@ public class AdapterTrainingMat extends RecyclerView.Adapter<AdapterTrainingMat.
                 id = R.drawable.media_thumb;
                 break;
             case "jpg":
+            case "jpeg":
             case "png":
             case ".jpg":
+            case ".jpeg":
             case ".png":
                 id = R.drawable.jpg_thumbnail;
+                break;
         }
         return id;
     }
