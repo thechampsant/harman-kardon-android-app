@@ -12,6 +12,7 @@ public class GetDoctypedata  extends DataEntity<GetDoctypedata> {
     public String ValidFrom;
     public String ValidTill;
     public String DisplayOrder;
+    public String DurationSeconds;
 
     @Override
     public void RegisterMappings() {
@@ -22,6 +23,7 @@ public class GetDoctypedata  extends DataEntity<GetDoctypedata> {
         this.RegisterMapping("ValidFrom", DataTypes.TEXT);
         this.RegisterMapping("ValidTill", DataTypes.TEXT);
         this.RegisterMapping("DisplayOrder", DataTypes.TEXT);
+        this.RegisterMapping("DurationSeconds", DataTypes.TEXT);
 
     }
 

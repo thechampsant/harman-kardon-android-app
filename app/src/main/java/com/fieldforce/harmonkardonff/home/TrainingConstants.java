@@ -31,6 +31,7 @@ public class TrainingConstants {
     public static final String DOC_URL = "DOC_URL";
     public static final String MAT_ID = "MAT_ID";
     public static final String ISP_APP_OPEN_CONTENT = "ISP_APP_OPEN_CONTENT";
+    public static final String ISP_DURATION_SECONDS = "ISP_DURATION_SECONDS";
     public static final String REFRESH_LIST = "REFRESH_LIST";
 
 

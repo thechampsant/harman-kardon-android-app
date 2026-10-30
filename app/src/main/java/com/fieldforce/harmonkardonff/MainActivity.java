@@ -21,6 +21,7 @@ import com.google.android.gms.location.LocationServices;
 import androidx.appcompat.widget.PagerSnapHelper;
 import androidx.appcompat.widget.RecyclerView;*/
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -59,7 +60,6 @@ import com.fieldforce.harmonkardonff.custom_adapters.NotificationAdpter;
 import com.fieldforce.harmonkardonff.demo_tracking_module.ui.activities.DemoTrackingFragmentsContainer;
 import com.fieldforce.harmonkardonff.fixture_resolution_module.ui.activities.FixtureResolutionTabActivity;
 import com.fieldforce.harmonkardonff.customer_rating_module.ui.activities.CustomerRatingActivity;
-import com.fieldforce.harmonkardonff.home.AdapterTrainingMat;
 import com.fieldforce.harmonkardonff.home.DocViewerActivity;
 import com.fieldforce.harmonkardonff.home.VideoPlayerActivity;
 import com.fieldforce.model.GetDoctypedata;
@@ -164,11 +164,10 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
     private RecyclerView notificationlist;
     private Bundle dataForTraining = new Bundle();
     NotificationAdpter notificationAdpter;
-    private List<GetDoctypedata> ispConfiguredDocQueue;
-    private int ispConfiguredDocIndex;
-    private boolean ispConfiguredSequenceActive;
-    private boolean awaitingReturnFromConfiguredDoc;
-    private AlertDialog ispConfiguredMaterialDialog;
+    private List<GetDoctypedata> configuredDocQueue;
+    private int configuredDocIndex;
+    private boolean configuredDocSequenceActive;
+    private boolean awaitingConfiguredDocReturn;
     public static FeedbackUrlConfigModel feedbackURLConfig = null;
     public static ProfileURLModel profileUrlModel = null;
     //------------------------------------ from Abhijai----------------------
@@ -844,29 +843,56 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
     }
 
     private void processDoclistResponse(Response response) {
-        if (response.isSuccess()) {
-            ArrayList<GetDoctypedata> originalList = response.data;
-            if (originalList != null && !originalList.isEmpty()) {
-
-                List<GetDoctypedata> filteredList = new java.util.ArrayList<>();
-
-                for (GetDoctypedata item : originalList) {
-                    if (item != null && "false".equalsIgnoreCase(String.valueOf(item.IsSeen).trim())) {
-                        filteredList.add(item);
-                    }
-                }
-
-                Collections.sort(filteredList, new Comparator<GetDoctypedata>() {
-                    @Override
-                    public int compare(GetDoctypedata o1, GetDoctypedata o2) {
-                        return Integer.compare(parseConfiguredDisplayOrder(o1), parseConfiguredDisplayOrder(o2));
-                    }
-                });
-                if (!filteredList.isEmpty() && !ispConfiguredSequenceActive) {
-                    showTrainingMaterialDialog(MainActivity.this, filteredList);
-                }
-            }
+        if (response == null) {
+            return;
         }
+        ArrayList<GetDoctypedata> originalList = response.data;
+        if (originalList == null || originalList.isEmpty()) {
+            return;
+        }
+        if (!response.isSuccess() && !response.isDataFound()) {
+            return;
+        }
+
+        List<GetDoctypedata> filteredList = new java.util.ArrayList<>();
+        for (GetDoctypedata item : originalList) {
+            if (item == null || TextUtils.isEmpty(item.DocID)) {
+                continue;
+            }
+            if (!"false".equalsIgnoreCase(String.valueOf(item.IsSeen).trim())) {
+                continue;
+            }
+            filteredList.add(item);
+        }
+
+        Collections.sort(filteredList, new Comparator<GetDoctypedata>() {
+            @Override
+            public int compare(GetDoctypedata o1, GetDoctypedata o2) {
+                return Integer.compare(parseConfiguredDisplayOrder(o1), parseConfiguredDisplayOrder(o2));
+            }
+        });
+        if (!filteredList.isEmpty() && !configuredDocSequenceActive) {
+            configuredDocQueue = new java.util.ArrayList<>(filteredList);
+            configuredDocIndex = 0;
+            configuredDocSequenceActive = true;
+            showConfiguredDocAtCurrentIndex();
+        }
+    }
+
+    private void showConfiguredDocAtCurrentIndex() {
+        if (configuredDocQueue == null || configuredDocIndex >= configuredDocQueue.size()) {
+            endConfiguredDocSequence();
+            return;
+        }
+        awaitingConfiguredDocReturn = true;
+        openConfiguredDoc(MainActivity.this, configuredDocQueue.get(configuredDocIndex));
+    }
+
+    private void endConfiguredDocSequence() {
+        configuredDocSequenceActive = false;
+        awaitingConfiguredDocReturn = false;
+        configuredDocQueue = null;
+        configuredDocIndex = 0;
     }
 
     private static int parseConfiguredDisplayOrder(GetDoctypedata item) {
@@ -880,57 +906,24 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
         }
     }
 
-    public void showTrainingMaterialDialog(Context context, List<GetDoctypedata> dataList) {
-        ispConfiguredDocQueue = new java.util.ArrayList<>(dataList);
-        ispConfiguredDocIndex = 0;
-        ispConfiguredSequenceActive = true;
-        showNextConfiguredMaterialDialog(context);
+    /** Backend {@code DurationSeconds}; default 60s if missing or invalid. */
+    private static int parseConfiguredDurationSeconds(GetDoctypedata item) {
+        if (item == null || item.DurationSeconds == null || item.DurationSeconds.trim().isEmpty()) {
+            return 60;
+        }
+        try {
+            int seconds = Integer.parseInt(item.DurationSeconds.trim());
+            return seconds > 0 ? seconds : 60;
+        } catch (Exception e) {
+            return 60;
+        }
     }
 
-    private void showNextConfiguredMaterialDialog(Context context) {
-        if (ispConfiguredDocQueue == null || ispConfiguredDocIndex >= ispConfiguredDocQueue.size()) {
-            finishConfiguredMaterialSequence();
-            return;
-        }
-
-        GetDoctypedata item = ispConfiguredDocQueue.get(ispConfiguredDocIndex);
+    private void openConfiguredDoc(Context context, GetDoctypedata item) {
         Intent openIntent = buildConfiguredDocIntent(context, item);
         if (openIntent != null) {
-            awaitingReturnFromConfiguredDoc = true;
             startActivity(openIntent);
-            return;
         }
-
-        List<GetDoctypedata> singleItem = Collections.singletonList(item);
-
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View dialogView = inflater.inflate(R.layout.dialog_training_material, null);
-
-        RecyclerView recyclerView = dialogView.findViewById(R.id.recycler_dialog);
-        Button btnClose = dialogView.findViewById(R.id.btn_dialog_close);
-
-        AdapterTrainingMat adapter = new AdapterTrainingMat();
-        adapter.addData(singleItem);
-        adapter.setConfiguredDocOpenListener(intent -> {
-            awaitingReturnFromConfiguredDoc = true;
-            if (ispConfiguredMaterialDialog != null) {
-                ispConfiguredMaterialDialog.dismiss();
-            }
-            startActivity(intent);
-        });
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(adapter);
-
-        ispConfiguredMaterialDialog = new AlertDialog.Builder(context)
-                .setView(dialogView)
-                .setCancelable(false)
-                .create();
-
-        btnClose.setOnClickListener(v -> {
-            ispConfiguredMaterialDialog.dismiss();
-            finishConfiguredMaterialSequence();
-        });
-        ispConfiguredMaterialDialog.show();
     }
 
     private Intent buildConfiguredDocIntent(Context context, GetDoctypedata item) {
@@ -979,29 +972,12 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
                 imageIntent.putExtra(TrainingConstants.MAT_ID, item.DocID);
                 imageIntent.putExtra("is_image", true);
                 imageIntent.putExtra(TrainingConstants.ISP_APP_OPEN_CONTENT, true);
+                imageIntent.putExtra(TrainingConstants.ISP_DURATION_SECONDS, parseConfiguredDurationSeconds(item));
                 return imageIntent;
             default:
                 return null;
         }
     }
-
-    private void finishConfiguredMaterialSequence() {
-        ispConfiguredSequenceActive = false;
-        awaitingReturnFromConfiguredDoc = false;
-        ispConfiguredDocQueue = null;
-        ispConfiguredDocIndex = 0;
-        ispConfiguredMaterialDialog = null;
-    }
-
-    private void continueConfiguredMaterialSequenceAfterReturn() {
-        if (!ispConfiguredSequenceActive || ispConfiguredDocQueue == null) {
-            return;
-        }
-        ispConfiguredDocIndex++;
-        showNextConfiguredMaterialDialog(this);
-    }
-
-
 
     public void gotoPendingImage() {
         this.startActivityForResult(new Intent(this, ImageGridActivity.class),
@@ -1295,9 +1271,10 @@ public class MainActivity extends GridActivity implements View.OnClickListener, 
     @Override
     public void onResume() {
         super.onResume();
-        if (awaitingReturnFromConfiguredDoc) {
-            awaitingReturnFromConfiguredDoc = false;
-            continueConfiguredMaterialSequenceAfterReturn();
+        if (awaitingConfiguredDocReturn && configuredDocSequenceActive) {
+            awaitingConfiguredDocReturn = false;
+            configuredDocIndex++;
+            showConfiguredDocAtCurrentIndex();
         }
         //       notificationViewModule = ViewModelProviders.of(this).get(NotificationViewModule.class);
 //        notificationViewModule.getSurveyHistoryData();

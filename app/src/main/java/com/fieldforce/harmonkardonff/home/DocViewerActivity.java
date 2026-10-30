@@ -31,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DocViewerActivity extends InnosolsActivity {
-    private static final long ISP_IMAGE_CLOSE_DELAY_MS = 60_000L;
+    private static final int ISP_IMAGE_CLOSE_DELAY_DEFAULT_SEC = 60;
 
     private int i = 0;
 
@@ -97,6 +97,13 @@ public class DocViewerActivity extends InnosolsActivity {
     }
 
     private void setupIspAppOpenImageCloseDelay() {
+        int delaySec = getIntent().getIntExtra(
+                TrainingConstants.ISP_DURATION_SECONDS, ISP_IMAGE_CLOSE_DELAY_DEFAULT_SEC);
+        if (delaySec <= 0) {
+            delaySec = ISP_IMAGE_CLOSE_DELAY_DEFAULT_SEC;
+        }
+        long delayMs = delaySec * 1000L;
+
         ispCloseEnabled = false;
         tvIspClose.setVisibility(View.GONE);
         tvIspClose.setOnClickListener(v -> {
@@ -107,7 +114,7 @@ public class DocViewerActivity extends InnosolsActivity {
         ispCloseHandler.postDelayed(() -> {
             ispCloseEnabled = true;
             tvIspClose.setVisibility(View.VISIBLE);
-        }, ISP_IMAGE_CLOSE_DELAY_MS);
+        }, delayMs);
     }
 
     @Override
@@ -121,7 +128,8 @@ public class DocViewerActivity extends InnosolsActivity {
         if (hasSubmitted) return; // prevent double call
           hasSubmitted = true;
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<Bannerdata> call = service.SubmitConfuguredData(User.GetUserName(),getIntent().getStringExtra(TrainingConstants.MAT_ID));
+        String docId = getIntent().getStringExtra(TrainingConstants.MAT_ID);
+        Call<Bannerdata> call = service.SubmitConfuguredData(User.GetUserName(), docId);
         call.enqueue(new Callback<Bannerdata>() {
             @Override
             public void onResponse(Call<Bannerdata> call, Response<Bannerdata> response) {

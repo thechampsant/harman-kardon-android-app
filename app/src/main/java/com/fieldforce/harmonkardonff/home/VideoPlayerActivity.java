@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ariston.training_module.utility.widgets.ExtendedTimeBar;
 import com.fieldforce.asyntask.WebService;
-import com.fieldforce.harmonkardonff.MainActivity;
 import com.fieldforce.harmonkardonff.R;
 import com.fieldforce.harmonkardonff.home.service.Bannerdata;
 import com.fieldforce.harmonkardonff.home.service.GetDataService;
@@ -66,6 +65,9 @@ public class VideoPlayerActivity extends InnosolsActivity implements VideoRender
     private SimpleExoPlayer player;
     private ExtendedTimeBar timeBar;
     private boolean isBound;
+    private boolean ispAppOpenContent;
+    private MediaSource primaryMediaSource;
+    private LoopingMediaSource loopingSource;
 
 
     @Override
@@ -78,7 +80,9 @@ public class VideoPlayerActivity extends InnosolsActivity implements VideoRender
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
         Log.e("activity_video_player",getIntent().getStringExtra(TrainingConstants.MAT_ID)+"null");
-        Uri mp4VideoUri = Uri.parse(getIntent().getStringExtra(TrainingConstants.MEDIA_URL)); //ABC NEWS
+        String mediaUrl = getIntent().getStringExtra(TrainingConstants.MEDIA_URL);
+        Uri mp4VideoUri = Uri.parse(mediaUrl);
+        ispAppOpenContent = getIntent().getBooleanExtra(TrainingConstants.ISP_APP_OPEN_CONTENT, false);
 
         DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter(); //test
         TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
@@ -87,10 +91,6 @@ public class VideoPlayerActivity extends InnosolsActivity implements VideoRender
         // 2. Create the player
         player = ExoPlayerFactory.newSimpleInstance(this, trackSelector);
 
-        DefaultHttpDataSourceFactory dataSource = new DefaultHttpDataSourceFactory(
-                Util.getUserAgent(this, "harman"));
-        ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSource)
-                .createMediaSource(mp4VideoUri, null, null);
         simpleExoPlayerView = new PlayerView(this);
         simpleExoPlayerView = findViewById(R.id.player_view);
         auiodio=findViewById(R.id.auiodio);
@@ -122,13 +122,10 @@ public class VideoPlayerActivity extends InnosolsActivity implements VideoRender
         //FOR SD CARD SOURCE:
         //        MediaSource videoSource = new ExtractorMediaSource(mp4VideoUri, dataSourceFactory, extractorsFactory, null, null);
 
-        //FOR LIVESTREAM LINK:
-        Handler mainHandler = new Handler();
-        HlsDataSourceFactory hlsDataSourceFactory = new DefaultHlsDataSourceFactory(dataSourceFactory);
-        MediaSource videoSource = new HlsMediaSource.Factory(hlsDataSourceFactory).createMediaSource(mp4VideoUri, mainHandler, null);
-        final LoopingMediaSource loopingSource = new LoopingMediaSource(videoSource);
-        // Prepare the player with the source.
-        player.prepare(videoSource);
+        primaryMediaSource = buildMediaSource(mp4VideoUri, dataSourceFactory, bandwidthMeter);
+        if (!ispAppOpenContent && primaryMediaSource != null) {
+            loopingSource = new LoopingMediaSource(primaryMediaSource);
+        }
 
         player.addListener(new ExoPlayer.EventListener() {
 
@@ -151,10 +148,9 @@ public class VideoPlayerActivity extends InnosolsActivity implements VideoRender
             public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
                 if (playbackState == Player.STATE_ENDED) {
                     simpleExoPlayerView.setKeepScreenOn(false);
+                    player.setPlayWhenReady(false);
                     isSeenVideo();
-
-                } else { // STATE_IDLE, STATE_ENDED
-                    // This prevents the screen from getting dim/lock
+                } else {
                     simpleExoPlayerView.setKeepScreenOn(true);
                 }
 
@@ -173,9 +169,16 @@ public class VideoPlayerActivity extends InnosolsActivity implements VideoRender
 
             @Override
             public void onPlayerError(ExoPlaybackException error) {
+                if (ispAppOpenContent) {
+                    Toast.makeText(VideoPlayerActivity.this, "Unable to play video", Toast.LENGTH_SHORT).show();
+                    finish();
+                    return;
+                }
                 player.stop();
-                player.prepare(loopingSource);
-                player.setPlayWhenReady(true);
+                if (loopingSource != null) {
+                    player.prepare(loopingSource);
+                    player.setPlayWhenReady(true);
+                }
             }
 
             @Override
@@ -193,17 +196,32 @@ public class VideoPlayerActivity extends InnosolsActivity implements VideoRender
 
             }
         });
-        //run file/link when ready to play.
         player.setVideoDebugListener(this);
-        player.prepare(mediaSource);
+        if (primaryMediaSource != null) {
+            player.prepare(primaryMediaSource);
+            player.setPlayWhenReady(true);
+        }
 
+    }
+
+    private MediaSource buildMediaSource(Uri uri, DataSource.Factory dataSourceFactory, DefaultBandwidthMeter bandwidthMeter) {
+        String url = uri.toString().toLowerCase();
+        boolean directFile = url.contains(".mp4") || url.contains(".mp3")
+                || url.contains(".m4v") || url.contains(".webm");
+        if (ispAppOpenContent || directFile) {
+            return new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
+        }
+        Handler mainHandler = new Handler();
+        HlsDataSourceFactory hlsDataSourceFactory = new DefaultHlsDataSourceFactory(dataSourceFactory);
+        return new HlsMediaSource.Factory(hlsDataSourceFactory).createMediaSource(uri, mainHandler, null);
     }
     void isSeenVideo() {
         if (hasSubmitted) return; // prevent double call
         hasSubmitted = true;
 
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<Bannerdata> call = service.SubmitConfuguredData(User.GetUserName(),getIntent().getStringExtra(TrainingConstants.MAT_ID));
+        String docId = getIntent().getStringExtra(TrainingConstants.MAT_ID);
+        Call<Bannerdata> call = service.SubmitConfuguredData(User.GetUserName(), docId);
         call.enqueue(new Callback<Bannerdata>() {
             @Override
             public void onResponse(Call<Bannerdata> call, Response<Bannerdata> response) {
@@ -214,8 +232,6 @@ public class VideoPlayerActivity extends InnosolsActivity implements VideoRender
 
                    if(response.body().getmStatus())
                    {
-                      Intent intent=new Intent(VideoPlayerActivity.this, MainActivity.class);
-                      startActivity(intent);
                       finish();
                    }
 
